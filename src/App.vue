@@ -1,11 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import ChampionRotation from './rotation/ChampionRotation.vue'
+</script>
 
 <template>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LoL Champion Rotation</title>
-  </head>
-
-  <body></body>
+  <ChampionRotation />
 </template>
