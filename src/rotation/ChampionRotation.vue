@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import type { ChampionRotation, DataState } from './Types'
-import { onMounted, ref } from 'vue'
-import RotationDetails from './components/RotationDetails.vue'
 import DataError from '@/components/DataError.vue'
 import DataLoading from '@/components/DataLoading.vue'
+import { apiBaseUrl } from '@/Environment'
+import { onMounted, ref } from 'vue'
+import RotationDetails from './components/RotationDetails.vue'
+import type { ChampionRotation, DataState } from './Types'
 
 const state = ref<DataState<ChampionRotation>>({ type: 'loading' })
 
 async function fetchRotation() {
   state.value = { type: 'loading' }
 
-  const data = await fetch('/api/rotation/current')
+  const data = await fetch(apiBaseUrl + '/api/rotation/current')
 
   if (data.ok) {
     state.value = { type: 'data', value: await data.json() }
