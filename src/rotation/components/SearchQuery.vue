@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { IconFilter, IconSearch } from '@/icons/Icons';
-import { ref } from 'vue';
+import { IconFilter, IconSearch } from '@/icons/Icons'
+import { ref } from 'vue'
 
 defineProps<{
   onChange: (query: string) => void

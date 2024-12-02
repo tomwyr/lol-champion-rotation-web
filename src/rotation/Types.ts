@@ -5,9 +5,16 @@ export type Champion = {
 }
 
 export type ChampionRotation = {
+  patchVersion?: string
+  duration: ChampionRotationDuration
   beginnerMaxLevel: number
   beginnerChampions: [Champion]
   regularChampions: [Champion]
+}
+
+export type ChampionRotationDuration = {
+  start: Date
+  end: Date
 }
 
 export type CurrentRotationError = 'unavailable'
