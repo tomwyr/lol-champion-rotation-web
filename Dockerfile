@@ -27,6 +27,10 @@ RUN npm ci --include=dev
 # Copy application code
 COPY . .
 
+# Set up environment variables
+ARG API_BASE_URL
+RUN echo "VITE_API_BASE_URL=$API_BASE_URL" >> .env
+
 # Build application
 RUN npm run build
 
