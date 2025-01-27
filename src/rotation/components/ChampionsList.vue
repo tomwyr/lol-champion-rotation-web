@@ -8,9 +8,9 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-wrap">
+  <div class="py-4 gap-4 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3">
     <template v-for="champion in champions" :key="champion.id">
-      <div class="flex flex-col p-4 items-center">
+      <div class="flex flex-col items-center">
         <img width="144px" height="144px" loading="lazy" class="rounded" :src="champion.imageUrl" />
         <div v-text="champion.name" class="pt-2 text-center"></div>
       </div>
