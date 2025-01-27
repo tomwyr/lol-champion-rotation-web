@@ -3,10 +3,8 @@ import IconSpinner from '@/icons/IconSpinner.vue'
 </script>
 
 <template>
-  <div class="flex flex-col justify-center mx-auto">
-    <div
-      class="grid w-full place-items-center overflow-x-scroll rounded-lg p-4 lg:overflow-visible"
-    >
+  <div class="flex items-center justify-center min-h-screen">
+    <div class="flex flex-col justify-center items-center">
       <IconSpinner />
       <h1 class="pt-4 text-gray-700">Loading...</h1>
     </div>
