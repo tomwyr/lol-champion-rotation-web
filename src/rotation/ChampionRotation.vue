@@ -11,7 +11,7 @@ const state = ref<DataState<ChampionRotation>>({ type: 'loading' })
 async function fetchRotation() {
   state.value = { type: 'loading' }
 
-  const data = await fetch(apiBaseUrl + '/api/rotation/current')
+  const data = await fetch(apiBaseUrl + '/rotation/current')
 
   if (data.ok) {
     state.value = { type: 'data', value: await data.json() }
