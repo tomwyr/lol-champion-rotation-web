@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import type { Champion, ChampionRotation } from '../Types'
 import ChampionsList from './ChampionsList.vue'
 import SearchQuery from './SearchQuery.vue'
+import DarkModeToggle from './DarkModeToggle.vue'
 
 const props = defineProps<{
   rotation: ChampionRotation
@@ -53,6 +54,10 @@ const duration = {
       </div>
 
       <SearchQuery :onChange="applyChampionsFilter" />
+
+      <div class="flex flex-row flex-grow items-center justify-end">
+        <DarkModeToggle />
+      </div>
     </div>
 
     <h2 class="pt-2">Champions available for free</h2>
