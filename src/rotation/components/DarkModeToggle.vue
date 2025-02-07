@@ -11,8 +11,22 @@ function saveEnabled(value: boolean) {
   localStorage.setItem('themeMode', value ? 'dark' : 'light')
 }
 
+function applyDarkMode(enabled: boolean) {
+  const classList = document.documentElement.classList
+  if (enabled) {
+    classList.add('dark')
+  } else {
+    classList.remove('dark')
+  }
+}
+
 const enabled = ref(loadEnabled())
-watchEffect(() => saveEnabled(enabled.value))
+applyDarkMode(enabled.value)
+
+watchEffect(() => {
+  applyDarkMode(enabled.value)
+  saveEnabled(enabled.value)
+})
 </script>
 
 <template>
