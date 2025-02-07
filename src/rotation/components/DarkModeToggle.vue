@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Switch } from '@headlessui/vue'
 import { MoonIcon, SunIcon } from '@heroicons/vue/24/outline'
+import { ref, watchEffect } from 'vue'
 
-const enabled = ref(false)
+function loadEnabled(): boolean {
+  return localStorage.getItem('themeMode') == 'dark'
+}
+
+function saveEnabled(value: boolean) {
+  localStorage.setItem('themeMode', value ? 'dark' : 'light')
+}
+
+const enabled = ref(loadEnabled())
+watchEffect(() => saveEnabled(enabled.value))
 </script>
 
 <template>
