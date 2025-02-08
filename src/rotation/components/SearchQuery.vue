@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { IconFilter, IconSearch } from '@/icons/Icons'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   onChange: (query: string) => void
 }>()
 
 const query = ref('')
 const expanded = ref(false)
+
+watch(query, props.onChange)
 </script>
 
 <template>
@@ -24,6 +26,5 @@ const expanded = ref(false)
     v-model="query"
     class="w-64 ml-1 px-2 py-1 text-sm rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 focus:border-gray-500 dark:border-gray-700 dark:focus:border-gray-500"
     placeholder="Champion name..."
-    @keyup="() => onChange(query)"
   />
 </template>

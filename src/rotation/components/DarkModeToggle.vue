@@ -4,7 +4,7 @@ import { MoonIcon, SunIcon } from '@heroicons/vue/24/outline'
 import { ref, watchEffect } from 'vue'
 
 function loadEnabled(): boolean {
-  return localStorage.getItem('themeMode') == 'dark'
+  return localStorage.getItem('themeMode') === 'dark'
 }
 
 function saveEnabled(value: boolean) {

@@ -74,8 +74,7 @@ const duration = {
 
     <h2 class="pt-2">Champions available for free for new players</h2>
     <h3 class="text-gray-500 dark:text-gray-400">
-      New players up to level {{ rotation.beginnerMaxLevel }} get access to a different pool of
-      champions
+      New players up to level {{ rotation.beginnerMaxLevel }} only
     </h3>
     <ChampionsList
       :champions="filtered ? beginnerChampions : rotation.beginnerChampions"
