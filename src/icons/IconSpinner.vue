@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="text-gray-300 animate-spin"
+    class="animate-spin"
     viewBox="0 0 64 64"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +13,7 @@
       stroke-width="5"
       stroke-linecap="round"
       stroke-linejoin="round"
+      class="text-gray-300 dark:text-gray-700"
     />
     <path
       d="M32 3a29 29 0 0 1 27.576 37.976"
@@ -20,7 +21,7 @@
       stroke-width="5"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="text-gray-900"
+      class="text-gray-900 dark:text-gray-100"
     />
   </svg>
 </template>

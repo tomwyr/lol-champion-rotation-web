@@ -6,7 +6,7 @@ import IconSpinner from '@/icons/IconSpinner.vue'
   <div class="flex items-center justify-center min-h-screen">
     <div class="flex flex-col justify-center items-center">
       <IconSpinner />
-      <h1 class="pt-4 text-gray-700">Loading...</h1>
+      <h1 class="pt-4 text-gray-700 dark:text-gray-300">Loading...</h1>
     </div>
   </div>
 </template>
