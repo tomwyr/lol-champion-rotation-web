@@ -15,7 +15,7 @@ defineProps<{
         <div v-text="champion.name" class="pt-2 text-center"></div>
       </div>
     </template>
-    <h3 v-if="filtered && champions.length === 0" class="py-2 text-gray-500">
+    <h3 v-if="filtered && champions.length === 0" class="py-2 text-gray-500 dark:text-gray-400">
       No champions match your search query.
     </h3>
   </div>

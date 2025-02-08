@@ -31,14 +31,14 @@ watchEffect(() => {
 
 <template>
   <Transition name="fade" mode="out-in">
-    <MoonIcon v-if="enabled" class="size-4" />
-    <SunIcon v-else class="size-4" />
+    <MoonIcon v-if="enabled" class="size-4 text-gray-300" />
+    <SunIcon v-else class="size-4 text-gray-700" />
   </Transition>
 
   <Switch
     v-model="enabled"
-    :class="enabled ? 'bg-slate-500' : 'bg-gray-200'"
-    class="relative inline-flex ml-1 h-5 w-9 items-center rounded-full transition-colors"
+    :class="enabled ? 'bg-gray-700' : 'bg-gray-300'"
+    class="relative inline-flex ml-[6px] h-5 w-9 items-center rounded-full transition-colors"
   >
     <span
       :class="enabled ? 'translate-x-5' : 'translate-x-1'"
@@ -50,7 +50,7 @@ watchEffect(() => {
 <style>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease;
+  transition: opacity 0.1s ease;
 }
 .fade-enter-from,
 .fade-leave-to {
