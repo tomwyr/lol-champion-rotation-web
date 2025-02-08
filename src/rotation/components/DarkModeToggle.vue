@@ -30,10 +30,16 @@ watchEffect(() => {
 </script>
 
 <template>
-  <Transition name="fade" mode="out-in">
+  <transition
+    enter-active-class="transition duration-100 ease-in"
+    leave-active-class="transition duration-100 ease-in"
+    enter-from-class="opacity-0"
+    leave-to-class="opacity-0"
+    mode="out-in"
+  >
     <MoonIcon v-if="enabled" class="size-4 text-gray-300" />
     <SunIcon v-else class="size-4 text-gray-700" />
-  </Transition>
+  </transition>
 
   <Switch
     v-model="enabled"
@@ -46,14 +52,3 @@ watchEffect(() => {
     />
   </Switch>
 </template>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.1s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

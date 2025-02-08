@@ -14,12 +14,14 @@ function getTypeData(type: RotationType) {
         value: 'regular',
         title: "Summoner's Rift",
         description: 'Classic map • Weekly rotation',
+        iconAsset: 'public/assets/icon-sr.png',
       }
     case 'beginner':
       return {
         value: 'beginner',
         title: "Summoner's Rift (Beginners)",
         description: 'Classic map • New players only',
+        iconAsset: 'public/assets/icon-sr-beginner.png',
       }
   }
 }
@@ -36,24 +38,31 @@ const typesData = [getTypeData('regular'), getTypeData('beginner')]
       <IconExpandMore class="ml-0.5" />
     </ListboxButton>
 
-    <ListboxOptions
-      class="absolute min-w-[280px] py-1 mt-1 -ml-1 rounded-md bg-gray-100 dark:bg-gray-800"
+    <transition
+      leave-active-class="transition duration-100 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
-      <ListboxOption
-        v-for="type in typesData"
-        :key="type.value"
-        :value="type.value"
-        v-slot="{ selected }"
-        class="flex flex-col px-2 py-2 rounded-sm cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
-      >
-        <div class="flex flex-row items-center justify-between">
-          <div class="flex flex-col">
-            <dt class="text-sm font-bold">{{ type.title }}</dt>
-            <dd class="text-xs text-gray-700 dark:text-gray-400">{{ type.description }}</dd>
+      <ListboxOptions class="absolute py-1 mt-1 -ml-1 rounded-md bg-gray-100 dark:bg-gray-800">
+        <ListboxOption
+          v-for="type in typesData"
+          :key="type.value"
+          :value="type.value"
+          v-slot="{ selected }"
+          class="flex flex-col px-2 py-2 rounded-sm cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700"
+        >
+          <div class="flex flex-row items-center gap-4">
+            <img :src="type.iconAsset" class="size-8" />
+            <div class="flex flex-col">
+              <dt class="text-sm font-bold">{{ type.title }}</dt>
+              <dd class="text-xs text-gray-700 dark:text-gray-400">{{ type.description }}</dd>
+            </div>
+            <div class="w-4 mr-1 ml-auto">
+              <CheckIcon v-if="selected" class="size-4" />
+            </div>
           </div>
-          <CheckIcon v-if="selected" class="size-4 ml-4 mr-1" />
-        </div>
-      </ListboxOption>
-    </ListboxOptions>
+        </ListboxOption>
+      </ListboxOptions>
+    </transition>
   </Listbox>
 </template>
