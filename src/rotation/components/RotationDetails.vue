@@ -15,35 +15,39 @@
       </div>
     </div>
 
-    <RotationTypePicker />
+    <RotationTypePicker v-model="rotationType" />
 
-    <h2 class="pt-2">Champions available for free</h2>
-    <h3 class="text-sm text-gray-500 dark:text-gray-400">
-      <time v-bind:datetime="duration.start.iso">{{ duration.start.formatted }}</time>
-      to
-      <time v-bind:datetime="duration.end.iso">{{ duration.end.formatted }}</time>
-    </h3>
+    <template v-if="rotationType === 'regular'">
+      <h2 class="pt-2">Champions available for free</h2>
+      <h3 class="text-sm text-gray-500 dark:text-gray-400">
+        <time v-bind:datetime="duration.start.iso">{{ duration.start.formatted }}</time>
+        to
+        <time v-bind:datetime="duration.end.iso">{{ duration.end.formatted }}</time>
+      </h3>
 
-    <ChampionsList
-      :champions="filtered ? regularChampions : rotation.regularChampions"
-      :filtered="filtered"
-    />
+      <ChampionsList
+        :champions="filtered ? regularChampions : rotation.regularChampions"
+        :filtered="filtered"
+      />
+    </template>
 
-    <h2 class="pt-2">Champions available for free for new players</h2>
-    <h3 class="text-gray-500 dark:text-gray-400">
-      New players up to level {{ rotation.beginnerMaxLevel }} only
-    </h3>
-    <ChampionsList
-      :champions="filtered ? beginnerChampions : rotation.beginnerChampions"
-      :filtered="filtered"
-    />
+    <template v-if="rotationType === 'beginner'">
+      <h2 class="pt-2">Champions available for free for new players</h2>
+      <h3 class="text-gray-500 dark:text-gray-400">
+        New players up to level {{ rotation.beginnerMaxLevel }} only
+      </h3>
+      <ChampionsList
+        :champions="filtered ? beginnerChampions : rotation.beginnerChampions"
+        :filtered="filtered"
+      />
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { format } from 'date-fns'
 import { ref } from 'vue'
-import type { Champion, ChampionRotation } from '../Types'
+import { type Champion, type ChampionRotation, type RotationType } from '../Types'
 import ChampionsList from './ChampionsList.vue'
 import DarkModeToggle from './DarkModeToggle.vue'
 import RotationTypePicker from './RotationTypePicker.vue'
@@ -52,6 +56,8 @@ import SearchQuery from './SearchQuery.vue'
 const props = defineProps<{
   rotation: ChampionRotation
 }>()
+
+const rotationType = ref<RotationType>('beginner')
 
 const filtered = ref(false)
 const regularChampions = ref<Champion[]>([])

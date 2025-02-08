@@ -1,9 +1,9 @@
 <template>
-  <Listbox v-model="selectedType">
+  <Listbox v-model="model">
     <ListboxButton
       class="flex flex-row items-center p-0.5 -ml-1 pl-1 rounded hover:bg-gray-100 hover:dark:bg-gray-800"
     >
-      <span>{{ getTypeData(selectedType).title }}</span>
+      <span>{{ getTypeData(model).title }}</span>
       <IconExpandMore class="ml-0.5" />
     </ListboxButton>
 
@@ -39,11 +39,11 @@
 <script setup lang="ts">
 import IconExpandMore from '@/icons/IconExpandMore.vue'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
+import { CheckIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
 import type { RotationType } from '../Types'
-import { CheckIcon } from '@heroicons/vue/24/outline'
 
-const selectedType = ref<RotationType>('regular')
+const model = ref<RotationType>('regular')
 
 function getTypeData(type: RotationType) {
   switch (type) {
