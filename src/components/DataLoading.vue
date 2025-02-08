@@ -1,7 +1,3 @@
-<script setup lang="ts">
-import IconSpinner from '@/icons/IconSpinner.vue'
-</script>
-
 <template>
   <div class="flex items-center justify-center min-h-screen">
     <div class="flex flex-col justify-center items-center">
@@ -10,3 +6,7 @@ import IconSpinner from '@/icons/IconSpinner.vue'
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import IconSpinner from '@/icons/IconSpinner.vue'
+</script>

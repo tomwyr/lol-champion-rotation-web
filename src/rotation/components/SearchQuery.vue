@@ -1,17 +1,3 @@
-<script setup lang="ts">
-import { IconFilter, IconSearch } from '@/icons/Icons'
-import { ref, watch } from 'vue'
-
-const props = defineProps<{
-  onChange: (query: string) => void
-}>()
-
-const query = ref('')
-const expanded = ref(false)
-
-watch(query, props.onChange)
-</script>
-
 <template>
   <div
     @click="expanded = !expanded"
@@ -28,3 +14,17 @@ watch(query, props.onChange)
     placeholder="Champion name..."
   />
 </template>
+
+<script setup lang="ts">
+import { IconFilter, IconSearch } from '@/icons/Icons'
+import { ref, watch } from 'vue'
+
+const props = defineProps<{
+  onChange: (query: string) => void
+}>()
+
+const query = ref('')
+const expanded = ref(false)
+
+watch(query, props.onChange)
+</script>

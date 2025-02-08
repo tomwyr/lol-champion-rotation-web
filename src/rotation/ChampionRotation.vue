@@ -1,3 +1,17 @@
+<template>
+  <template v-if="state.type === 'loading'">
+    <DataLoading />
+  </template>
+
+  <template v-if="state.type === 'error'">
+    <DataError :onRetry="fetchRotation" />
+  </template>
+
+  <template v-if="state.type === 'data'">
+    <RotationDetails :rotation="state.value" />
+  </template>
+</template>
+
 <script setup lang="ts">
 import DataError from '@/components/DataError.vue'
 import DataLoading from '@/components/DataLoading.vue'
@@ -22,17 +36,3 @@ async function fetchRotation() {
 
 onMounted(fetchRotation)
 </script>
-
-<template>
-  <template v-if="state.type === 'loading'">
-    <DataLoading />
-  </template>
-
-  <template v-if="state.type === 'error'">
-    <DataError :onRetry="fetchRotation" />
-  </template>
-
-  <template v-if="state.type === 'data'">
-    <RotationDetails :rotation="state.value" />
-  </template>
-</template>

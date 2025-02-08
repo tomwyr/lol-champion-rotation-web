@@ -1,12 +1,3 @@
-<script setup lang="ts">
-import type { Champion } from '../Types'
-
-defineProps<{
-  champions: Champion[]
-  filtered: boolean
-}>()
-</script>
-
 <template>
   <div class="py-4 gap-4 grid lg:grid-cols-6 md:grid-cols-4 grid-cols-3">
     <template v-for="champion in champions" :key="champion.id">
@@ -20,3 +11,12 @@ defineProps<{
     </h3>
   </div>
 </template>
+
+<script setup lang="ts">
+import type { Champion } from '../Types'
+
+defineProps<{
+  champions: Champion[]
+  filtered: boolean
+}>()
+</script>

@@ -1,34 +1,3 @@
-<script setup lang="ts">
-import IconExpandMore from '@/icons/IconExpandMore.vue'
-import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import { ref } from 'vue'
-import type { RotationType } from '../Types'
-import { CheckIcon } from '@heroicons/vue/24/outline'
-
-const selectedType = ref<RotationType>('regular')
-
-function getTypeData(type: RotationType) {
-  switch (type) {
-    case 'regular':
-      return {
-        value: 'regular',
-        title: "Summoner's Rift",
-        description: 'Classic map • Weekly rotation',
-        iconAsset: 'public/assets/icon-sr.png',
-      }
-    case 'beginner':
-      return {
-        value: 'beginner',
-        title: "Summoner's Rift (Beginners)",
-        description: 'Classic map • New players only',
-        iconAsset: 'public/assets/icon-sr-beginner.png',
-      }
-  }
-}
-
-const typesData = [getTypeData('regular'), getTypeData('beginner')]
-</script>
-
 <template>
   <Listbox v-model="selectedType">
     <ListboxButton
@@ -66,3 +35,34 @@ const typesData = [getTypeData('regular'), getTypeData('beginner')]
     </transition>
   </Listbox>
 </template>
+
+<script setup lang="ts">
+import IconExpandMore from '@/icons/IconExpandMore.vue'
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
+import { ref } from 'vue'
+import type { RotationType } from '../Types'
+import { CheckIcon } from '@heroicons/vue/24/outline'
+
+const selectedType = ref<RotationType>('regular')
+
+function getTypeData(type: RotationType) {
+  switch (type) {
+    case 'regular':
+      return {
+        value: 'regular',
+        title: "Summoner's Rift",
+        description: 'Classic map • Weekly rotation',
+        iconAsset: 'public/assets/icon-sr.png',
+      }
+    case 'beginner':
+      return {
+        value: 'beginner',
+        title: "Summoner's Rift (Beginners)",
+        description: 'Classic map • New players only',
+        iconAsset: 'public/assets/icon-sr-beginner.png',
+      }
+  }
+}
+
+const typesData = [getTypeData('regular'), getTypeData('beginner')]
+</script>

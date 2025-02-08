@@ -1,3 +1,45 @@
+<template>
+  <div class="px-4 py-2">
+    <div class="flex flex-row h-8 items-center">
+      <div class="flex flex-row gap-1 items-baseline">
+        <h1 class="text-xl">Current champion rotation</h1>
+        <h3 v-if="rotation.patchVersion" class="text-sm text-gray-500 dark:text-gray-400">
+          v{{ rotation.patchVersion }}
+        </h3>
+      </div>
+
+      <SearchQuery :onChange="applyChampionsFilter" />
+
+      <div class="flex flex-row flex-grow items-center justify-end">
+        <DarkModeToggle />
+      </div>
+    </div>
+
+    <RotationTypePicker />
+
+    <h2 class="pt-2">Champions available for free</h2>
+    <h3 class="text-sm text-gray-500 dark:text-gray-400">
+      <time v-bind:datetime="duration.start.iso">{{ duration.start.formatted }}</time>
+      to
+      <time v-bind:datetime="duration.end.iso">{{ duration.end.formatted }}</time>
+    </h3>
+
+    <ChampionsList
+      :champions="filtered ? regularChampions : rotation.regularChampions"
+      :filtered="filtered"
+    />
+
+    <h2 class="pt-2">Champions available for free for new players</h2>
+    <h3 class="text-gray-500 dark:text-gray-400">
+      New players up to level {{ rotation.beginnerMaxLevel }} only
+    </h3>
+    <ChampionsList
+      :champions="filtered ? beginnerChampions : rotation.beginnerChampions"
+      :filtered="filtered"
+    />
+  </div>
+</template>
+
 <script setup lang="ts">
 import { format } from 'date-fns'
 import { ref } from 'vue'
@@ -43,45 +85,3 @@ const duration = {
   },
 }
 </script>
-
-<template>
-  <div class="px-4 py-2">
-    <div class="flex flex-row h-8 items-center">
-      <div class="flex flex-row gap-1 items-baseline">
-        <h1 class="text-xl">Current champion rotation</h1>
-        <h3 v-if="rotation.patchVersion" class="text-sm text-gray-500 dark:text-gray-400">
-          v{{ rotation.patchVersion }}
-        </h3>
-      </div>
-
-      <SearchQuery :onChange="applyChampionsFilter" />
-
-      <div class="flex flex-row flex-grow items-center justify-end">
-        <DarkModeToggle />
-      </div>
-    </div>
-
-    <RotationTypePicker />
-
-    <h2 class="pt-2">Champions available for free</h2>
-    <h3 class="text-sm text-gray-500 dark:text-gray-400">
-      <time v-bind:datetime="duration.start.iso">{{ duration.start.formatted }}</time>
-      to
-      <time v-bind:datetime="duration.end.iso">{{ duration.end.formatted }}</time>
-    </h3>
-
-    <ChampionsList
-      :champions="filtered ? regularChampions : rotation.regularChampions"
-      :filtered="filtered"
-    />
-
-    <h2 class="pt-2">Champions available for free for new players</h2>
-    <h3 class="text-gray-500 dark:text-gray-400">
-      New players up to level {{ rotation.beginnerMaxLevel }} only
-    </h3>
-    <ChampionsList
-      :champions="filtered ? beginnerChampions : rotation.beginnerChampions"
-      :filtered="filtered"
-    />
-  </div>
-</template>

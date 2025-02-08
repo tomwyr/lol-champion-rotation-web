@@ -1,11 +1,3 @@
-<script setup lang="ts">
-import IconWarning from '@/icons/IconWarning.vue'
-
-defineProps<{
-  onRetry: () => void
-}>()
-</script>
-
 <template>
   <div class="flex items-center justify-center min-h-screen">
     <div class="flex flex-col justify-center items-center">
@@ -20,3 +12,11 @@ defineProps<{
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import IconWarning from '@/icons/IconWarning.vue'
+
+defineProps<{
+  onRetry: () => void
+}>()
+</script>
