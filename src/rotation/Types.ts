@@ -20,3 +20,5 @@ export type ChampionRotationDuration = {
 export type CurrentRotationError = 'unavailable'
 
 export type DataState<V> = { type: 'loading' } | { type: 'error' } | { type: 'data'; value: V }
+
+export type RotationType = 'regular' | 'beginner'

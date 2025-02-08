@@ -3,8 +3,9 @@ import { format } from 'date-fns'
 import { ref } from 'vue'
 import type { Champion, ChampionRotation } from '../Types'
 import ChampionsList from './ChampionsList.vue'
-import SearchQuery from './SearchQuery.vue'
 import DarkModeToggle from './DarkModeToggle.vue'
+import RotationTypePicker from './RotationTypePicker.vue'
+import SearchQuery from './SearchQuery.vue'
 
 const props = defineProps<{
   rotation: ChampionRotation
@@ -59,6 +60,8 @@ const duration = {
         <DarkModeToggle />
       </div>
     </div>
+
+    <RotationTypePicker />
 
     <h2 class="pt-2">Champions available for free</h2>
     <h3 class="text-sm text-gray-500 dark:text-gray-400">
