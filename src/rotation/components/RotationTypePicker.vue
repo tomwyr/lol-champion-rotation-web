@@ -40,10 +40,9 @@
 import IconExpandMore from '@/icons/IconExpandMore.vue'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon } from '@heroicons/vue/24/outline'
-import { ref } from 'vue'
 import type { RotationType } from '../Types'
 
-const model = ref<RotationType>('regular')
+const model = defineModel<RotationType>({ required: true })
 
 function getTypeData(type: RotationType) {
   switch (type) {

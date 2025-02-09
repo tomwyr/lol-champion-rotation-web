@@ -14,6 +14,7 @@
       :currentRotation="currentRotationState.value"
       :nextRotations="nextRotationsState.data"
       :hasNextRotation="nextRotationToken !== undefined"
+      :isLoadingMore="nextRotationsState.loadingMore"
       :onLoadMore="fetchNextRotation"
     />
   </template>

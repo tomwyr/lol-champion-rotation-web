@@ -23,7 +23,7 @@ const props = defineProps<{
   onChange: (query: string) => void
 }>()
 
-const query = ref('')
+const query = defineModel({ default: '' })
 const expanded = ref(false)
 
 watch(query, props.onChange)

@@ -1,78 +1,59 @@
 <template>
-  <div class="px-4 py-2">
-    <div class="flex flex-row h-8 items-center">
-      <div class="flex flex-row gap-1 items-baseline">
-        <h1 class="text-xl">Current champion rotation</h1>
-        <h3 v-if="currentRotation.patchVersion" class="text-sm text-gray-500 dark:text-gray-400">
-          v{{ currentRotation.patchVersion }}
-        </h3>
-      </div>
+  <RotationHeader
+    v-model:rotation-type="rotationType"
+    v-model:search-query="searchQuery"
+    :currentRotation="currentRotation"
+    @queryChange="applyChampionsFilter"
+  />
 
-      <SearchQuery :onChange="applyChampionsFilter" />
-
-      <div class="flex flex-row flex-grow items-center justify-end">
-        <DarkModeToggle />
-      </div>
-    </div>
-
-    <RotationTypePicker v-model="rotationType" />
-
+  <div class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto pt-[72px]">
     <template v-if="rotationType === 'regular'">
-      <h2 class="pt-2">Champions available for free</h2>
-      <h3 class="text-sm text-gray-500 dark:text-gray-400">
-        <time v-bind:datetime="duration.start.iso">{{ duration.start.formatted }}</time>
-        to
-        <time v-bind:datetime="duration.end.iso">{{ duration.end.formatted }}</time>
-      </h3>
-
-      <ChampionsList
-        :champions="filtered ? regularChampions : currentRotation.regularChampions"
-        :filtered="filtered"
+      <ChampionsSection :rotations="regularRotationsData()" :filtered="filtered" />
+      <MoreDataLoader
+        v-if="searchQuery.length === 0 && hasNextRotation"
+        :showButton="!isLoadingMore && nextRotations.length === 0"
+        buttonLabel="Previous Rotations"
+        :extentThreshold="200"
+        :onLoadMore="onLoadMore"
       />
-
-      <IconSpinner v-if="hasNextRotation" class="m-4 mb-8 mx-auto" />
     </template>
 
     <template v-if="rotationType === 'beginner'">
-      <h2 class="pt-2">Champions available for free for new players</h2>
-      <h3 class="text-gray-500 dark:text-gray-400">
-        New players up to level {{ currentRotation.beginnerMaxLevel }} only
-      </h3>
-      <ChampionsList
-        :champions="filtered ? beginnerChampions : currentRotation.beginnerChampions"
-        :filtered="filtered"
-      />
+      <ChampionsSection :rotations="beginnerRotationsData()" :filtered="filtered" />
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import IconSpinner from '@/icons/IconSpinner.vue'
 import { format } from 'date-fns'
 import { ref } from 'vue'
 import {
   type Champion,
   type ChampionRotation,
+  type ChampionRotationDuration,
   type CurrentChampionRotation,
   type RotationType,
 } from '../Types'
-import ChampionsList from './ChampionsList.vue'
-import DarkModeToggle from './DarkModeToggle.vue'
-import RotationTypePicker from './RotationTypePicker.vue'
-import SearchQuery from './SearchQuery.vue'
+import ChampionsSection from './ChampionsSection.vue'
+import MoreDataLoader from './MoreDataLoader.vue'
+import RotationHeader from './RotationHeader.vue'
 
 const props = defineProps<{
   currentRotation: CurrentChampionRotation
   nextRotations: ChampionRotation[]
   hasNextRotation: boolean
+  isLoadingMore: boolean
   onLoadMore: () => void
 }>()
 
-const rotationType = ref<RotationType>('regular')
+const rotationType = defineModel<RotationType>('rotationType', { default: 'regular' })
+const searchQuery = defineModel<string>('searchQuery', { default: '' })
 
 const filtered = ref(false)
 const regularChampions = ref<Champion[]>([])
 const beginnerChampions = ref<Champion[]>([])
+
+const currentRotation = props.currentRotation
 
 function applyChampionsFilter(filter: string) {
   const hasQuery = filter.trim().length > 0
@@ -87,18 +68,37 @@ function applyChampionsFilter(filter: string) {
   }
 
   filtered.value = hasQuery
-  regularChampions.value = filterChampions(props.currentRotation.regularChampions)
-  beginnerChampions.value = filterChampions(props.currentRotation.beginnerChampions)
+  regularChampions.value = filterChampions(currentRotation.regularChampions)
+  beginnerChampions.value = filterChampions(currentRotation.beginnerChampions)
 }
 
-const duration = {
-  start: {
-    iso: props.currentRotation.duration.start.toISOString,
-    formatted: format(props.currentRotation.duration.start, 'MMMM dd'),
-  },
-  end: {
-    iso: props.currentRotation.duration.end.toISOString,
-    formatted: format(props.currentRotation.duration.end, 'MMMM dd'),
-  },
+function formatDuration(duration: ChampionRotationDuration) {
+  const start = format(duration.start, 'MMMM dd')
+  const end = format(duration.end, 'MMMM dd')
+  return start + ' to ' + end
+}
+
+function regularRotationsData() {
+  return [
+    {
+      header: formatDuration(currentRotation.duration),
+      champions: filtered.value ? regularChampions.value : currentRotation.regularChampions,
+    },
+    ...props.nextRotations.map((rotation) => {
+      return {
+        header: formatDuration(rotation.duration),
+        champions: rotation.champions,
+      }
+    }),
+  ]
+}
+
+function beginnerRotationsData() {
+  return [
+    {
+      header: 'New players up to level ' + currentRotation.beginnerMaxLevel + ' only',
+      champions: filtered.value ? beginnerChampions.value : currentRotation.beginnerChampions,
+    },
+  ]
 }
 </script>
