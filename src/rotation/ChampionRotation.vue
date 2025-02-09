@@ -1,14 +1,21 @@
 <template>
-  <template v-if="state.type === 'loading'">
+  <template
+    v-if="currentRotationState.type === 'initial' || currentRotationState.type === 'loading'"
+  >
     <DataLoading />
   </template>
 
-  <template v-if="state.type === 'error'">
-    <DataError :onRetry="fetchRotation" />
+  <template v-if="currentRotationState.type === 'error'">
+    <DataError :onRetry="fetchCurrentRotation" />
   </template>
 
-  <template v-if="state.type === 'data'">
-    <RotationDetails :rotation="state.value" />
+  <template v-if="currentRotationState.type === 'data'">
+    <RotationDetails
+      :currentRotation="currentRotationState.value"
+      :nextRotations="nextRotationsState.data"
+      :hasNextRotation="nextRotationToken !== undefined"
+      :onLoadMore="fetchNextRotation"
+    />
   </template>
 </template>
 
@@ -16,23 +23,63 @@
 import DataError from '@/components/DataError.vue'
 import DataLoading from '@/components/DataLoading.vue'
 import { apiBaseUrl } from '@/Environment'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import RotationDetails from './components/RotationDetails.vue'
-import type { ChampionRotation, DataState } from './Types'
+import type {
+  ChampionRotation,
+  CurrentChampionRotation,
+  CurrentRotationState,
+  NextRotationsState,
+} from './Types'
 
-const state = ref<DataState<ChampionRotation>>({ type: 'loading' })
+const currentRotationState = ref<CurrentRotationState>({ type: 'initial' })
+const nextRotationsState = ref<NextRotationsState>({ data: [], loadingMore: false })
 
-async function fetchRotation() {
-  state.value = { type: 'loading' }
+const nextRotationToken = computed(() => {
+  const nextRotations = nextRotationsState.value.data
+  if (nextRotations.length > 0) {
+    return nextRotations[nextRotations.length - 1].nextRotationToken
+  }
+
+  const currentRotation = currentRotationState.value
+  if (currentRotation.type === 'data') {
+    return currentRotation.value.nextRotationToken
+  }
+
+  return undefined
+})
+
+async function fetchCurrentRotation() {
+  currentRotationState.value = { type: 'loading' }
 
   const data = await fetch(apiBaseUrl + '/rotation/current')
 
   if (data.ok) {
-    state.value = { type: 'data', value: await data.json() }
+    const rotation = (await data.json()) as CurrentChampionRotation
+    currentRotationState.value = { type: 'data', value: rotation }
   } else {
-    state.value = { type: 'error' }
+    currentRotationState.value = { type: 'error' }
   }
 }
 
-onMounted(fetchRotation)
+async function fetchNextRotation() {
+  const initialValue = nextRotationsState.value
+  const token = nextRotationToken.value
+  if (initialValue.loadingMore || !token) {
+    return
+  }
+
+  nextRotationsState.value = { ...initialValue, loadingMore: true }
+
+  const data = await fetch(apiBaseUrl + '/rotation?nextRotationToken=' + token)
+
+  if (data.ok) {
+    const rotation = (await data.json()) as ChampionRotation
+    nextRotationsState.value = { data: [...initialValue.data, rotation], loadingMore: false }
+  } else {
+    nextRotationsState.value = initialValue
+  }
+}
+
+onMounted(fetchCurrentRotation)
 </script>

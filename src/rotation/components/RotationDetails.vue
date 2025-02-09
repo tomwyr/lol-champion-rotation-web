@@ -3,8 +3,8 @@
     <div class="flex flex-row h-8 items-center">
       <div class="flex flex-row gap-1 items-baseline">
         <h1 class="text-xl">Current champion rotation</h1>
-        <h3 v-if="rotation.patchVersion" class="text-sm text-gray-500 dark:text-gray-400">
-          v{{ rotation.patchVersion }}
+        <h3 v-if="currentRotation.patchVersion" class="text-sm text-gray-500 dark:text-gray-400">
+          v{{ currentRotation.patchVersion }}
         </h3>
       </div>
 
@@ -26,18 +26,20 @@
       </h3>
 
       <ChampionsList
-        :champions="filtered ? regularChampions : rotation.regularChampions"
+        :champions="filtered ? regularChampions : currentRotation.regularChampions"
         :filtered="filtered"
       />
+
+      <IconSpinner v-if="hasNextRotation" class="m-4 mb-8 mx-auto" />
     </template>
 
     <template v-if="rotationType === 'beginner'">
       <h2 class="pt-2">Champions available for free for new players</h2>
       <h3 class="text-gray-500 dark:text-gray-400">
-        New players up to level {{ rotation.beginnerMaxLevel }} only
+        New players up to level {{ currentRotation.beginnerMaxLevel }} only
       </h3>
       <ChampionsList
-        :champions="filtered ? beginnerChampions : rotation.beginnerChampions"
+        :champions="filtered ? beginnerChampions : currentRotation.beginnerChampions"
         :filtered="filtered"
       />
     </template>
@@ -45,19 +47,28 @@
 </template>
 
 <script setup lang="ts">
+import IconSpinner from '@/icons/IconSpinner.vue'
 import { format } from 'date-fns'
 import { ref } from 'vue'
-import { type Champion, type ChampionRotation, type RotationType } from '../Types'
+import {
+  type Champion,
+  type ChampionRotation,
+  type CurrentChampionRotation,
+  type RotationType,
+} from '../Types'
 import ChampionsList from './ChampionsList.vue'
 import DarkModeToggle from './DarkModeToggle.vue'
 import RotationTypePicker from './RotationTypePicker.vue'
 import SearchQuery from './SearchQuery.vue'
 
 const props = defineProps<{
-  rotation: ChampionRotation
+  currentRotation: CurrentChampionRotation
+  nextRotations: ChampionRotation[]
+  hasNextRotation: boolean
+  onLoadMore: () => void
 }>()
 
-const rotationType = ref<RotationType>('beginner')
+const rotationType = ref<RotationType>('regular')
 
 const filtered = ref(false)
 const regularChampions = ref<Champion[]>([])
@@ -76,18 +87,18 @@ function applyChampionsFilter(filter: string) {
   }
 
   filtered.value = hasQuery
-  regularChampions.value = filterChampions(props.rotation.regularChampions)
-  beginnerChampions.value = filterChampions(props.rotation.beginnerChampions)
+  regularChampions.value = filterChampions(props.currentRotation.regularChampions)
+  beginnerChampions.value = filterChampions(props.currentRotation.beginnerChampions)
 }
 
 const duration = {
   start: {
-    iso: props.rotation.duration.start.toISOString,
-    formatted: format(props.rotation.duration.start, 'MMMM dd'),
+    iso: props.currentRotation.duration.start.toISOString,
+    formatted: format(props.currentRotation.duration.start, 'MMMM dd'),
   },
   end: {
-    iso: props.rotation.duration.end.toISOString,
-    formatted: format(props.rotation.duration.end, 'MMMM dd'),
+    iso: props.currentRotation.duration.end.toISOString,
+    formatted: format(props.currentRotation.duration.end, 'MMMM dd'),
   },
 }
 </script>
