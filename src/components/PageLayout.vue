@@ -4,7 +4,7 @@
       <slot name="header"></slot>
     </div>
   </header>
-  <main class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto pt-[72px]">
+  <main class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto pt-[4.75rem]">
     <slot name="body"></slot>
   </main>
 </template>

@@ -28,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import PageLayout from '@/components/PageLayout.vue'
 import { format } from 'date-fns'
 import { computed, ref } from 'vue'
 import {
@@ -37,10 +38,9 @@ import {
   type CurrentChampionRotation,
   type RotationType,
 } from '../Types'
-import ChampionsSection from './ChampionsSection.vue'
+import ChampionsSection, { type ChampionsSectionRotation } from './ChampionsSection.vue'
 import MoreDataLoader from './MoreDataLoader.vue'
 import RotationHeader from './RotationHeader.vue'
-import PageLayout from '@/components/PageLayout.vue'
 
 const props = defineProps<{
   currentRotation: CurrentChampionRotation
@@ -58,11 +58,12 @@ const searchQuery = ref<string>('')
 const filter = computed(() => searchQuery.value.toLowerCase().trim())
 const filtered = computed(() => filter.value.length > 0)
 
-const regularRotationsData = computed(() => {
+const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
   return [
     {
       header: formatDuration(currentRotation.duration),
       champions: filterChampions(currentRotation.regularChampions),
+      current: true,
     },
     ...props.nextRotations.map((rotation) => {
       return {
@@ -73,7 +74,7 @@ const regularRotationsData = computed(() => {
   ]
 })
 
-const beginnerRotationsData = computed(() => {
+const beginnerRotationsData = computed<ChampionsSectionRotation[]>(() => {
   return [
     {
       header: 'New players up to level ' + currentRotation.beginnerMaxLevel + ' only',

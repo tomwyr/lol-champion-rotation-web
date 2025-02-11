@@ -1,8 +1,17 @@
 <template>
   <template v-for="rotation in nonEmptyRotations" :key="rotation">
-    <h2 class="text-gray-500 dark:text-gray-400">
-      {{ rotation.header }}
-    </h2>
+    <div class="flex flex-row items-center">
+      <h2 class="text-gray-500 dark:text-gray-400">
+        {{ rotation.header }}
+      </h2>
+      <span
+        v-if="rotation.current"
+        class="ml-2 px-1.5 py-0.5 text-xs rounded-full border text-green-700 bg-green-700 bg-opacity-5 border-green-700 dark:text-green-300 dark:bg-green-300 dark:bg-opacity-10 dark:border-green-300"
+      >
+        Current
+      </span>
+    </div>
+
     <div
       v-if="rotation.champions.length > 0"
       class="py-4 gap-4 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3"
@@ -31,11 +40,14 @@
 import { computed } from 'vue'
 import type { Champion } from '../Types'
 
+export type ChampionsSectionRotation = {
+  header: string
+  champions: Champion[]
+  current?: boolean
+}
+
 const props = defineProps<{
-  rotations: {
-    header: string
-    champions: Champion[]
-  }[]
+  rotations: ChampionsSectionRotation[]
   filtered: boolean
 }>()
 
