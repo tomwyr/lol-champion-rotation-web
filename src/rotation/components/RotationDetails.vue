@@ -46,8 +46,8 @@ const props = defineProps<{
   onLoadMore: () => void
 }>()
 
-const rotationType = defineModel<RotationType>('rotationType', { default: 'regular' })
-const searchQuery = defineModel<string>('searchQuery', { default: '' })
+const rotationType = ref<RotationType>('regular')
+const searchQuery = ref<string>('')
 
 const filtered = ref(false)
 const regularChampions = ref<Champion[]>([])
