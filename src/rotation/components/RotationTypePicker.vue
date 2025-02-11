@@ -51,14 +51,14 @@ function getTypeData(type: RotationType) {
         value: 'regular',
         title: "Summoner's Rift",
         description: 'Classic map • Weekly rotation',
-        iconAsset: 'public/assets/icon-sr.png',
+        iconAsset: 'assets/icon-sr.png',
       }
     case 'beginner':
       return {
         value: 'beginner',
         title: "Summoner's Rift (Beginners)",
         description: 'Classic map • New players only',
-        iconAsset: 'public/assets/icon-sr-beginner.png',
+        iconAsset: 'assets/icon-sr-beginner.png',
       }
   }
 }
