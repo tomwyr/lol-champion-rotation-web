@@ -1,6 +1,6 @@
 <template>
-  <header class="fixed z-50 inset-x-0 py-2 px-4 bg-inherit">
-    <div class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto">
+  <header class="fixed z-50 inset-x-0 py-2 bg-inherit">
+    <div class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] px-4 mx-auto">
       <slot name="header"></slot>
     </div>
   </header>
