@@ -9,7 +9,7 @@
           </h3>
         </div>
 
-        <SearchQuery v-model="searchQuery" :onChange="onQueryChange" />
+        <SearchQuery v-model="searchQuery" />
 
         <div class="flex flex-row flex-grow items-center justify-end">
           <DarkModeToggle />
@@ -32,6 +32,5 @@ const searchQuery = defineModel<string>('searchQuery', { required: true })
 
 defineProps<{
   currentRotation: CurrentChampionRotation
-  onQueryChange: (query: string) => void
 }>()
 </script>

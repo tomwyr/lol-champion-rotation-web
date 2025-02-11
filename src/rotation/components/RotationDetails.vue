@@ -3,12 +3,11 @@
     v-model:rotation-type="rotationType"
     v-model:search-query="searchQuery"
     :currentRotation="currentRotation"
-    @queryChange="applyChampionsFilter"
   />
 
   <div class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto pt-[72px]">
     <template v-if="rotationType === 'regular'">
-      <ChampionsSection :rotations="regularRotationsData()" :filtered="filtered" />
+      <ChampionsSection :rotations="regularRotationsData" :filtered="filtered" />
       <MoreDataLoader
         v-if="searchQuery.length === 0 && hasNextRotation"
         :showButton="!isLoadingMore && nextRotations.length === 0"
@@ -19,14 +18,14 @@
     </template>
 
     <template v-if="rotationType === 'beginner'">
-      <ChampionsSection :rotations="beginnerRotationsData()" :filtered="filtered" />
+      <ChampionsSection :rotations="beginnerRotationsData" :filtered="filtered" />
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { format } from 'date-fns'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import {
   type Champion,
   type ChampionRotation,
@@ -46,59 +45,48 @@ const props = defineProps<{
   onLoadMore: () => void
 }>()
 
+const currentRotation = props.currentRotation
+
 const rotationType = ref<RotationType>('regular')
 const searchQuery = ref<string>('')
 
-const filtered = ref(false)
-const regularChampions = ref<Champion[]>([])
-const beginnerChampions = ref<Champion[]>([])
+const filter = computed(() => searchQuery.value.toLowerCase().trim())
+const filtered = computed(() => filter.value.length > 0)
 
-const currentRotation = props.currentRotation
+const regularRotationsData = computed(() => {
+  return [
+    {
+      header: formatDuration(currentRotation.duration),
+      champions: filterChampions(currentRotation.regularChampions),
+    },
+    ...props.nextRotations.map((rotation) => {
+      return {
+        header: formatDuration(rotation.duration),
+        champions: filterChampions(rotation.champions),
+      }
+    }),
+  ]
+})
 
-function applyChampionsFilter(filter: string) {
-  const hasQuery = filter.trim().length > 0
+const beginnerRotationsData = computed(() => {
+  return [
+    {
+      header: 'New players up to level ' + currentRotation.beginnerMaxLevel + ' only',
+      champions: filterChampions(currentRotation.beginnerChampions),
+    },
+  ]
+})
 
-  const filterChampions = (champions: Champion[]) => {
-    if (!hasQuery) {
-      return champions
-    }
-    return champions.filter((champion) =>
-      champion.name.toLowerCase().includes(filter.toLowerCase()),
-    )
+function filterChampions(champions: Champion[]) {
+  if (filter.value.length === 0) {
+    return champions
   }
-
-  filtered.value = hasQuery
-  regularChampions.value = filterChampions(currentRotation.regularChampions)
-  beginnerChampions.value = filterChampions(currentRotation.beginnerChampions)
+  return champions.filter((champion) => champion.name.toLowerCase().includes(filter.value))
 }
 
 function formatDuration(duration: ChampionRotationDuration) {
   const start = format(duration.start, 'MMMM dd')
   const end = format(duration.end, 'MMMM dd')
   return start + ' to ' + end
-}
-
-function regularRotationsData() {
-  return [
-    {
-      header: formatDuration(currentRotation.duration),
-      champions: filtered.value ? regularChampions.value : currentRotation.regularChampions,
-    },
-    ...props.nextRotations.map((rotation) => {
-      return {
-        header: formatDuration(rotation.duration),
-        champions: rotation.champions,
-      }
-    }),
-  ]
-}
-
-function beginnerRotationsData() {
-  return [
-    {
-      header: 'New players up to level ' + currentRotation.beginnerMaxLevel + ' only',
-      champions: filtered.value ? beginnerChampions.value : currentRotation.beginnerChampions,
-    },
-  ]
 }
 </script>

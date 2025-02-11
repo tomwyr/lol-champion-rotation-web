@@ -1,5 +1,5 @@
 <template>
-  <template v-for="rotation in rotations" :key="rotation">
+  <template v-for="rotation in nonEmptyRotations" :key="rotation">
     <h2 class="text-gray-500 dark:text-gray-400">
       {{ rotation.header }}
     </h2>
@@ -20,23 +20,26 @@
         </div>
       </template>
     </div>
-    <h3
-      v-if="filtered && rotation.champions.length === 0"
-      class="py-2 text-gray-500 dark:text-gray-400"
-    >
-      No champions match your search query.
-    </h3>
   </template>
+
+  <h3 v-if="nonEmptyRotations.length === 0" class="py-2 text-gray-500 dark:text-gray-400">
+    {{ filtered ? 'No champions match your search query.' : 'No data available at the moment.' }}
+  </h3>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { Champion } from '../Types'
 
-defineProps<{
+const props = defineProps<{
   rotations: {
     header: string
     champions: Champion[]
   }[]
   filtered: boolean
 }>()
+
+const nonEmptyRotations = computed(() => {
+  return props.rotations.filter((data) => data.champions.length > 0)
+})
 </script>

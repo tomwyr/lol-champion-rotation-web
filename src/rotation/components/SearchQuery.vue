@@ -17,14 +17,8 @@
 
 <script setup lang="ts">
 import { IconFilter, IconSearch } from '@/icons/Icons'
-import { ref, watch } from 'vue'
-
-const props = defineProps<{
-  onChange: (query: string) => void
-}>()
+import { ref } from 'vue'
 
 const query = defineModel({ default: '' })
 const expanded = ref(false)
-
-watch(query, props.onChange)
 </script>
