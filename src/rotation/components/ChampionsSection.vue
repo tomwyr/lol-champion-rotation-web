@@ -6,7 +6,7 @@
       </h2>
       <span
         v-if="rotation.current"
-        class="ml-2 px-1.5 py-0.5 text-xs rounded-full border text-green-700 bg-green-700 bg-opacity-5 border-green-700 dark:text-green-300 dark:bg-green-300 dark:bg-opacity-10 dark:border-green-300"
+        class="ml-2 px-1.5 py-0.5 text-xs rounded-full border bg-opacity-10 dark:bg-opacity-10 text-green-400 bg-green-400 border-green-400 dark:text-green-300 dark:bg-green-300 dark:border-green-300"
       >
         Current
       </span>
