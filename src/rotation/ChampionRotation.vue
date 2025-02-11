@@ -32,6 +32,7 @@ import type {
   CurrentRotationState,
   NextRotationsState,
 } from './Types'
+import { restoreScrollAfterFrame } from './Utils'
 
 const currentRotationState = ref<CurrentRotationState>({ type: 'initial' })
 const nextRotationsState = ref<NextRotationsState>({ data: [], loadingMore: false })
@@ -77,6 +78,7 @@ async function fetchNextRotation() {
   if (data.ok) {
     const rotation = (await data.json()) as ChampionRotation
     nextRotationsState.value = { data: [...initialValue.data, rotation], loadingMore: false }
+    restoreScrollAfterFrame()
   } else {
     nextRotationsState.value = initialValue
   }
