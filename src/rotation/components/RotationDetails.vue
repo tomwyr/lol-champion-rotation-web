@@ -1,26 +1,30 @@
 <template>
-  <RotationHeader
-    v-model:rotation-type="rotationType"
-    v-model:search-query="searchQuery"
-    :currentRotation="currentRotation"
-  />
-
-  <div class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto pt-[72px]">
-    <template v-if="rotationType === 'regular'">
-      <ChampionsSection :rotations="regularRotationsData" :filtered="filtered" />
-      <MoreDataLoader
-        v-if="searchQuery.length === 0 && hasNextRotation"
-        :showButton="!isLoadingMore && nextRotations.length === 0"
-        buttonLabel="Previous Rotations"
-        :extentThreshold="200"
-        :onLoadMore="onLoadMore"
+  <PageLayout>
+    <template v-slot:header>
+      <RotationHeader
+        v-model:rotation-type="rotationType"
+        v-model:search-query="searchQuery"
+        :currentRotation="currentRotation"
       />
     </template>
 
-    <template v-if="rotationType === 'beginner'">
-      <ChampionsSection :rotations="beginnerRotationsData" :filtered="filtered" />
+    <template v-slot:body>
+      <template v-if="rotationType === 'regular'">
+        <ChampionsSection :rotations="regularRotationsData" :filtered="filtered" />
+        <MoreDataLoader
+          v-if="searchQuery.length === 0 && hasNextRotation"
+          :showButton="!isLoadingMore && nextRotations.length === 0"
+          buttonLabel="Previous Rotations"
+          :extentThreshold="200"
+          :onLoadMore="onLoadMore"
+        />
+      </template>
+
+      <template v-if="rotationType === 'beginner'">
+        <ChampionsSection :rotations="beginnerRotationsData" :filtered="filtered" />
+      </template>
     </template>
-  </div>
+  </PageLayout>
 </template>
 
 <script setup lang="ts">
@@ -36,6 +40,7 @@ import {
 import ChampionsSection from './ChampionsSection.vue'
 import MoreDataLoader from './MoreDataLoader.vue'
 import RotationHeader from './RotationHeader.vue'
+import PageLayout from '@/components/PageLayout.vue'
 
 const props = defineProps<{
   currentRotation: CurrentChampionRotation
