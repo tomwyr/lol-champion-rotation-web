@@ -17,15 +17,20 @@
       class="py-4 gap-4 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3"
     >
       <template v-for="champion in rotation.champions" :key="champion.id">
-        <div class="flex flex-col items-center">
+        <div class="relative">
           <img
+            class="rounded"
             width="144px"
             height="144px"
             loading="lazy"
-            class="rounded"
             :src="champion.imageUrl"
           />
-          <div v-text="champion.name" class="pt-2 text-center"></div>
+          <div class="absolute bottom-0 inset-x-0 text-center">
+            <div
+              v-text="champion.name"
+              class="inline-block px-2 py-0.5 mb-2 text-sm rounded-full shadow-sm shadow-black bg-opacity-80 text-gray-100 bg-gray-900"
+            />
+          </div>
         </div>
       </template>
     </div>
