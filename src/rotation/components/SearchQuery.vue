@@ -1,7 +1,7 @@
 <template>
   <div
     @click="expanded = !expanded"
-    class="ml-2 p-1 hover:bg-gray-300 dark:hover:bg-gray-700 rounded relative"
+    class="p-1 hover:bg-gray-300 dark:hover:bg-gray-700 rounded relative"
   >
     <IconSearch />
     <IconFilter v-if="query && !expanded" />
@@ -17,8 +17,7 @@
 
 <script setup lang="ts">
 import { IconFilter, IconSearch } from '@/icons/Icons'
-import { ref } from 'vue'
 
-const query = defineModel({ default: '' })
-const expanded = ref(false)
+const query = defineModel('query', { default: '' })
+const expanded = defineModel('expanded', { default: false })
 </script>
