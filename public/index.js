@@ -1,4 +1,4 @@
-function initDarkMode() {
+;(function initDarkMode() {
   const root = document.documentElement
   const body = document.body
 
@@ -16,6 +16,4 @@ function initDarkMode() {
       body.classList.add(bgAnimate)
     }, 100)
   })
-}
-
-initDarkMode()
+})()
