@@ -6,7 +6,7 @@
   const bgAnimate = 'animate-theme'
 
   root.style.visibility = 'hidden'
-  if (localStorage.getItem('themeMode') === 'light') {
+  if (localStorage.getItem('themeMode') === 'dark') {
     root.classList.add('dark')
     root.style.backgroundColor = bgDark
   }
