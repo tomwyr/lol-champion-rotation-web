@@ -54,7 +54,7 @@ const nextRotationToken = computed(() => {
 async function fetchCurrentRotation() {
   currentRotationState.value = { type: 'loading' }
 
-  const data = await fetch(apiBaseUrl + '/rotation/current')
+  const data = await fetch(apiBaseUrl + '/rotations/current')
 
   if (data.ok) {
     const rotation = (await data.json()) as CurrentChampionRotation
@@ -73,7 +73,7 @@ async function fetchNextRotation() {
 
   nextRotationsState.value = { ...initialValue, loadingMore: true }
 
-  const data = await fetch(apiBaseUrl + '/rotation?nextRotationToken=' + token)
+  const data = await fetch(apiBaseUrl + '/rotations?nextRotationToken=' + token)
 
   if (data.ok) {
     const rotation = (await data.json()) as ChampionRotation
