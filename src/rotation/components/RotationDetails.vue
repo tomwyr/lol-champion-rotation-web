@@ -35,6 +35,7 @@ import {
   type Champion,
   type ChampionRotation,
   type ChampionRotationDuration,
+  type ChampionRotationPrediction,
   type CurrentChampionRotation,
   type RotationType,
 } from '../Types'
@@ -43,6 +44,7 @@ import MoreDataLoader from './MoreDataLoader.vue'
 import RotationHeader from './RotationHeader.vue'
 
 const props = defineProps<{
+  rotationPrediction?: ChampionRotationPrediction
   currentRotation: CurrentChampionRotation
   nextRotations: ChampionRotation[]
   hasNextRotation: boolean
@@ -50,7 +52,7 @@ const props = defineProps<{
   onLoadMore: () => void
 }>()
 
-const currentRotation = props.currentRotation
+const { rotationPrediction, currentRotation, nextRotations } = props
 
 const rotationType = ref<RotationType>('regular')
 const searchQuery = ref<string>('')
@@ -59,19 +61,30 @@ const filter = computed(() => searchQuery.value.toLowerCase().trim())
 const filtered = computed(() => filter.value.length > 0)
 
 const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
-  return [
-    {
-      header: formatDuration(currentRotation.duration),
-      champions: filterChampions(currentRotation.regularChampions),
-      current: true,
-    },
-    ...props.nextRotations.map((rotation) => {
-      return {
-        header: formatDuration(rotation.duration),
-        champions: filterChampions(rotation.champions),
-      }
-    }),
-  ]
+  const result: ChampionsSectionRotation[] = []
+
+  if (rotationPrediction) {
+    result.push({
+      header: formatDuration(rotationPrediction.duration),
+      champions: filterChampions(rotationPrediction.champions),
+      badge: 'prediction',
+    })
+  }
+
+  result.push({
+    header: formatDuration(currentRotation.duration),
+    champions: filterChampions(currentRotation.regularChampions),
+    badge: 'current',
+  })
+
+  for (const rotation of nextRotations) {
+    result.push({
+      header: formatDuration(rotation.duration),
+      champions: filterChampions(rotation.champions),
+    })
+  }
+
+  return result
 })
 
 const beginnerRotationsData = computed<ChampionsSectionRotation[]>(() => {

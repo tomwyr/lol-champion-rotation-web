@@ -4,12 +4,7 @@
       <h2 class="text-gray-500 dark:text-gray-400">
         {{ rotation.header }}
       </h2>
-      <span
-        v-if="rotation.current"
-        class="ml-2 px-1.5 py-0.5 text-xs rounded-full border bg-opacity-10 dark:bg-opacity-10 text-green-400 bg-green-400 border-green-400 dark:text-green-300 dark:bg-green-300 dark:border-green-300"
-      >
-        Current
-      </span>
+      <RotationBadge v-if="rotation.badge" :variant="rotation.badge" />
     </div>
 
     <div
@@ -44,11 +39,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { Champion } from '../Types'
+import type { RotationBadgeVariant } from './RotationBadge.vue'
+import RotationBadge from './RotationBadge.vue'
 
 export type ChampionsSectionRotation = {
   header: string
   champions: Champion[]
-  current?: boolean
+  badge?: RotationBadgeVariant
 }
 
 const props = defineProps<{

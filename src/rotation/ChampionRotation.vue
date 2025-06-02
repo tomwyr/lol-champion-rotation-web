@@ -1,16 +1,17 @@
 <template>
-  <template
-    v-if="currentRotationState.type === 'initial' || currentRotationState.type === 'loading'"
-  >
+  <template v-if="isLoadingInitialData">
     <DataLoading />
   </template>
 
-  <template v-if="currentRotationState.type === 'error'">
+  <template v-else-if="currentRotationState.type === 'error'">
     <DataError :onRetry="fetchCurrentRotation" />
   </template>
 
-  <template v-if="currentRotationState.type === 'data'">
+  <template v-else-if="currentRotationState.type === 'data'">
     <RotationDetails
+      :rotation-prediction="
+        rotationPredictionState.type === 'data' ? rotationPredictionState.value : undefined
+      "
       :currentRotation="currentRotationState.value"
       :nextRotations="nextRotationsState.data"
       :hasNextRotation="nextRotationToken !== undefined"
@@ -28,12 +29,15 @@ import { computed, onMounted, ref } from 'vue'
 import RotationDetails from './components/RotationDetails.vue'
 import type {
   ChampionRotation,
+  ChampionRotationPrediction,
   CurrentChampionRotation,
   CurrentRotationState,
   NextRotationsState,
+  RotationPredictionState,
 } from './Types'
 import { restoreScrollAfterFrame } from './Utils'
 
+const rotationPredictionState = ref<RotationPredictionState>({ type: 'initial' })
 const currentRotationState = ref<CurrentRotationState>({ type: 'initial' })
 const nextRotationsState = ref<NextRotationsState>({ data: [], loadingMore: false })
 
@@ -51,6 +55,14 @@ const nextRotationToken = computed(() => {
   return undefined
 })
 
+const isLoadingInitialData = computed(
+  () =>
+    rotationPredictionState.value.type === 'initial' ||
+    rotationPredictionState.value.type === 'loading' ||
+    currentRotationState.value.type === 'initial' ||
+    currentRotationState.value.type === 'loading',
+)
+
 async function fetchCurrentRotation() {
   currentRotationState.value = { type: 'loading' }
 
@@ -61,6 +73,19 @@ async function fetchCurrentRotation() {
     currentRotationState.value = { type: 'data', value: rotation }
   } else {
     currentRotationState.value = { type: 'error' }
+  }
+}
+
+async function fetchRotationPrediction() {
+  rotationPredictionState.value = { type: 'loading' }
+
+  const data = await fetch(apiBaseUrl + '/rotations/predict')
+
+  if (data.ok) {
+    const rotation = (await data.json()) as ChampionRotationPrediction
+    rotationPredictionState.value = { type: 'data', value: rotation }
+  } else {
+    rotationPredictionState.value = { type: 'error' }
   }
 }
 
@@ -84,5 +109,8 @@ async function fetchNextRotation() {
   }
 }
 
-onMounted(fetchCurrentRotation)
+onMounted(() => {
+  fetchCurrentRotation()
+  fetchRotationPrediction()
+})
 </script>

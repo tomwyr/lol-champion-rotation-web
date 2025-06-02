@@ -20,6 +20,11 @@ export type ChampionRotation = {
   champions: Champion[]
 }
 
+export type ChampionRotationPrediction = {
+  duration: ChampionRotationDuration
+  champions: [Champion]
+}
+
 export type ChampionRotationDuration = {
   start: Date
   end: Date
@@ -29,10 +34,14 @@ export type RotationType = 'regular' | 'beginner'
 
 export type CurrentRotationError = 'unavailable'
 
-export type CurrentRotationState =
+export type CurrentRotationState = AsyncDataState<CurrentChampionRotation>
+
+export type RotationPredictionState = AsyncDataState<ChampionRotationPrediction>
+
+export type NextRotationsState = { data: ChampionRotation[]; loadingMore: boolean }
+
+export type AsyncDataState<T> =
   | { type: 'initial' }
   | { type: 'loading' }
   | { type: 'error' }
-  | { type: 'data'; value: CurrentChampionRotation }
-
-export type NextRotationsState = { data: ChampionRotation[]; loadingMore: boolean }
+  | { type: 'data'; value: T }
