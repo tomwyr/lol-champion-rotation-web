@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-2 pb-6 text-center">
+  <div class="pb-6 text-center">
     <button
       v-if="showButton"
       @click="onLoadMore"

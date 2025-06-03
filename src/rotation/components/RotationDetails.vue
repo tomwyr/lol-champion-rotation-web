@@ -67,6 +67,7 @@ const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
     result.push({
       header: formatDuration(rotationPrediction.duration),
       champions: filterChampions(rotationPrediction.champions),
+      expanded: false,
       badge: 'prediction',
     })
   }
