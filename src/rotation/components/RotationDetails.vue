@@ -65,14 +65,16 @@ const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
 
   if (rotationPrediction) {
     result.push({
+      key: 'prediction',
       header: formatDuration(rotationPrediction.duration),
       champions: filterChampions(rotationPrediction.champions),
-      expanded: false,
+      expandable: true,
       badge: 'prediction',
     })
   }
 
   result.push({
+    key: `current#${currentRotation.id}`,
     header: formatDuration(currentRotation.duration),
     champions: filterChampions(currentRotation.regularChampions),
     badge: 'current',
@@ -80,6 +82,7 @@ const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
 
   for (const rotation of nextRotations) {
     result.push({
+      key: `current#${currentRotation.id}`,
       header: formatDuration(rotation.duration),
       champions: filterChampions(rotation.champions),
     })
@@ -91,6 +94,7 @@ const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
 const beginnerRotationsData = computed<ChampionsSectionRotation[]>(() => {
   return [
     {
+      key: 'beginner',
       header: 'New players up to level ' + currentRotation.beginnerMaxLevel + ' only',
       champions: filterChampions(currentRotation.beginnerChampions),
     },

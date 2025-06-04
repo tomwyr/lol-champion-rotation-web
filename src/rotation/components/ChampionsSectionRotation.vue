@@ -7,9 +7,9 @@
     <RotationBadge v-if="rotation.badge" :variant="rotation.badge" />
 
     <div
-      v-if="rotation.expanded !== undefined"
+      v-if="rotation.expandable !== undefined"
       class="ml-1 p-1 cursor-pointer rounded-full hover:bg-gray-100 hover:dark:bg-gray-800"
-      @click="expanded = !expanded"
+      @click="toggleExpansion"
     >
       <IconUnfoldLess v-if="expanded" />
       <IconUnfoldMore v-else />
@@ -41,6 +41,7 @@
 import IconUnfoldLess from '@/icons/IconUnfoldLess.vue'
 import IconUnfoldMore from '@/icons/IconUnfoldMore.vue'
 import { ref } from 'vue'
+import { getRotationExpansion, saveRotationExpansion } from '../services/RotationExpansionsStorage'
 import type { ChampionsSectionRotation } from './ChampionsSection.vue'
 import RotationBadge from './RotationBadge.vue'
 
@@ -48,5 +49,10 @@ const { rotation } = defineProps<{
   rotation: ChampionsSectionRotation
 }>()
 
-const expanded = ref(rotation.expanded ?? true)
+function toggleExpansion() {
+  expanded.value = !expanded.value
+  saveRotationExpansion(rotation.key, expanded.value)
+}
+
+const expanded = ref(rotation.expandable ? getRotationExpansion(rotation.key) : true)
 </script>

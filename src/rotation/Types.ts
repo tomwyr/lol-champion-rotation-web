@@ -5,6 +5,7 @@ export type Champion = {
 }
 
 export type CurrentChampionRotation = {
+  id: string
   patchVersion?: string
   duration: ChampionRotationDuration
   beginnerMaxLevel: number
@@ -14,6 +15,7 @@ export type CurrentChampionRotation = {
 }
 
 export type ChampionRotation = {
+  id: string
   patchVersion?: string
   nextRotationToken?: string
   duration: ChampionRotationDuration

@@ -15,9 +15,10 @@ import ChampionsSectionRotation from './ChampionsSectionRotation.vue'
 import type { RotationBadgeVariant } from './RotationBadge.vue'
 
 export type ChampionsSectionRotation = {
+  key: string
   header: string
   champions: Champion[]
-  expanded?: boolean
+  expandable?: boolean
   badge?: RotationBadgeVariant
 }
 
