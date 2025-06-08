@@ -12,20 +12,20 @@
 
     <SearchQuery v-model:query="searchQuery" v-model:expanded="searchExpanded" />
 
-    <div class="flex flex-row flex-grow items-center justify-end gap-4">
-      <DarkModeToggle />
-      <RotationPredictionToggle />
-    </div>
+    <Bars3Icon
+      @click="openSideMenu"
+      class="size-4 cursor-pointer ml-auto text-gray-700 dark:text-gray-300"
+    />
   </div>
 
   <RotationTypePicker v-model="rotationType" />
 </template>
 
 <script setup lang="ts">
+import { openSideMenu } from '@/data/SideMenuOpen'
+import { Bars3Icon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
 import type { CurrentChampionRotation, RotationType } from '../Types'
-import DarkModeToggle from './DarkModeToggle.vue'
-import RotationPredictionToggle from './RotationPredictionToggle.vue'
 import RotationTypePicker from './RotationTypePicker.vue'
 import SearchQuery from './SearchQuery.vue'
 
