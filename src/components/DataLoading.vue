@@ -8,5 +8,5 @@
 </template>
 
 <script setup lang="ts">
-import IconSpinner from '@/icons/IconSpinner.vue'
+import { IconSpinner } from '@/icons/Icons'
 </script>

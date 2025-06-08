@@ -52,8 +52,6 @@ const props = defineProps<{
   onLoadMore: () => void
 }>()
 
-const { rotationPrediction, currentRotation, nextRotations } = props
-
 const rotationType = ref<RotationType>('regular')
 const searchQuery = ref<string>('')
 
@@ -61,6 +59,8 @@ const filter = computed(() => searchQuery.value.toLowerCase().trim())
 const filtered = computed(() => filter.value.length > 0)
 
 const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
+  const { rotationPrediction, currentRotation, nextRotations } = props
+
   const result: ChampionsSectionRotation[] = []
 
   if (rotationPrediction) {
@@ -92,6 +92,8 @@ const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
 })
 
 const beginnerRotationsData = computed<ChampionsSectionRotation[]>(() => {
+  const { currentRotation } = props
+
   return [
     {
       key: 'beginner',

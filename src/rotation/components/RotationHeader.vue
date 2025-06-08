@@ -12,8 +12,9 @@
 
     <SearchQuery v-model:query="searchQuery" v-model:expanded="searchExpanded" />
 
-    <div class="flex flex-row flex-grow items-center justify-end">
+    <div class="flex flex-row flex-grow items-center justify-end gap-4">
       <DarkModeToggle />
+      <RotationPredictionToggle />
     </div>
   </div>
 
@@ -24,6 +25,7 @@
 import { ref } from 'vue'
 import type { CurrentChampionRotation, RotationType } from '../Types'
 import DarkModeToggle from './DarkModeToggle.vue'
+import RotationPredictionToggle from './RotationPredictionToggle.vue'
 import RotationTypePicker from './RotationTypePicker.vue'
 import SearchQuery from './SearchQuery.vue'
 

@@ -1,5 +1,5 @@
 <template>
-  <template v-if="isLoadingInitialData">
+  <template v-if="!dataInitialized">
     <DataLoading />
   </template>
 
@@ -10,7 +10,9 @@
   <template v-else-if="currentRotationState.type === 'data'">
     <RotationDetails
       :rotation-prediction="
-        rotationPredictionState.type === 'data' ? rotationPredictionState.value : undefined
+        rotationPredictionEnabled && rotationPredictionState.type === 'data'
+          ? rotationPredictionState.value
+          : undefined
       "
       :currentRotation="currentRotationState.value"
       :nextRotations="nextRotationsState.data"
@@ -24,8 +26,9 @@
 <script setup lang="ts">
 import DataError from '@/components/DataError.vue'
 import DataLoading from '@/components/DataLoading.vue'
+import { rotationPredictionEnabledRef } from '@/data/RotationPredictionEnabled'
 import { apiBaseUrl } from '@/Environment'
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import RotationDetails from './components/RotationDetails.vue'
 import type {
   ChampionRotation,
@@ -36,6 +39,8 @@ import type {
   RotationPredictionState,
 } from './Types'
 import { restoreScrollAfterFrame } from './Utils'
+
+const rotationPredictionEnabled = rotationPredictionEnabledRef()
 
 const rotationPredictionState = ref<RotationPredictionState>({ type: 'initial' })
 const currentRotationState = ref<CurrentRotationState>({ type: 'initial' })
@@ -55,13 +60,7 @@ const nextRotationToken = computed(() => {
   return undefined
 })
 
-const isLoadingInitialData = computed(
-  () =>
-    rotationPredictionState.value.type === 'initial' ||
-    rotationPredictionState.value.type === 'loading' ||
-    currentRotationState.value.type === 'initial' ||
-    currentRotationState.value.type === 'loading',
-)
+const dataInitialized = ref(false)
 
 async function fetchCurrentRotation() {
   currentRotationState.value = { type: 'loading' }
@@ -109,8 +108,19 @@ async function fetchNextRotation() {
   }
 }
 
-onMounted(() => {
-  fetchCurrentRotation()
-  fetchRotationPrediction()
+onMounted(async () => {
+  const tasks: Promise<unknown>[] = []
+  tasks.push(fetchCurrentRotation())
+  if (rotationPredictionEnabled.value) {
+    tasks.push(fetchRotationPrediction())
+  }
+  await Promise.all(tasks)
+  dataInitialized.value = true
+})
+
+watchEffect(() => {
+  if (rotationPredictionEnabled.value && rotationPredictionState.value.type === 'initial') {
+    fetchRotationPrediction()
+  }
 })
 </script>

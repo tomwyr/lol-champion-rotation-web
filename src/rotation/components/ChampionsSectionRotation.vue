@@ -38,8 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import IconUnfoldLess from '@/icons/IconUnfoldLess.vue'
-import IconUnfoldMore from '@/icons/IconUnfoldMore.vue'
+import { IconUnfoldLess, IconUnfoldMore } from '@/icons/Icons'
 import { ref } from 'vue'
 import { getRotationExpansion, saveRotationExpansion } from '../services/RotationExpansionsStorage'
 import type { ChampionsSectionRotation } from './ChampionsSection.vue'
