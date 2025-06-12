@@ -53,18 +53,24 @@
 </template>
 
 <script setup lang="ts">
+import type { Champion } from '@/common/Types'
 import { IconUnfoldLess, IconUnfoldMore } from '@/icons/Icons'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import {
-  getRotationExpansion,
-  saveRotationExpansion,
-} from '../rotationList/services/RotationExpansionsStorage'
-import type { ChampionsRotationItemData } from './ChampionsSection.vue'
-import RotationBadge from './RotationBadge.vue'
+import RotationBadge, { type RotationBadgeVariant } from './RotationBadge.vue'
+import { getRotationExpansion, saveRotationExpansion } from './RotationExpansionsStorage'
+
+export type ChampionsRotationData = {
+  key: string
+  header: string
+  detailsId?: string
+  champions: Champion[]
+  expandable?: boolean
+  badge?: RotationBadgeVariant
+}
 
 const { rotation } = defineProps<{
-  rotation: ChampionsRotationItemData
+  rotation: ChampionsRotationData
 }>()
 
 const router = useRouter()

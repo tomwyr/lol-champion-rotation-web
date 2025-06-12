@@ -41,8 +41,8 @@
 </template>
 
 <script setup lang="ts">
-import { sideMenuOpenRef } from '@/data/SideMenuOpen';
-import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
+import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { sideMenuOpenRef } from './SideMenu'
 
 const open = sideMenuOpenRef()
 </script>

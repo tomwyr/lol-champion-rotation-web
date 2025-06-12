@@ -10,7 +10,7 @@
       </h3>
     </div>
 
-    <SearchQuery v-model:query="searchQuery" v-model:expanded="searchExpanded" />
+    <ChampionsSearchField v-model:query="searchQuery" v-model:expanded="searchExpanded" />
 
     <Bars3Icon
       @click="openSideMenu"
@@ -22,12 +22,12 @@
 </template>
 
 <script setup lang="ts">
-import { openSideMenu } from '@/data/SideMenuOpen'
+import type { CurrentChampionRotation, RotationType } from '@/common/Types'
+import { openSideMenu } from '@/components/common/SideMenu'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
-import type { CurrentChampionRotation, RotationType } from '../../common/Types'
+import ChampionsSearchField from './ChampionsSearchField.vue'
 import RotationTypePicker from './RotationTypePicker.vue'
-import SearchQuery from './SearchQuery.vue'
 
 const rotationType = defineModel<RotationType>('rotationType', { required: true })
 const searchQuery = defineModel<string>('searchQuery', { required: true })

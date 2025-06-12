@@ -19,25 +19,24 @@
         </div>
       </template>
       <template v-slot:body>
-        <ChampionsSectionRotation :rotation="rotationItemDataFrom(rotationDetailsState.value)" />
+        <ChampionRotation :rotation="rotationItemDataFrom(rotationDetailsState.value)" />
       </template>
     </PageLayout>
   </template>
 </template>
 
 <script setup lang="ts">
-import DataError from '@/components/DataError.vue'
-import DataLoading from '@/components/DataLoading.vue'
-import PageLayout from '@/components/PageLayout.vue'
-import type { AsyncDataState } from '@/data/Types'
+import type { Champion, ChampionRotationDuration } from '@/common/Types'
+import type { AsyncDataState } from '@/common/Utils'
+import DataError from '@/components/common/DataError.vue'
+import DataLoading from '@/components/common/DataLoading.vue'
+import PageLayout from '@/components/common/PageLayout.vue'
 import { apiBaseUrl } from '@/Environment'
 import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
 import { format } from 'date-fns'
 import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import type { ChampionsRotationItemData } from '../common/ChampionsSection.vue'
-import ChampionsSectionRotation from '../common/ChampionsSectionRotation.vue'
-import type { Champion, ChampionRotationDuration } from '../common/Types'
+import ChampionRotation, { type ChampionsRotationData } from '../common/ChampionRotation.vue'
 
 const router = useRouter()
 const route = useRoute()
@@ -70,7 +69,7 @@ function formatDuration(duration: ChampionRotationDuration) {
   return start + ' to ' + end
 }
 
-function rotationItemDataFrom(details: ChampionRotationDetails): ChampionsRotationItemData {
+function rotationItemDataFrom(details: ChampionRotationDetails): ChampionsRotationData {
   return {
     key: `details#${rotationId}`,
     header: formatDuration(details.duration),

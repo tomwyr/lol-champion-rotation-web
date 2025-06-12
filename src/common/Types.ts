@@ -1,5 +1,3 @@
-import type { AsyncDataState } from '@/data/Types'
-
 export type Champion = {
   id: string
   name: string
@@ -35,11 +33,3 @@ export type ChampionRotationDuration = {
 }
 
 export type RotationType = 'regular' | 'beginner'
-
-export type CurrentRotationError = 'unavailable'
-
-export type CurrentRotationState = AsyncDataState<CurrentChampionRotation>
-
-export type RotationPredictionState = AsyncDataState<ChampionRotationPrediction>
-
-export type NextRotationsState = { data: ChampionRotation[]; loadingMore: boolean }

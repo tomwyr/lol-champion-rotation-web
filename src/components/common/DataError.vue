@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { IconWarning } from '@/icons/Icons';
+import { IconWarning } from '@/icons/Icons'
 
 defineProps<{
   onRetry: () => void

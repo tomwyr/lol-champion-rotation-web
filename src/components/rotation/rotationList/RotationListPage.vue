@@ -8,7 +8,7 @@
   </template>
 
   <template v-else-if="currentRotationState.type === 'data'">
-    <RotationDetails
+    <RotationListData
       :rotation-prediction="
         rotationPredictionEnabled && rotationPredictionState.type === 'data'
           ? rotationPredictionState.value
@@ -21,24 +21,24 @@
       :onLoadMore="fetchNextRotation"
     />
   </template>
+
+  <ChampionRotationMenu />
 </template>
 
 <script setup lang="ts">
-import DataError from '@/components/DataError.vue'
-import DataLoading from '@/components/DataLoading.vue'
-import { rotationPredictionEnabledRef } from '@/data/RotationPredictionEnabled'
-import { apiBaseUrl } from '@/Environment'
-import { computed, onMounted, ref, watchEffect } from 'vue'
 import type {
   ChampionRotation,
   ChampionRotationPrediction,
   CurrentChampionRotation,
-  CurrentRotationState,
-  NextRotationsState,
-  RotationPredictionState,
-} from '../common/Types'
-import RotationDetails from './components/RotationDetails.vue'
-import { restoreScrollAfterFrame } from './Utils'
+} from '@/common/Types'
+import type { AsyncDataState } from '@/common/Utils'
+import { restoreScrollAfterFrame } from '@/common/Utils'
+import DataError from '@/components/common/DataError.vue'
+import DataLoading from '@/components/common/DataLoading.vue'
+import { rotationPredictionEnabledRef } from '@/components/menu/RotationPrediction'
+import { apiBaseUrl } from '@/Environment'
+import { computed, onMounted, ref, watchEffect } from 'vue'
+import RotationListData from './components/RotationListData.vue'
 
 const rotationPredictionEnabled = rotationPredictionEnabledRef()
 
@@ -123,4 +123,8 @@ watchEffect(() => {
     fetchRotationPrediction()
   }
 })
+
+type CurrentRotationState = AsyncDataState<CurrentChampionRotation>
+type RotationPredictionState = AsyncDataState<ChampionRotationPrediction>
+type NextRotationsState = { data: ChampionRotation[]; loadingMore: boolean }
 </script>

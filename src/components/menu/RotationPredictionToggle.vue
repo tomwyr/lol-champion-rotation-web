@@ -10,10 +10,10 @@
 </template>
 
 <script setup lang="ts">
-import DotSwitch from '@/components/DotSwitch.vue'
-import SideMenuTile from '@/components/SideMenuTile.vue'
-import { rotationPredictionEnabledRef } from '@/data/RotationPredictionEnabled'
+import DotSwitch from '@/components/common/DotSwitch.vue'
+import SideMenuTile from '@/components/common/SideMenuTile.vue'
 import { SparklesIcon } from '@heroicons/vue/24/outline'
+import { rotationPredictionEnabledRef } from './RotationPrediction'
 
 const enabled = rotationPredictionEnabledRef()
 </script>

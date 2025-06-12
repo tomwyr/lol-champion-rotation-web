@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { IconFilter, IconSearch } from '@/icons/Icons';
+import { IconFilter, IconSearch } from '@/icons/Icons'
 
 const query = defineModel('query', { default: '' })
 const expanded = defineModel('expanded', { default: false })

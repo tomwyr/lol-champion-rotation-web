@@ -1,7 +1,7 @@
 <template>
   <PageLayout>
     <template v-slot:header>
-      <RotationHeader
+      <RotationsHeader
         v-model:rotation-type="rotationType"
         v-model:search-query="searchQuery"
         :currentRotation="currentRotation"
@@ -10,7 +10,7 @@
 
     <template v-slot:body>
       <template v-if="rotationType === 'regular'">
-        <ChampionsSection :rotations="regularRotationsData" :filtered="filtered" />
+        <FilteredChampionRotation :rotations="regularRotationsData" :filtered="filtered" />
         <MoreDataLoader
           v-if="searchQuery.length === 0 && hasNextRotation"
           :showButton="!isLoadingMore && nextRotations.length === 0"
@@ -21,17 +21,13 @@
       </template>
 
       <template v-if="rotationType === 'beginner'">
-        <ChampionsSection :rotations="beginnerRotationsData" :filtered="filtered" />
+        <FilteredChampionRotation :rotations="beginnerRotationsData" :filtered="filtered" />
       </template>
     </template>
   </PageLayout>
 </template>
 
 <script setup lang="ts">
-import PageLayout from '@/components/PageLayout.vue'
-import { format } from 'date-fns'
-import { computed, ref } from 'vue'
-import ChampionsSection, { type ChampionsRotationItemData } from '../../common/ChampionsSection.vue'
 import {
   type Champion,
   type ChampionRotation,
@@ -39,9 +35,14 @@ import {
   type ChampionRotationPrediction,
   type CurrentChampionRotation,
   type RotationType,
-} from '../../common/Types'
-import MoreDataLoader from './MoreDataLoader.vue'
-import RotationHeader from './RotationHeader.vue'
+} from '@/common/Types'
+import PageLayout from '@/components/common/PageLayout.vue'
+import { format } from 'date-fns'
+import { computed, ref } from 'vue'
+import MoreDataLoader from '../../../common/MoreDataLoader.vue'
+import type { ChampionsRotationData } from '../../common/ChampionRotation.vue'
+import FilteredChampionRotation from './FilteredChampionRotation.vue'
+import RotationsHeader from './RotationListHeader.vue'
 
 const props = defineProps<{
   rotationPrediction?: ChampionRotationPrediction
@@ -58,10 +59,10 @@ const searchQuery = ref<string>('')
 const filter = computed(() => searchQuery.value.toLowerCase().trim())
 const filtered = computed(() => filter.value.length > 0)
 
-const regularRotationsData = computed<ChampionsRotationItemData[]>(() => {
+const regularRotationsData = computed<ChampionsRotationData[]>(() => {
   const { rotationPrediction, currentRotation, nextRotations } = props
 
-  const result: ChampionsRotationItemData[] = []
+  const result: ChampionsRotationData[] = []
 
   if (rotationPrediction) {
     result.push({
@@ -93,7 +94,7 @@ const regularRotationsData = computed<ChampionsRotationItemData[]>(() => {
   return result
 })
 
-const beginnerRotationsData = computed<ChampionsRotationItemData[]>(() => {
+const beginnerRotationsData = computed<ChampionsRotationData[]>(() => {
   const { currentRotation } = props
 
   return [

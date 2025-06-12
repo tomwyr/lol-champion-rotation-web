@@ -1,6 +1,6 @@
 <template>
   <template v-for="rotation in nonEmptyRotations" :key="rotation.key">
-    <ChampionsSectionRotation :rotation="rotation" />
+    <ChampionRotation :rotation="rotation" />
   </template>
 
   <h3 v-if="nonEmptyRotations.length === 0" class="py-2 text-gray-500 dark:text-gray-400">
@@ -10,21 +10,11 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import ChampionsSectionRotation from './ChampionsSectionRotation.vue'
-import type { RotationBadgeVariant } from './RotationBadge.vue'
-import type { Champion } from './Types'
-
-export type ChampionsRotationItemData = {
-  key: string
-  header: string
-  detailsId?: string
-  champions: Champion[]
-  expandable?: boolean
-  badge?: RotationBadgeVariant
-}
+import type { ChampionsRotationData } from '../../common/ChampionRotation.vue'
+import ChampionRotation from '../../common/ChampionRotation.vue'
 
 const props = defineProps<{
-  rotations: ChampionsRotationItemData[]
+  rotations: ChampionsRotationData[]
   filtered: boolean
 }>()
 
