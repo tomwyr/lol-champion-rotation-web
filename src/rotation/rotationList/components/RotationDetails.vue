@@ -31,6 +31,7 @@
 import PageLayout from '@/components/PageLayout.vue'
 import { format } from 'date-fns'
 import { computed, ref } from 'vue'
+import ChampionsSection, { type ChampionsRotationItemData } from '../../common/ChampionsSection.vue'
 import {
   type Champion,
   type ChampionRotation,
@@ -38,8 +39,7 @@ import {
   type ChampionRotationPrediction,
   type CurrentChampionRotation,
   type RotationType,
-} from '../Types'
-import ChampionsSection, { type ChampionsSectionRotation } from './ChampionsSection.vue'
+} from '../../common/Types'
 import MoreDataLoader from './MoreDataLoader.vue'
 import RotationHeader from './RotationHeader.vue'
 
@@ -58,10 +58,10 @@ const searchQuery = ref<string>('')
 const filter = computed(() => searchQuery.value.toLowerCase().trim())
 const filtered = computed(() => filter.value.length > 0)
 
-const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
+const regularRotationsData = computed<ChampionsRotationItemData[]>(() => {
   const { rotationPrediction, currentRotation, nextRotations } = props
 
-  const result: ChampionsSectionRotation[] = []
+  const result: ChampionsRotationItemData[] = []
 
   if (rotationPrediction) {
     result.push({
@@ -76,6 +76,7 @@ const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
   result.push({
     key: `current#${currentRotation.id}`,
     header: formatDuration(currentRotation.duration),
+    detailsId: currentRotation.id,
     champions: filterChampions(currentRotation.regularChampions),
     badge: 'current',
   })
@@ -84,6 +85,7 @@ const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
     result.push({
       key: `current#${currentRotation.id}`,
       header: formatDuration(rotation.duration),
+      detailsId: currentRotation.id,
       champions: filterChampions(rotation.champions),
     })
   }
@@ -91,7 +93,7 @@ const regularRotationsData = computed<ChampionsSectionRotation[]>(() => {
   return result
 })
 
-const beginnerRotationsData = computed<ChampionsSectionRotation[]>(() => {
+const beginnerRotationsData = computed<ChampionsRotationItemData[]>(() => {
   const { currentRotation } = props
 
   return [

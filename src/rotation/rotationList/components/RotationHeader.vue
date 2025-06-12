@@ -14,7 +14,7 @@
 
     <Bars3Icon
       @click="openSideMenu"
-      class="size-4 cursor-pointer ml-auto text-gray-700 dark:text-gray-300"
+      class="size-6 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
     />
   </div>
 
@@ -25,7 +25,7 @@
 import { openSideMenu } from '@/data/SideMenuOpen'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
-import type { CurrentChampionRotation, RotationType } from '../Types'
+import type { CurrentChampionRotation, RotationType } from '../../common/Types'
 import RotationTypePicker from './RotationTypePicker.vue'
 import SearchQuery from './SearchQuery.vue'
 

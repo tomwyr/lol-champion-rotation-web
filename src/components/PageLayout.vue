@@ -4,7 +4,19 @@
       <slot name="header"></slot>
     </div>
   </header>
-  <main class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto pt-[5rem] px-4">
+  <main
+    :class="{
+      'pt-[5rem]': headerSize === 'large',
+      'pt-[3.5rem]': headerSize === 'compact',
+    }"
+    class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto px-4"
+  >
     <slot name="body"></slot>
   </main>
 </template>
+
+<script setup lang="ts">
+const { headerSize = 'large' } = defineProps<{
+  headerSize?: 'large' | 'compact'
+}>()
+</script>

@@ -14,9 +14,9 @@
 </template>
 
 <script setup lang="ts">
-import { IconSpinner } from '@/icons/Icons'
-import { ChevronDoubleDownIcon } from '@heroicons/vue/24/outline'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { IconSpinner } from '@/icons/Icons';
+import { ChevronDoubleDownIcon } from '@heroicons/vue/24/outline';
+import { onMounted, onUnmounted, ref } from 'vue';
 
 const props = defineProps<{
   showButton: boolean

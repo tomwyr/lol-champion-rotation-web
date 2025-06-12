@@ -40,7 +40,7 @@
 import { IconExpandMore } from '@/icons/Icons'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon } from '@heroicons/vue/24/outline'
-import type { RotationType } from '../Types'
+import type { RotationType } from '../../common/Types'
 
 const model = defineModel<RotationType>({ required: true })
 

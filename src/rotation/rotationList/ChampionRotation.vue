@@ -29,7 +29,6 @@ import DataLoading from '@/components/DataLoading.vue'
 import { rotationPredictionEnabledRef } from '@/data/RotationPredictionEnabled'
 import { apiBaseUrl } from '@/Environment'
 import { computed, onMounted, ref, watchEffect } from 'vue'
-import RotationDetails from './components/RotationDetails.vue'
 import type {
   ChampionRotation,
   ChampionRotationPrediction,
@@ -37,7 +36,8 @@ import type {
   CurrentRotationState,
   NextRotationsState,
   RotationPredictionState,
-} from './Types'
+} from '../common/Types'
+import RotationDetails from './components/RotationDetails.vue'
 import { restoreScrollAfterFrame } from './Utils'
 
 const rotationPredictionEnabled = rotationPredictionEnabledRef()
