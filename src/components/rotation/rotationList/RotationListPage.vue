@@ -22,7 +22,7 @@
     />
   </template>
 
-  <ChampionRotationMenu />
+  <AppMenu />
 </template>
 
 <script setup lang="ts">
@@ -35,6 +35,7 @@ import type { AsyncDataState } from '@/common/Utils'
 import { restoreScrollAfterFrame } from '@/common/Utils'
 import DataError from '@/components/common/DataError.vue'
 import DataLoading from '@/components/common/DataLoading.vue'
+import AppMenu from '@/components/menu/AppMenu.vue'
 import { rotationPredictionEnabledRef } from '@/components/menu/RotationPrediction'
 import { apiBaseUrl } from '@/Environment'
 import { computed, onMounted, ref, watchEffect } from 'vue'

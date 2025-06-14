@@ -1,8 +1,8 @@
-import { ref, type Ref } from 'vue'
+import { ref } from 'vue'
 
 const open = ref(false)
 
-export function sideMenuOpenRef(): Ref<boolean, boolean> {
+export function sideMenuOpenRef() {
   return open
 }
 

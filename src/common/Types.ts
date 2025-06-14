@@ -22,6 +22,20 @@ export type ChampionRotation = {
   champions: Champion[]
 }
 
+export type ChampionRotationDetails = {
+  id: string
+  duration: ChampionRotationDuration
+  champions: [Champion]
+  current: boolean
+}
+
+export type ObservedRotation = {
+  id: string
+  duration: ChampionRotationDuration
+  current: boolean
+  championImageUrls: string[]
+}
+
 export type ChampionRotationPrediction = {
   duration: ChampionRotationDuration
   champions: [Champion]

@@ -13,9 +13,16 @@
         <div class="flex flex-row h-8 items-center">
           <ChevronLeftIcon class="size-5 stroke-[2px] cursor-pointer" @click="router.go(-1)" />
           <h1 class="mx-2 text-xl">Rotation details</h1>
-          <!-- <BookmarkIcon
+          <BookmarkIconSolid
+            v-if="isBookmarked"
             class="size-6 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
-          /> -->
+            @click="unbookmarkRotation(rotationId)"
+          />
+          <BookmarkIconOutline
+            v-else
+            class="size-6 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
+            @click="bookmarkRotation(rotationDetailsState.value)"
+          />
         </div>
       </template>
       <template v-slot:body>
@@ -26,27 +33,30 @@
 </template>
 
 <script setup lang="ts">
-import type { Champion, ChampionRotationDuration } from '@/common/Types'
+import { formatDuration } from '@/common/Formatters'
+import type { ChampionRotationDetails } from '@/common/Types'
 import type { AsyncDataState } from '@/common/Utils'
 import DataError from '@/components/common/DataError.vue'
 import DataLoading from '@/components/common/DataLoading.vue'
 import PageLayout from '@/components/common/PageLayout.vue'
 import { apiBaseUrl } from '@/Environment'
-import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
-import { format } from 'date-fns'
-import { onMounted, ref } from 'vue'
+import { BookmarkIcon as BookmarkIconOutline, ChevronLeftIcon } from '@heroicons/vue/24/outline'
+import { BookmarkIcon as BookmarkIconSolid } from '@heroicons/vue/24/solid'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import {
+  bookmarkedRotationsRef,
+  bookmarkRotation,
+  unbookmarkRotation,
+} from '../bookmarkedRotations/BookmarkedRotations'
 import ChampionRotation, { type ChampionsRotationData } from '../common/ChampionRotation.vue'
 
 const router = useRouter()
 const route = useRoute()
 const rotationId = route.params.id as string
 
-type ChampionRotationDetails = {
-  duration: ChampionRotationDuration
-  champions: [Champion]
-  current: boolean
-}
+const bookmarks = bookmarkedRotationsRef()
+const isBookmarked = computed(() => bookmarks.value.some((rotation) => rotation.id === rotationId))
 
 const rotationDetailsState = ref<AsyncDataState<ChampionRotationDetails>>({ type: 'initial' })
 
@@ -61,12 +71,6 @@ async function fetchRotationDetails() {
   } else {
     rotationDetailsState.value = { type: 'error' }
   }
-}
-
-function formatDuration(duration: ChampionRotationDuration) {
-  const start = format(duration.start, 'MMMM dd')
-  const end = format(duration.end, 'MMMM dd')
-  return start + ' to ' + end
 }
 
 function rotationItemDataFrom(details: ChampionRotationDetails): ChampionsRotationData {

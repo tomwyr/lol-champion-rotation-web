@@ -10,7 +10,7 @@
 
     <template v-slot:body>
       <template v-if="rotationType === 'regular'">
-        <FilteredChampionRotation :rotations="regularRotationsData" :filtered="filtered" />
+        <FilteredChampionRotations :rotations="regularRotationsData" :filtered="filtered" />
         <MoreDataLoader
           v-if="searchQuery.length === 0 && hasNextRotation"
           :showButton="!isLoadingMore && nextRotations.length === 0"
@@ -21,27 +21,26 @@
       </template>
 
       <template v-if="rotationType === 'beginner'">
-        <FilteredChampionRotation :rotations="beginnerRotationsData" :filtered="filtered" />
+        <FilteredChampionRotations :rotations="beginnerRotationsData" :filtered="filtered" />
       </template>
     </template>
   </PageLayout>
 </template>
 
 <script setup lang="ts">
+import { formatDuration } from '@/common/Formatters'
 import {
   type Champion,
   type ChampionRotation,
-  type ChampionRotationDuration,
   type ChampionRotationPrediction,
   type CurrentChampionRotation,
   type RotationType,
 } from '@/common/Types'
 import PageLayout from '@/components/common/PageLayout.vue'
-import { format } from 'date-fns'
 import { computed, ref } from 'vue'
 import MoreDataLoader from '../../../common/MoreDataLoader.vue'
 import type { ChampionsRotationData } from '../../common/ChampionRotation.vue'
-import FilteredChampionRotation from './FilteredChampionRotation.vue'
+import FilteredChampionRotations from './FilteredChampionRotations.vue'
 import RotationsHeader from './RotationListHeader.vue'
 
 const props = defineProps<{
@@ -86,7 +85,7 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
     result.push({
       key: `current#${currentRotation.id}`,
       header: formatDuration(rotation.duration),
-      detailsId: currentRotation.id,
+      detailsId: rotation.id,
       champions: filterChampions(rotation.champions),
     })
   }
@@ -111,11 +110,5 @@ function filterChampions(champions: Champion[]) {
     return champions
   }
   return champions.filter((champion) => champion.name.toLowerCase().includes(filter.value))
-}
-
-function formatDuration(duration: ChampionRotationDuration) {
-  const start = format(duration.start, 'MMMM dd')
-  const end = format(duration.end, 'MMMM dd')
-  return start + ' to ' + end
 }
 </script>

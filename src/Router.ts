@@ -1,9 +1,11 @@
+import BookmarkedRotationsPage from '@/components/rotation/bookmarkedRotations/BookmarkedRotationsPage.vue'
 import RotationDetailsPage from '@/components/rotation/rotationDetails/RotationDetailsPage.vue'
 import RotationListPage from '@/components/rotation/rotationList/RotationListPage.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
   { path: '/', component: RotationListPage },
+  { path: '/rotations/bookmarks', component: BookmarkedRotationsPage },
   { path: '/rotations/:id', component: RotationDetailsPage },
 ]
 

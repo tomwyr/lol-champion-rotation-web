@@ -33,13 +33,7 @@
     >
       <template v-for="champion in rotation.champions" :key="champion.id">
         <div class="relative">
-          <img
-            class="rounded"
-            width="144px"
-            height="144px"
-            loading="lazy"
-            :src="champion.imageUrl"
-          />
+          <img class="rounded size-36" loading="lazy" :src="champion.imageUrl" />
           <div class="absolute bottom-0 inset-x-0 text-center">
             <div
               v-text="champion.name"

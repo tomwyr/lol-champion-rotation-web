@@ -1,9 +1,9 @@
-import { ref, watchEffect, type Ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 
 const enabled = ref(loadEnabled())
 watchEffect(() => saveEnabled(enabled.value))
 
-export function rotationPredictionEnabledRef(): Ref<boolean, boolean> {
+export function rotationPredictionEnabledRef() {
   return enabled
 }
 

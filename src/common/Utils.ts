@@ -12,3 +12,19 @@ export type AsyncDataState<T> =
   | { type: 'loading' }
   | { type: 'error' }
   | { type: 'data'; value: T }
+
+declare global {
+  interface Array<T> {
+    reversed(): Array<T>
+  }
+}
+
+if (!Array.prototype.reversed) {
+  Array.prototype.reversed = function <T>(this: T[]): T[] {
+    const result = Array<T>()
+    for (let i = this.length - 1; i >= 0; i--) {
+      result.push(this[i])
+    }
+    return result
+  }
+}

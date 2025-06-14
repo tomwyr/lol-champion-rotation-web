@@ -9,9 +9,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { ChampionsRotationData } from '../../common/ChampionRotation.vue'
-import ChampionRotation from '../../common/ChampionRotation.vue'
+import { computed } from 'vue';
+import type { ChampionsRotationData } from '../../common/ChampionRotation.vue';
+import ChampionRotation from '../../common/ChampionRotation.vue';
 
 const props = defineProps<{
   rotations: ChampionsRotationData[]
