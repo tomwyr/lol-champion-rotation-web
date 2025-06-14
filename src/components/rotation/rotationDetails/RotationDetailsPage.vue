@@ -10,9 +10,7 @@
   <template v-if="rotationDetailsState.type === 'data'">
     <PageLayout headerSize="compact">
       <template v-slot:header>
-        <div class="flex flex-row h-8 items-center">
-          <ChevronLeftIcon class="size-5 stroke-[2px] cursor-pointer" @click="router.go(-1)" />
-          <h1 class="mx-2 text-xl">Rotation details</h1>
+        <AppPageHeader title="Rotation details">
           <BookmarkIconSolid
             v-if="isBookmarked"
             class="size-6 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
@@ -23,7 +21,7 @@
             class="size-6 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
             @click="bookmarkRotation(rotationDetailsState.value)"
           />
-        </div>
+        </AppPageHeader>
       </template>
       <template v-slot:body>
         <ChampionRotation :rotation="rotationItemDataFrom(rotationDetailsState.value)" />
@@ -39,11 +37,12 @@ import type { AsyncDataState } from '@/common/Utils'
 import DataError from '@/components/common/DataError.vue'
 import DataLoading from '@/components/common/DataLoading.vue'
 import PageLayout from '@/components/common/PageLayout.vue'
+import AppPageHeader from '@/components/menu/AppPageHeader.vue'
 import { apiBaseUrl } from '@/Environment'
-import { BookmarkIcon as BookmarkIconOutline, ChevronLeftIcon } from '@heroicons/vue/24/outline'
+import { BookmarkIcon as BookmarkIconOutline } from '@heroicons/vue/24/outline'
 import { BookmarkIcon as BookmarkIconSolid } from '@heroicons/vue/24/solid'
 import { computed, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 import {
   bookmarkedRotationsRef,
   bookmarkRotation,
@@ -51,7 +50,6 @@ import {
 } from '../bookmarkedRotations/BookmarkedRotations'
 import ChampionRotation, { type ChampionsRotationData } from '../common/ChampionRotation.vue'
 
-const router = useRouter()
 const route = useRoute()
 const rotationId = route.params.id as string
 

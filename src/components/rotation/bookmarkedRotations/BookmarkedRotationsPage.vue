@@ -1,10 +1,7 @@
 <template>
   <PageLayout headerSize="compact">
     <template v-slot:header>
-      <div class="flex flex-row h-8 items-center">
-        <ChevronLeftIcon class="size-5 stroke-[2px] cursor-pointer" @click="router.go(-1)" />
-        <h1 class="mx-2 text-xl">Bookmarked rotations</h1>
-      </div>
+      <AppPageHeader title="Bookmarked rotations" />
     </template>
     <template v-slot:body>
       <template v-for="(rotation, index) in bookmarkedRotations" :key="rotation.id">
@@ -32,12 +29,12 @@
 </template>
 
 <script setup lang="ts">
-import PageLayout from '@/components/common/PageLayout.vue'
-import { ChevronLeftIcon } from '@heroicons/vue/24/outline'
-import { useRouter } from 'vue-router'
-import { bookmarkedRotationsRef } from './BookmarkedRotations'
 import { formatDuration } from '@/common/Formatters'
 import type { ObservedRotation } from '@/common/Types'
+import PageLayout from '@/components/common/PageLayout.vue'
+import AppPageHeader from '@/components/menu/AppPageHeader.vue'
+import { useRouter } from 'vue-router'
+import { bookmarkedRotationsRef } from './BookmarkedRotations'
 
 const router = useRouter()
 const bookmarkedRotations = bookmarkedRotationsRef()
