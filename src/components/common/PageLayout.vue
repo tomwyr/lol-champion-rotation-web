@@ -9,7 +9,7 @@
       'pt-[5rem]': headerSize === 'large',
       'pt-[3.5rem]': headerSize === 'compact',
     }"
-    class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto px-4"
+    class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto px-4 flex flex-col h-screen"
   >
     <slot name="body"></slot>
   </main>
