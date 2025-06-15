@@ -1,10 +1,10 @@
 <template>
   <SideMenuTile title="Dark mode">
-    <template v-slot:leading>
+    <template #leading>
       <MoonIcon v-if="enabled" class="size-6 mx-2 text-gray-300" />
       <SunIcon v-else class="size-6 mx-2 text-gray-700" />
     </template>
-    <template v-slot:trailing>
+    <template #trailing>
       <DotSwitch class="ml-auto mx-2" v-model:enabled="enabled" />
     </template>
   </SideMenuTile>

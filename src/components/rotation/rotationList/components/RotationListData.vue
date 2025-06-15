@@ -1,6 +1,6 @@
 <template>
   <PageLayout>
-    <template v-slot:header>
+    <template #header>
       <RotationsHeader
         v-model:rotation-type="rotationType"
         v-model:search-query="searchQuery"
@@ -8,7 +8,7 @@
       />
     </template>
 
-    <template v-slot:body>
+    <template #body>
       <template v-if="rotationType === 'regular'">
         <FilteredChampionRotations :rotations="regularRotationsData" :filtered="filtered" />
         <MoreDataLoader

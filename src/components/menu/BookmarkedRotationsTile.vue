@@ -1,6 +1,6 @@
 <template>
   <SideMenuTile title="Rotations" @click="openBookmarkedRotations">
-    <template v-slot:leading>
+    <template #leading>
       <BookmarkIcon class="size-5 mx-2" />
     </template>
   </SideMenuTile>

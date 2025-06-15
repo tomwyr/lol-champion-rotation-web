@@ -1,12 +1,12 @@
 <template>
   <PageLayout headerSize="compact">
-    <template v-slot:header>
+    <template #header>
       <AppPageHeader title="Bookmarked rotations" />
     </template>
-    <template v-slot:body>
+    <template #body>
       <template v-if="bookmarkedRotations.length === 0">
         <DataInfo message="Bookmark your first rotation to see it on the list.">
-          <template v-slot:icon>
+          <template #icon>
             <IconBookmarkAdd class="size-14" />
           </template>
         </DataInfo>

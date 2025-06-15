@@ -9,7 +9,7 @@
 
   <template v-if="rotationDetailsState.type === 'data'">
     <PageLayout headerSize="compact">
-      <template v-slot:header>
+      <template #header>
         <AppPageHeader title="Rotation details">
           <BookmarkIconSolid
             v-if="isBookmarked"
@@ -23,7 +23,7 @@
           />
         </AppPageHeader>
       </template>
-      <template v-slot:body>
+      <template #body>
         <ChampionRotation :rotation="rotationItemDataFrom(rotationDetailsState.value)" />
       </template>
     </PageLayout>
