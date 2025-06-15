@@ -2,10 +2,10 @@
   <div
     :class="{
       'mb-4': rotation.champions.length > 0,
-      '-m-1 p-1 rounded cursor-pointer hover:bg-gray-100 hover:dark:bg-gray-800':
+      '-m-1 p-1 rounded cursor-pointer hover:[&:not(:has(.champion-tile:hover))]:bg-gray-100 dark:hover:[&:not(:has(.champion-tile:hover))]:bg-gray-800':
         rotation.detailsId,
     }"
-    @click="openDetails"
+    @click="openRotationDetails"
   >
     <div class="flex flex-row items-center">
       <h2 class="text-gray-500 dark:text-gray-400">
@@ -32,7 +32,10 @@
       class="pt-4 pb-2 gap-4 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3"
     >
       <template v-for="champion in rotation.champions" :key="champion.id">
-        <div class="relative">
+        <div
+          class="champion-tile relative cursor-pointer"
+          @click.stop="openChampionDetails(champion)"
+        >
           <img class="rounded size-36" loading="lazy" :src="champion.imageUrl" />
           <div class="absolute bottom-0 inset-x-0 text-center">
             <div
@@ -69,7 +72,11 @@ const { rotation } = defineProps<{
 
 const router = useRouter()
 
-function openDetails() {
+function openChampionDetails(champion: Champion) {
+  router.push(`/champions/${champion.id}`)
+}
+
+function openRotationDetails() {
   if (rotation.detailsId) {
     router.push(`/rotations/${rotation.detailsId}`)
   }

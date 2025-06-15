@@ -4,6 +4,13 @@ export type Champion = {
   imageUrl: string
 }
 
+export type ChampionDetails = {
+  id: string
+  name: string
+  title: string
+  imageUrl: string
+}
+
 export type CurrentChampionRotation = {
   id: string
   patchVersion?: string

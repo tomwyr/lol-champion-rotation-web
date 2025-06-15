@@ -10,18 +10,7 @@
   <template v-if="rotationDetailsState.type === 'data'">
     <PageLayout headerSize="compact">
       <template #header>
-        <AppPageHeader title="Rotation details">
-          <BookmarkIconSolid
-            v-if="isObserved"
-            class="size-6 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
-            @click="unobserveRotation(rotationId)"
-          />
-          <BookmarkIconOutline
-            v-else
-            class="size-6 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
-            @click="observeRotation(rotationDetailsState.value)"
-          />
-        </AppPageHeader>
+        <RotationDetailsHeader :rotation="rotationDetailsState.value" />
       </template>
       <template #body>
         <ChampionRotation :rotation="rotationItemDataFrom(rotationDetailsState.value)" />
@@ -37,26 +26,14 @@ import type { AsyncDataState } from '@/common/Utils'
 import DataError from '@/components/common/DataError.vue'
 import DataLoading from '@/components/common/DataLoading.vue'
 import PageLayout from '@/components/common/PageLayout.vue'
-import AppPageHeader from '@/components/menu/AppPageHeader.vue'
 import { apiBaseUrl } from '@/Environment'
-import { BookmarkIcon as BookmarkIconOutline } from '@heroicons/vue/24/outline'
-import { BookmarkIcon as BookmarkIconSolid } from '@heroicons/vue/24/solid'
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ChampionRotation, { type ChampionsRotationData } from '../common/ChampionRotation.vue'
-import {
-  observedRotationsRef,
-  observeRotation,
-  unobserveRotation,
-} from '../observedRotations/ObservedRotations'
+import RotationDetailsHeader from './RotationDetailsHeader.vue'
 
 const route = useRoute()
 const rotationId = route.params.id as string
-
-const observedRotations = observedRotationsRef()
-const isObserved = computed(() =>
-  observedRotations.value.some((rotation) => rotation.id === rotationId),
-)
 
 const rotationDetailsState = ref<AsyncDataState<ChampionRotationDetails>>({ type: 'initial' })
 
