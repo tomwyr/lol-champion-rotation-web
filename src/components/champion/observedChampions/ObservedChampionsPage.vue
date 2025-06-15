@@ -15,7 +15,7 @@
 
       <template v-else>
         <template v-for="(champion, index) in observedChampions" :key="champion.id">
-          <ObservedChampionTile :champion="champion" :index="index" />
+          <ObservedChampionTile :champion :index />
         </template>
       </template>
     </template>

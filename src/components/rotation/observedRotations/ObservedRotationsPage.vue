@@ -14,7 +14,7 @@
 
       <template v-else>
         <template v-for="(rotation, index) in observedRotations" :key="rotation.id">
-          <ObservedRotationTile :rotation="rotation" :index="index" />
+          <ObservedRotationTile :rotation :index />
         </template>
       </template>
     </template>

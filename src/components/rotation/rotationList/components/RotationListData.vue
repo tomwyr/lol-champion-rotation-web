@@ -4,24 +4,24 @@
       <RotationsHeader
         v-model:rotation-type="rotationType"
         v-model:search-query="searchQuery"
-        :currentRotation="currentRotation"
+        :currentRotation
       />
     </template>
 
     <template #body>
       <template v-if="rotationType === 'regular'">
-        <FilteredChampionRotations :rotations="regularRotationsData" :filtered="filtered" />
+        <FilteredChampionRotations :rotations="regularRotationsData" :filtered />
         <MoreDataLoader
           v-if="searchQuery.length === 0 && hasNextRotation"
           :showButton="!isLoadingMore && nextRotations.length === 0"
           buttonLabel="Previous Rotations"
           :extentThreshold="200"
-          :onLoadMore="onLoadMore"
+          :onLoadMore
         />
       </template>
 
       <template v-if="rotationType === 'beginner'">
-        <FilteredChampionRotations :rotations="beginnerRotationsData" :filtered="filtered" />
+        <FilteredChampionRotations :rotations="beginnerRotationsData" :filtered />
       </template>
     </template>
   </PageLayout>
