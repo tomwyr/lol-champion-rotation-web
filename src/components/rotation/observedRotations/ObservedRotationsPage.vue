@@ -5,7 +5,7 @@
     </template>
     <template #body>
       <template v-if="observedRotations.length === 0">
-        <DataInfo message="Bookmark your first rotation to see it on the list.">
+        <DataInfo message="Bookmark a rotation to see it on the list.">
           <template #icon>
             <IconBookmarkAdd class="size-14" />
           </template>

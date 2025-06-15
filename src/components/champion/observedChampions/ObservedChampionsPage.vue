@@ -6,7 +6,7 @@
 
     <template #body>
       <template v-if="observedChampions.length === 0">
-        <DataInfo message="Observe your first champion to see it on the list.">
+        <DataInfo message="Observe a champion to see it on the list.">
           <template #icon>
             <EyeIcon class="size-14" />
           </template>
