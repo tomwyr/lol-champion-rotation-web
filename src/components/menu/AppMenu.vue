@@ -1,7 +1,7 @@
 <template>
   <SideMenu>
     <AppPageHeader title="Menu" class="pb-4" @back="closeSideMenu" />
-    <BookmarkedRotationsTile />
+    <ObservedRotationsTile />
     <DarkModeToggle />
     <RotationPredictionToggle />
   </SideMenu>
@@ -11,7 +11,7 @@
 import { closeSideMenu } from '../common/SideMenu'
 import SideMenu from '../common/SideMenu.vue'
 import AppPageHeader from './AppPageHeader.vue'
-import BookmarkedRotationsTile from './BookmarkedRotationsTile.vue'
 import DarkModeToggle from './DarkModeToggle.vue'
+import ObservedRotationsTile from './ObservedRotationsTile.vue'
 import RotationPredictionToggle from './RotationPredictionToggle.vue'
 </script>

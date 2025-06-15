@@ -1,5 +1,5 @@
 <template>
-  <SideMenuTile title="Rotations" @click="openBookmarkedRotations">
+  <SideMenuTile title="Rotations" @click="openObservedRotations">
     <template #leading>
       <BookmarkIcon class="size-5 mx-2" />
     </template>
@@ -14,7 +14,7 @@ import SideMenuTile from '../common/SideMenuTile.vue'
 
 const router = useRouter()
 
-function openBookmarkedRotations() {
+function openObservedRotations() {
   closeSideMenu()
   router.push('/rotations/bookmarks')
 }

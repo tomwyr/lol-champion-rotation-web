@@ -4,7 +4,7 @@
       <AppPageHeader title="Bookmarked rotations" />
     </template>
     <template #body>
-      <template v-if="bookmarkedRotations.length === 0">
+      <template v-if="observedRotations.length === 0">
         <DataInfo message="Bookmark your first rotation to see it on the list.">
           <template #icon>
             <IconBookmarkAdd class="size-14" />
@@ -13,7 +13,7 @@
       </template>
 
       <template v-else>
-        <template v-for="(rotation, index) in bookmarkedRotations" :key="rotation.id">
+        <template v-for="(rotation, index) in observedRotations" :key="rotation.id">
           <div
             class="p-2 flex flex-row items-center cursor-pointer rounded hover:bg-gray-100 hover:dark:bg-gray-800"
             :class="{ 'mt-2': index > 0 }"
@@ -46,10 +46,10 @@ import PageLayout from '@/components/common/PageLayout.vue'
 import AppPageHeader from '@/components/menu/AppPageHeader.vue'
 import IconBookmarkAdd from '@/icons/IconBookmarkAdd.vue'
 import { useRouter } from 'vue-router'
-import { bookmarkedRotationsRef } from './BookmarkedRotations'
+import { observedRotationsRef } from './ObservedRotations'
 
 const router = useRouter()
-const bookmarkedRotations = bookmarkedRotationsRef()
+const observedRotations = observedRotationsRef()
 
 function openDetails(rotation: ObservedRotation) {
   router.push(`/rotations/${rotation.id}`)
