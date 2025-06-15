@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'mb-4': rotation.champions.length > 0,
+      'mb-2': rotation.champions.length > 0,
       '-m-1 p-1 rounded cursor-pointer hover:[&:not(:has(.champion-tile:hover))]:bg-gray-100 dark:hover:[&:not(:has(.champion-tile:hover))]:bg-gray-800':
         rotation.detailsId,
     }"

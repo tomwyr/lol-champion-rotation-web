@@ -10,7 +10,7 @@
   <template v-if="championDetailsState.type === 'data'">
     <PageLayout header-size="compact">
       <template #header>
-        <AppPageHeader title="Champion details"></AppPageHeader>
+        <ChampionDetailsHeader :champion="championDetailsState.value" />
       </template>
 
       <template #body>
@@ -23,11 +23,11 @@
 <script setup lang="ts">
 import type { ChampionDetails } from '@/common/Types'
 import type { AsyncDataState } from '@/common/Utils'
+import PageLayout from '@/components/common/PageLayout.vue'
 import { apiBaseUrl } from '@/Environment'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import PageLayout from '../common/PageLayout.vue'
-import AppPageHeader from '../menu/AppPageHeader.vue'
+import ChampionDetailsHeader from './ChampionDetailsHeader.vue'
 import ChampionDetailsSummary from './ChampionDetailsSummary.vue'
 
 const route = useRoute()
