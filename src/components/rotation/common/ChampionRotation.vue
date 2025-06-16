@@ -36,7 +36,7 @@
           class="champion-tile relative cursor-pointer"
           @click.stop="openChampionDetails(champion)"
         >
-          <img class="rounded size-36" loading="lazy" :src="champion.imageUrl" />
+          <img class="rounded aspect-square" loading="lazy" :src="champion.imageUrl" />
           <div class="absolute bottom-0 inset-x-0 text-center">
             <div
               v-text="champion.name"
