@@ -6,23 +6,26 @@
   >
     <img class="rounded size-12 md:size-16" loading="lazy" :src="champion.imageUrl" />
     <span class="text-xl">{{ champion.name }}</span>
+    <template v-if="champion.current">
+      <RotationBadge variant="current" />
+    </template>
     <ChevronRightIcon class="size-6 ml-auto" />
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Champion } from '@/common/Types';
+import type { ObservedChampion } from '@/common/Types';
 import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 import { useRouter } from 'vue-router';
 
 defineProps<{
-  champion: Champion
+  champion: ObservedChampion
   index: number
 }>()
 
 const router = useRouter()
 
-function openDetails(champion: Champion) {
+function openDetails(champion: ObservedChampion) {
   router.push(`/champions/${champion.id}`)
 }
 </script>

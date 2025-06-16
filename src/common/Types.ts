@@ -39,8 +39,15 @@ export type ChampionRotationDetails = {
 export type ObservedRotation = {
   id: string
   duration: ChampionRotationDuration
-  current: boolean
   championImageUrls: string[]
+  current?: boolean
+}
+
+export type ObservedChampion = {
+  id: string
+  name: string
+  imageUrl: string
+  current?: boolean
 }
 
 export type ChampionRotationPrediction = {

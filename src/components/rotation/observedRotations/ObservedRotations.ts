@@ -1,5 +1,9 @@
 import { rotationDetailsToObservedRotation } from '@/common/Mappers'
-import type { ChampionRotationDetails, ObservedRotation } from '@/common/Types'
+import type {
+  ChampionRotationDetails,
+  CurrentChampionRotation,
+  ObservedRotation,
+} from '@/common/Types'
 import { ref, watchEffect } from 'vue'
 
 const observedRotations = ref<ObservedRotation[]>(loadRotations())
@@ -21,6 +25,17 @@ export function observeRotation(rotationDetails: ChampionRotationDetails) {
 
 export function unobserveRotation(rotationId: string) {
   const updatedRotations = observedRotations.value.filter((value) => value.id !== rotationId)
+  observedRotations.value = updatedRotations
+}
+
+export function updateRotationsCurrentStatus(currentRotation: CurrentChampionRotation) {
+  const updatedRotations = [...observedRotations.value].map<ObservedRotation>((rotation) => {
+    const current = rotation.id === currentRotation.id
+    return {
+      ...rotation,
+      current: current,
+    }
+  })
   observedRotations.value = updatedRotations
 }
 

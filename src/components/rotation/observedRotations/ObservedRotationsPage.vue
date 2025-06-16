@@ -22,12 +22,25 @@
 </template>
 
 <script setup lang="ts">
+import type { CurrentChampionRotation } from '@/common/Types'
 import DataInfo from '@/components/common/DataInfo.vue'
 import PageLayout from '@/components/common/PageLayout.vue'
 import AppPageHeader from '@/components/menu/AppPageHeader.vue'
+import { apiBaseUrl } from '@/Environment'
 import IconBookmarkAdd from '@/icons/IconBookmarkAdd.vue'
-import { observedRotationsRef } from './ObservedRotations'
+import { onMounted } from 'vue'
+import { observedRotationsRef, updateRotationsCurrentStatus } from './ObservedRotations'
 import ObservedRotationTile from './ObservedRotationTile.vue'
 
 const observedRotations = observedRotationsRef()
+
+async function syncCurrentRotationStatus() {
+  const data = await fetch(apiBaseUrl + '/rotations/current')
+  if (data.ok) {
+    const rotation = (await data.json()) as CurrentChampionRotation
+    updateRotationsCurrentStatus(rotation)
+  }
+}
+
+onMounted(syncCurrentRotationStatus)
 </script>
