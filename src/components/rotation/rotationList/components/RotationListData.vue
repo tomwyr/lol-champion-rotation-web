@@ -4,7 +4,7 @@
       <RotationsHeader
         v-model:rotation-type="rotationType"
         v-model:search-query="searchQuery"
-        :currentRotation
+        :rotationsOverview
       />
     </template>
 
@@ -33,7 +33,7 @@ import {
   type Champion,
   type ChampionRotation,
   type ChampionRotationPrediction,
-  type CurrentChampionRotation,
+  type ChampionRotationsOverview,
   type RotationType,
 } from '@/common/Types'
 import PageLayout from '@/components/common/PageLayout.vue'
@@ -45,7 +45,7 @@ import RotationsHeader from './RotationListHeader.vue'
 
 const props = defineProps<{
   rotationPrediction?: ChampionRotationPrediction
-  currentRotation: CurrentChampionRotation
+  rotationsOverview: ChampionRotationsOverview
   nextRotations: ChampionRotation[]
   hasNextRotation: boolean
   isLoadingMore: boolean
@@ -59,7 +59,7 @@ const filter = computed(() => searchQuery.value.toLowerCase().trim())
 const filtered = computed(() => filter.value.length > 0)
 
 const regularRotationsData = computed<ChampionsRotationData[]>(() => {
-  const { rotationPrediction, currentRotation, nextRotations } = props
+  const { rotationPrediction, rotationsOverview, nextRotations } = props
 
   const result: ChampionsRotationData[] = []
 
@@ -74,16 +74,16 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
   }
 
   result.push({
-    key: `current#${currentRotation.id}`,
-    header: formatDuration(currentRotation.duration),
-    detailsId: currentRotation.id,
-    champions: filterChampions(currentRotation.regularChampions),
+    key: `regular#${rotationsOverview.id}`,
+    header: formatDuration(rotationsOverview.duration),
+    detailsId: rotationsOverview.id,
+    champions: filterChampions(rotationsOverview.regularChampions),
     badge: 'current',
   })
 
   for (const rotation of nextRotations) {
     result.push({
-      key: `current#${currentRotation.id}`,
+      key: `regular#${rotationsOverview.id}`,
       header: formatDuration(rotation.duration),
       detailsId: rotation.id,
       champions: filterChampions(rotation.champions),
@@ -94,13 +94,13 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
 })
 
 const beginnerRotationsData = computed<ChampionsRotationData[]>(() => {
-  const { currentRotation } = props
+  const { rotationsOverview } = props
 
   return [
     {
       key: 'beginner',
-      header: 'New players up to level ' + currentRotation.beginnerMaxLevel + ' only',
-      champions: filterChampions(currentRotation.beginnerChampions),
+      header: 'New players up to level ' + rotationsOverview.beginnerMaxLevel + ' only',
+      champions: filterChampions(rotationsOverview.beginnerChampions),
     },
   ]
 })

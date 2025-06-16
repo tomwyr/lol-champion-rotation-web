@@ -5,8 +5,8 @@
       class="mr-2 flex flex-row gap-1 items-baseline"
     >
       <h1 class="text-xl">Champion rotation</h1>
-      <h3 v-if="currentRotation.patchVersion" class="text-sm text-gray-500 dark:text-gray-400">
-        v{{ currentRotation.patchVersion }}
+      <h3 v-if="rotationsOverview.patchVersion" class="text-sm text-gray-500 dark:text-gray-400">
+        v{{ rotationsOverview.patchVersion }}
       </h3>
     </div>
 
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CurrentChampionRotation, RotationType } from '@/common/Types'
+import type { ChampionRotationsOverview, RotationType } from '@/common/Types'
 import { openSideMenu } from '@/components/common/SideMenu'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
@@ -35,6 +35,6 @@ const searchQuery = defineModel<string>('searchQuery', { required: true })
 const searchExpanded = ref(false)
 
 defineProps<{
-  currentRotation: CurrentChampionRotation
+  rotationsOverview: ChampionRotationsOverview
 }>()
 </script>

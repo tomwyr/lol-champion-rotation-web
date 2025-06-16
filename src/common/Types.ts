@@ -11,7 +11,7 @@ export type ChampionDetails = {
   imageUrl: string
 }
 
-export type CurrentChampionRotation = {
+export type ChampionRotationsOverview = {
   id: string
   patchVersion?: string
   duration: ChampionRotationDuration
@@ -25,6 +25,12 @@ export type ChampionRotation = {
   id: string
   patchVersion?: string
   nextRotationToken?: string
+  duration: ChampionRotationDuration
+  champions: Champion[]
+}
+
+export type ChampionRotationSummary = {
+  id: string
   duration: ChampionRotationDuration
   champions: Champion[]
 }

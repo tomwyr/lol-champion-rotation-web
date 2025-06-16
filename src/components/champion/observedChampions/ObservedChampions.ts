@@ -1,5 +1,9 @@
 import { championToObservedChampion } from '@/common/Mappers'
-import type { Champion, CurrentChampionRotation, ObservedChampion } from '@/common/Types'
+import type {
+  Champion,
+  ChampionRotationSummary,
+  ObservedChampion
+} from '@/common/Types'
 import { ref, watchEffect } from 'vue'
 
 const observedChampions = ref<ObservedChampion[]>(loadChampions())
@@ -23,8 +27,8 @@ export function unobserveChampion(championId: string) {
   observedChampions.value = updatedChampions
 }
 
-export function updateChampionsCurrentStatus(currentRotation: CurrentChampionRotation) {
-  const currentChampionIds = currentRotation.regularChampions.map((champion) => champion.id)
+export function updateChampionsCurrentStatus(currentRotation: ChampionRotationSummary) {
+  const currentChampionIds = currentRotation.champions.map((champion) => champion.id)
   const updatedChampions = [...observedChampions.value].map<ObservedChampion>((champion) => {
     const current = currentChampionIds.includes(champion.id)
     return {

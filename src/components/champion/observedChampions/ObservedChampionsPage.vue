@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import type { CurrentChampionRotation } from '@/common/Types'
+import type { ChampionRotationSummary } from '@/common/Types'
 import DataInfo from '@/components/common/DataInfo.vue'
 import PageLayout from '@/components/common/PageLayout.vue'
 import AppPageHeader from '@/components/menu/AppPageHeader.vue'
@@ -38,7 +38,7 @@ const observedChampions = observedChampionsRef()
 async function syncCurrentRotationStatus() {
   const data = await fetch(apiBaseUrl + '/rotations/current')
   if (data.ok) {
-    const rotation = (await data.json()) as CurrentChampionRotation
+    const rotation = (await data.json()) as ChampionRotationSummary
     updateChampionsCurrentStatus(rotation)
   }
 }

@@ -1,8 +1,8 @@
 import { rotationDetailsToObservedRotation } from '@/common/Mappers'
 import type {
   ChampionRotationDetails,
-  CurrentChampionRotation,
-  ObservedRotation,
+  ChampionRotationSummary,
+  ObservedRotation
 } from '@/common/Types'
 import { ref, watchEffect } from 'vue'
 
@@ -28,7 +28,7 @@ export function unobserveRotation(rotationId: string) {
   observedRotations.value = updatedRotations
 }
 
-export function updateRotationsCurrentStatus(currentRotation: CurrentChampionRotation) {
+export function updateRotationsCurrentStatus(currentRotation: ChampionRotationSummary) {
   const updatedRotations = [...observedRotations.value].map<ObservedRotation>((rotation) => {
     const current = rotation.id === currentRotation.id
     return {
