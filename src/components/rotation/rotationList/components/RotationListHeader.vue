@@ -22,14 +22,14 @@
 </template>
 
 <script setup lang="ts">
-import type { ChampionRotationsOverview, RotationType } from '@/common/Types'
+import type { ChampionRotationsOverview, ChampionRotationType } from '@/common/Types'
 import { openSideMenu } from '@/components/common/SideMenu'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
 import ChampionsSearchField from './ChampionsSearchField.vue'
 import RotationTypePicker from './RotationTypePicker.vue'
 
-const rotationType = defineModel<RotationType>('rotationType', { required: true })
+const rotationType = defineModel<ChampionRotationType>('rotationType', { required: true })
 const searchQuery = defineModel<string>('searchQuery', { required: true })
 
 const searchExpanded = ref(false)

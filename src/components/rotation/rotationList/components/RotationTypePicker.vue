@@ -37,28 +37,28 @@
 </template>
 
 <script setup lang="ts">
-import type { RotationType } from '@/common/Types'
+import type { ChampionRotationType } from '@/common/Types'
 import { IconExpandMore } from '@/icons/Icons'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon } from '@heroicons/vue/24/outline'
 
-const model = defineModel<RotationType>({ required: true })
+const model = defineModel<ChampionRotationType>({ required: true })
 
-function getTypeData(type: RotationType) {
+function getTypeData(type: ChampionRotationType) {
   switch (type) {
     case 'regular':
       return {
         value: 'regular',
         title: "Summoner's Rift",
         description: 'Classic map • Weekly rotation',
-        iconAsset: 'assets/icon-sr.png',
+        iconAsset: '/assets/icon-sr.png',
       }
     case 'beginner':
       return {
         value: 'beginner',
         title: "Summoner's Rift (Beginners)",
         description: 'Classic map • New players only',
-        iconAsset: 'assets/icon-sr-beginner.png',
+        iconAsset: '/assets/icon-sr-beginner.png',
       }
   }
 }

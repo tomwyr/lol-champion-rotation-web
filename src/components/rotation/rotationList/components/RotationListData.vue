@@ -34,7 +34,7 @@ import {
   type ChampionRotation,
   type ChampionRotationPrediction,
   type ChampionRotationsOverview,
-  type RotationType,
+  type ChampionRotationType,
 } from '@/common/Types'
 import PageLayout from '@/components/common/PageLayout.vue'
 import { computed, ref } from 'vue'
@@ -52,7 +52,7 @@ const props = defineProps<{
   onLoadMore: () => void
 }>()
 
-const rotationType = ref<RotationType>('regular')
+const rotationType = ref<ChampionRotationType>('regular')
 const searchQuery = ref<string>('')
 
 const filter = computed(() => searchQuery.value.toLowerCase().trim())

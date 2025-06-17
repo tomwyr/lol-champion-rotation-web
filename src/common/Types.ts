@@ -9,6 +9,13 @@ export type ChampionDetails = {
   name: string
   title: string
   imageUrl: string
+  availability: [ChampionDetailsAvailability]
+}
+
+export type ChampionDetailsAvailability = {
+  rotationType: ChampionRotationType
+  lastAvailable?: Date
+  current: boolean
 }
 
 export type ChampionRotationsOverview = {
@@ -66,4 +73,4 @@ export type ChampionRotationDuration = {
   end: Date
 }
 
-export type RotationType = 'regular' | 'beginner'
+export type ChampionRotationType = 'regular' | 'beginner'
