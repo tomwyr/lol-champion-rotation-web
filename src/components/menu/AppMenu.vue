@@ -9,6 +9,8 @@
       <DarkModeToggle />
       <RotationPredictionToggle />
     </div>
+
+    <RiotPolicyNote />
   </SideMenu>
 </template>
 
@@ -19,5 +21,6 @@ import AppPageHeader from './AppPageHeader.vue'
 import DarkModeToggle from './DarkModeToggle.vue'
 import ObservedChampionsTile from './ObservedChampionsTile.vue'
 import ObservedRotationsTile from './ObservedRotationsTile.vue'
+import RiotPolicyNote from './RiotPolicyNote.vue'
 import RotationPredictionToggle from './RotationPredictionToggle.vue'
 </script>
