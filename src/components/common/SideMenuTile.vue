@@ -5,9 +5,13 @@
       'hover:bg-gray-100 hover:dark:bg-gray-800 rounded cursor-pointer': !!onClick,
     }"
   >
-    <slot name="leading" class="size-6 mx-2 text-gray-700 dark:text-gray-300" />
+    <div class="size-5 mx-2 text-gray-700 dark:text-gray-300">
+      <slot name="leading" />
+    </div>
     <div class="mx-2 flex flex-col">{{ title }}</div>
-    <slot name="trailing" class="ml-auto mx-2" />
+    <div class="ml-auto mx-2">
+      <slot name="trailing" />
+    </div>
   </div>
 </template>
 

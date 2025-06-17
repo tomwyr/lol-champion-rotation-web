@@ -1,7 +1,7 @@
 <template>
   <SideMenuTile title="Rotations" @click="openObservedRotations">
     <template #leading>
-      <BookmarkIcon class="size-5 mx-2" />
+      <BookmarkIcon />
     </template>
   </SideMenuTile>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <SideMenuTile title="Champions" @click="openObservedChampions">
     <template #leading>
-      <EyeIcon class="size-5 mx-2" />
+      <EyeIcon />
     </template>
   </SideMenuTile>
 </template>

@@ -3,8 +3,12 @@
     <AppPageHeader title="Menu" class="pb-4" @back="closeSideMenu" />
     <ObservedChampionsTile />
     <ObservedRotationsTile />
-    <DarkModeToggle />
-    <RotationPredictionToggle />
+
+    <div class="mt-auto">
+      <p class="h-px my-2 bg-gray-200 dark:bg-gray-700" />
+      <DarkModeToggle />
+      <RotationPredictionToggle />
+    </div>
   </SideMenu>
 </template>
 

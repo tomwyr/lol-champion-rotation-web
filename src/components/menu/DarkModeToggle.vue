@@ -1,11 +1,11 @@
 <template>
-  <SideMenuTile title="Dark mode">
+  <SideMenuTile title="Dark mode" class="text-sm">
     <template #leading>
-      <MoonIcon v-if="enabled" class="size-6 mx-2 text-gray-300" />
-      <SunIcon v-else class="size-6 mx-2 text-gray-700" />
+      <MoonIcon v-if="enabled" />
+      <SunIcon v-else />
     </template>
     <template #trailing>
-      <DotSwitch class="ml-auto mx-2" v-model:enabled="enabled" />
+      <DotSwitch v-model:enabled="enabled" class="mr-1" />
     </template>
   </SideMenuTile>
 </template>

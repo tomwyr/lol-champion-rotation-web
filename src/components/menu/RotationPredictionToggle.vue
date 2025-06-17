@@ -1,10 +1,10 @@
 <template>
-  <SideMenuTile title="Rotation prediction">
+  <SideMenuTile title="Rotation prediction" class="text-sm">
     <template #leading>
-      <SparklesIcon class="size-6 mx-2 text-gray-700 dark:text-gray-300" />
+      <SparklesIcon />
     </template>
     <template #trailing>
-      <DotSwitch class="ml-auto mx-2" v-model:enabled="enabled" />
+      <DotSwitch v-model:enabled="enabled" class="mr-1" />
     </template>
   </SideMenuTile>
 </template>
