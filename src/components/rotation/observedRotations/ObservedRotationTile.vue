@@ -5,24 +5,21 @@
     @click="openDetails(rotation)"
   >
     <span class="text-sm md:text-base">
-      {{ formatDuration(rotation.duration) }}
+      {{ formatRotationDuration(rotation.duration) }}
     </span>
     <template v-if="rotation.current">
       <RotationBadge variant="current" />
     </template>
-    <div class="flex flex-grow pr-4 md:pr-6" dir="rtl">
-      <template v-for="imageUrl in rotation.championImageUrls.reversed()" :key="imageUrl">
-        <img class="size-8 md:size-10 rounded-full -mr-4 md:-mr-6" loading="lazy" :src="imageUrl" />
-      </template>
-    </div>
+    <ChampionRotationPreview :champion-image-urls="rotation.championImageUrls" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { formatDuration } from '@/common/Formatters'
+import { formatRotationDuration } from '@/common/Formatters'
 import type { ObservedRotation } from '@/common/Types'
 import { useRouter } from 'vue-router'
 import RotationBadge from '../common/RotationBadge.vue'
+import ChampionRotationPreview from '../common/ChampionRotationPreview.vue'
 
 defineProps<{
   rotation: ObservedRotation

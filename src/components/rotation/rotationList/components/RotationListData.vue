@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatDuration } from '@/common/Formatters'
+import { formatRotationDuration } from '@/common/Formatters'
 import {
   type Champion,
   type ChampionRotation,
@@ -66,7 +66,7 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
   if (rotationPrediction) {
     result.push({
       key: 'prediction',
-      header: formatDuration(rotationPrediction.duration),
+      header: formatRotationDuration(rotationPrediction.duration),
       champions: filterChampions(rotationPrediction.champions),
       expandable: true,
       badge: 'prediction',
@@ -75,7 +75,7 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
 
   result.push({
     key: `regular#${rotationsOverview.id}`,
-    header: formatDuration(rotationsOverview.duration),
+    header: formatRotationDuration(rotationsOverview.duration),
     detailsId: rotationsOverview.id,
     champions: filterChampions(rotationsOverview.regularChampions),
     badge: 'current',
@@ -84,7 +84,7 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
   for (const rotation of nextRotations) {
     result.push({
       key: `regular#${rotationsOverview.id}`,
-      header: formatDuration(rotation.duration),
+      header: formatRotationDuration(rotation.duration),
       detailsId: rotation.id,
       champions: filterChampions(rotation.champions),
     })

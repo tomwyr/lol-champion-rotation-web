@@ -3,21 +3,21 @@
     <span class="md:text-xl mb-1">Overview</span>
 
     <div class="flex flex-row items-center my-1">
-      <HashtagIcon class="size-5 mx-2.5" />
+      <HashtagIcon :class="className" />
       <span class="font-bold ml-2">{{ occurrencesPrefix }}</span>
       <span>{{ occurrencesSuffix }} in rotation</span>
     </div>
 
     <div class="flex flex-row items-center my-1">
-      <ChartBarIcon class="size-5 mx-2.5" />
+      <ChartBarIcon :class="className" />
       <span class="font-bold ml-2">{{ popularityPrefix }}</span>
       <span>{{ popularitySuffix }}</span>
     </div>
 
     <div class="flex flex-row items-center my-1">
-      <ArrowLongRightIcon v-if="!currentStreak || currentStreak === 0" class="size-5 mx-2.5" />
-      <ArrowTrendingUpIcon v-else-if="currentStreak > 0" class="size-5 mx-2.5" />
-      <ArrowTrendingUpIcon v-else-if="currentStreak < 0" class="size-5 mx-2.5" />
+      <ArrowLongRightIcon v-if="!currentStreak || currentStreak === 0" :class="className" />
+      <ArrowTrendingUpIcon v-else-if="currentStreak > 0" :class="className" />
+      <ArrowTrendingUpIcon v-else-if="currentStreak < 0" :class="className" />
       <span class="font-bold ml-2">{{ currentStreakHighlight }}</span>
       <span>{{ currentStreakDescription }}</span>
     </div>
@@ -37,6 +37,8 @@ import {
 const props = defineProps<{
   champion: ChampionDetails
 }>()
+
+const className = 'size-5 mx-2.5 text-gray-500 dark:text-gray-300'
 
 const { occurrences, popularity, currentStreak } = props.champion.overview
 const nbsp = '\u00A0'

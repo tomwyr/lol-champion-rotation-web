@@ -17,6 +17,7 @@
         <ChampionDetailsSummary :champion="championDetailsState.value" />
         <ChampionDetailsAvailabilitySection :champion="championDetailsState.value" />
         <ChampionDetailsOverviewSection :champion="championDetailsState.value" />
+        <ChampionDetailsHistorySection :champion="championDetailsState.value" />
       </template>
     </PageLayout>
   </template>
@@ -33,6 +34,7 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ChampionDetailsAvailabilitySection from './ChampionDetailsAvailabilitySection.vue'
 import ChampionDetailsHeader from './ChampionDetailsHeader.vue'
+import ChampionDetailsHistorySection from './ChampionDetailsHistorySection.vue'
 import ChampionDetailsOverviewSection from './ChampionDetailsOverviewSection.vue'
 import ChampionDetailsSummary from './ChampionDetailsSummary.vue'
 

@@ -11,6 +11,7 @@ export type ChampionDetails = {
   imageUrl: string
   availability: [ChampionDetailsAvailability]
   overview: ChampionDetailsOverview
+  history: [ChampionDetailsHistoryEvent]
 }
 
 export type ChampionDetailsAvailability = {
@@ -23,6 +24,29 @@ export type ChampionDetailsOverview = {
   occurrences: number
   popularity?: number
   currentStreak?: number
+}
+
+export type ChampionDetailsHistoryEvent =
+  | ChampionDetailsHistoryRotation
+  | ChampionDetailsHistoryBench
+  | ChampionDetailsHistoryRelease
+
+export type ChampionDetailsHistoryRotation = {
+  type: 'rotation'
+  id: string
+  duration: ChampionRotationDuration
+  current: boolean
+  championImageUrls: [string]
+}
+
+export type ChampionDetailsHistoryBench = {
+  type: 'bench'
+  rotationsMissed: number
+}
+
+export type ChampionDetailsHistoryRelease = {
+  type: 'release'
+  releasedAt: Date
 }
 
 export type ChampionRotationsOverview = {

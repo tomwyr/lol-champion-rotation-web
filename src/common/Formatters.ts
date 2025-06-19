@@ -1,10 +1,18 @@
 import { format } from 'date-fns'
 import type { ChampionRotationDuration } from './Types'
 
-export function formatDuration(duration: ChampionRotationDuration) {
-  const start = format(duration.start, 'MMMM dd')
-  const end = format(duration.end, 'MMMM dd')
+export function formatRotationDuration(
+  duration: ChampionRotationDuration,
+  options: { format: 'long' | 'short' } = { format: 'long' },
+) {
+  const formatStr = options.format === 'long' ? 'MMMM dd' : 'MMM dd'
+  const start = format(duration.start, formatStr)
+  const end = format(duration.end, formatStr)
   return start + ' to ' + end
+}
+
+export function formatChampionReleaseDate(date: Date) {
+  return format(date, "MMM dd ''yy")
 }
 
 export function formatOrdinal(number: number) {

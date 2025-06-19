@@ -1,10 +1,11 @@
 <template>
-  <span
-    :class="className"
-    class="ml-2 px-1.5 py-0.5 text-xs rounded-full border bg-opacity-10 dark:bg-opacity-10"
-  >
-    {{ label }}
-  </span>
+  <div class="ml-2">
+    <span
+      :class="className"
+      class="h-auto px-1.5 py-0.5 text-xs rounded-full border bg-opacity-10 dark:bg-opacity-10"
+      >{{ label }}</span
+    >
+  </div>
 </template>
 
 <script setup lang="ts">
