@@ -15,7 +15,8 @@
 
       <template #body>
         <ChampionDetailsSummary :champion="championDetailsState.value" />
-        <ChampionDetailsAvailability :champion="championDetailsState.value" />
+        <ChampionDetailsAvailabilitySection :champion="championDetailsState.value" />
+        <ChampionDetailsOverviewSection :champion="championDetailsState.value" />
       </template>
     </PageLayout>
   </template>
@@ -30,8 +31,9 @@ import PageLayout from '@/components/common/PageLayout.vue'
 import { apiBaseUrl } from '@/Environment'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import ChampionDetailsAvailability from './ChampionDetailsAvailability.vue'
+import ChampionDetailsAvailabilitySection from './ChampionDetailsAvailabilitySection.vue'
 import ChampionDetailsHeader from './ChampionDetailsHeader.vue'
+import ChampionDetailsOverviewSection from './ChampionDetailsOverviewSection.vue'
 import ChampionDetailsSummary from './ChampionDetailsSummary.vue'
 
 const route = useRoute()

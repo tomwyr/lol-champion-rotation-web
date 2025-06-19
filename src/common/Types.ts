@@ -10,12 +10,19 @@ export type ChampionDetails = {
   title: string
   imageUrl: string
   availability: [ChampionDetailsAvailability]
+  overview: ChampionDetailsOverview
 }
 
 export type ChampionDetailsAvailability = {
   rotationType: ChampionRotationType
   lastAvailable?: Date
   current: boolean
+}
+
+export type ChampionDetailsOverview = {
+  occurrences: number
+  popularity?: number
+  currentStreak?: number
 }
 
 export type ChampionRotationsOverview = {

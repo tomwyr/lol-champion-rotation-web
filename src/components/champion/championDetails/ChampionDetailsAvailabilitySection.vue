@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col mt-4 font-thin">
+  <div class="flex flex-col mt-3 font-thin">
     <span class="md:text-xl mb-1">Rotations</span>
 
     <template v-for="data in rotationsData" :key="data.type">
