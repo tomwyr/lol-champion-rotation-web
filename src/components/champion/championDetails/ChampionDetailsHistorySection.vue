@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col mt-3 pb-3 font-thin">
-    <span class="md:text-xl mb-1">History</span>
+  <div class="flex flex-col mt-3 pb-3">
+    <span class="md:text-xl mb-1 font-thin">History</span>
 
     <template v-for="(event, index) in champion.history" :key="event.type">
       <template v-if="event.type === 'rotation'">

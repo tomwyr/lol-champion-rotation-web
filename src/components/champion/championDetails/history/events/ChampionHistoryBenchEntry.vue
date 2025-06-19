@@ -1,6 +1,6 @@
 <template>
   <ChampionDetailsHistoryEntry :event :index :eventCount>
-    <span class="text-gray-500 dark:text-gray-300">
+    <span class="text-gray-400">
       {{ event.rotationsMissed }}
       rotation{{ formatPluralSuffix(event.rotationsMissed) }} missed
     </span>

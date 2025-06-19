@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col mt-3 font-thin">
-    <span class="md:text-xl mb-1">Rotations</span>
+  <div class="flex flex-col mt-3">
+    <span class="md:text-xl mb-1 font-thin">Rotations</span>
 
     <template v-for="data in rotationsData" :key="data.type">
       <div class="flex flex-row my-1 gap-4 items-center">

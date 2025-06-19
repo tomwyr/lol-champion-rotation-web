@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col mt-3 font-thin">
-    <span class="md:text-xl mb-1">Overview</span>
+  <div class="flex flex-col mt-3">
+    <span class="md:text-xl mb-1 font-thin">Overview</span>
 
     <div class="flex flex-row items-center my-1">
       <HashtagIcon :class="className" />
