@@ -4,7 +4,7 @@
   </template>
 
   <h3 v-if="nonEmptyRotations.length === 0" class="py-2 text-gray-500 dark:text-gray-400">
-    {{ filtered ? 'No champions match your search query.' : 'No data available at the moment.' }}
+    {{ 'No data available at the moment.' }}
   </h3>
 </template>
 
@@ -15,7 +15,6 @@ import ChampionRotation from '../../common/ChampionRotation.vue'
 
 const props = defineProps<{
   rotations: ChampionsRotationData[]
-  filtered: boolean
 }>()
 
 const nonEmptyRotations = computed(() => {

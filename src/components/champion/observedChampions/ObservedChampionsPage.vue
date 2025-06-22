@@ -1,5 +1,5 @@
 <template>
-  <PageLayout headerSize="compact">
+  <PageLayout>
     <template #header>
       <AppPageHeader title="Observed champions" />
     </template>

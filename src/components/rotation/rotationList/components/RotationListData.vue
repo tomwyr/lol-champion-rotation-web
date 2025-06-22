@@ -1,7 +1,7 @@
 <template>
-  <PageLayout>
+  <PageLayout headerSize="loose">
     <template #header>
-      <RotationListHeader v-model:search-query="searchQuery" :rotationsOverview />
+      <RotationListHeader :rotationsOverview />
     </template>
 
     <template #body>
@@ -12,9 +12,9 @@
       </div>
 
       <template v-if="rotationType === 'regular'">
-        <FilteredChampionRotations :rotations="regularRotationsData" :filtered />
+        <FilteredChampionRotations :rotations="regularRotationsData" />
         <MoreDataLoader
-          v-if="searchQuery.length === 0 && hasNextRotation"
+          v-if="hasNextRotation"
           :showButton="!isLoadingMore && nextRotations.length === 0"
           buttonLabel="Previous Rotations"
           :extentThreshold="200"
@@ -23,7 +23,7 @@
       </template>
 
       <template v-if="rotationType === 'beginner'">
-        <FilteredChampionRotations :rotations="beginnerRotationsData" :filtered />
+        <FilteredChampionRotations :rotations="beginnerRotationsData" />
       </template>
     </template>
   </PageLayout>
@@ -32,7 +32,6 @@
 <script setup lang="ts">
 import { formatRotationDuration } from '@/common/Formatters'
 import {
-  type Champion,
   type ChampionRotation,
   type ChampionRotationPrediction,
   type ChampionRotationsOverview,
@@ -56,10 +55,6 @@ const props = defineProps<{
 }>()
 
 const rotationType = ref<ChampionRotationType>('regular')
-const searchQuery = ref<string>('')
-
-const filter = computed(() => searchQuery.value.toLowerCase().trim())
-const filtered = computed(() => filter.value.length > 0)
 
 const regularRotationsData = computed<ChampionsRotationData[]>(() => {
   const { rotationPrediction, rotationsOverview, nextRotations } = props
@@ -70,7 +65,7 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
     result.push({
       key: 'prediction',
       header: formatRotationDuration(rotationPrediction.duration),
-      champions: filterChampions(rotationPrediction.champions),
+      champions: rotationPrediction.champions,
       expandable: true,
       badge: 'prediction',
     })
@@ -80,7 +75,7 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
     key: `regular#${rotationsOverview.id}`,
     header: formatRotationDuration(rotationsOverview.duration),
     detailsId: rotationsOverview.id,
-    champions: filterChampions(rotationsOverview.regularChampions),
+    champions: rotationsOverview.regularChampions,
     badge: 'current',
   })
 
@@ -89,7 +84,7 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
       key: `regular#${rotationsOverview.id}`,
       header: formatRotationDuration(rotation.duration),
       detailsId: rotation.id,
-      champions: filterChampions(rotation.champions),
+      champions: rotation.champions,
     })
   }
 
@@ -103,15 +98,8 @@ const beginnerRotationsData = computed<ChampionsRotationData[]>(() => {
     {
       key: 'beginner',
       header: 'New players up to level ' + rotationsOverview.beginnerMaxLevel + ' only',
-      champions: filterChampions(rotationsOverview.beginnerChampions),
+      champions: rotationsOverview.beginnerChampions,
     },
   ]
 })
-
-function filterChampions(champions: Champion[]) {
-  if (filter.value.length === 0) {
-    return champions
-  }
-  return champions.filter((champion) => champion.name.toLowerCase().includes(filter.value))
-}
 </script>

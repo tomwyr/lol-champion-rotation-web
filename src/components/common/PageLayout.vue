@@ -11,18 +11,18 @@
     </div>
   </header>
   <main
+    class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto px-4 flex flex-col h-screen"
     :class="{
       'pt-[4rem] md:pt-[4.5rem]': headerSize === 'loose',
       'pt-[4rem]': headerSize === 'tight',
     }"
-    class="lg:max-w-[768px] md:max-w-[600px] max-w-[480px] mx-auto px-4 flex flex-col h-screen"
   >
     <slot name="body"></slot>
   </main>
 </template>
 
 <script setup lang="ts">
-const { headerSize = 'loose' } = defineProps<{
+const { headerSize = 'tight' } = defineProps<{
   headerSize?: 'loose' | 'tight'
 }>()
 </script>

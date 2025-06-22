@@ -8,7 +8,7 @@
   </template>
 
   <template v-if="rotationDetailsState.type === 'data'">
-    <PageLayout headerSize="compact">
+    <PageLayout>
       <template #header>
         <RotationDetailsHeader :rotation="rotationDetailsState.value" />
       </template>

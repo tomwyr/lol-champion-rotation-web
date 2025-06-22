@@ -8,7 +8,7 @@
   </template>
 
   <template v-if="championDetailsState.type === 'data'">
-    <PageLayout header-size="compact">
+    <PageLayout>
       <template #header>
         <ChampionDetailsHeader :champion="championDetailsState.value" />
       </template>
