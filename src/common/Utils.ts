@@ -28,3 +28,32 @@ if (!Array.prototype.reversed) {
     return result
   }
 }
+
+export async function delay(millis: number): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, millis))
+}
+
+export function createSwitchTask(options: { debounceMillis?: number } = {}) {
+  let currentToken = Symbol()
+
+  return {
+    run: async <T>(task: () => Promise<T>): Promise<T | undefined> => {
+      const token = Symbol()
+      currentToken = token
+
+      if (options.debounceMillis) {
+        await delay(options.debounceMillis)
+      }
+      if (token !== currentToken) return
+
+      const result = await task()
+      if (token !== currentToken) return
+
+      return result
+    },
+
+    cancel: () => {
+      currentToken = Symbol()
+    },
+  }
+}

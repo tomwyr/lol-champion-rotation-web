@@ -9,9 +9,9 @@ export type ChampionDetails = {
   name: string
   title: string
   imageUrl: string
-  availability: [ChampionDetailsAvailability]
+  availability: ChampionDetailsAvailability[]
   overview: ChampionDetailsOverview
-  history: [ChampionDetailsHistoryEvent]
+  history: ChampionDetailsHistoryEvent[]
 }
 
 export type ChampionDetailsAvailability = {
@@ -36,7 +36,7 @@ export type ChampionDetailsHistoryRotation = {
   id: string
   duration: ChampionRotationDuration
   current: boolean
-  championImageUrls: [string]
+  championImageUrls: string[]
 }
 
 export type ChampionDetailsHistoryBench = {
@@ -54,8 +54,8 @@ export type ChampionRotationsOverview = {
   patchVersion?: string
   duration: ChampionRotationDuration
   beginnerMaxLevel: number
-  beginnerChampions: [Champion]
-  regularChampions: [Champion]
+  beginnerChampions: Champion[]
+  regularChampions: Champion[]
   nextRotationToken?: string
 }
 
@@ -76,7 +76,7 @@ export type ChampionRotationSummary = {
 export type ChampionRotationDetails = {
   id: string
   duration: ChampionRotationDuration
-  champions: [Champion]
+  champions: Champion[]
   current: boolean
 }
 
@@ -96,7 +96,16 @@ export type ObservedChampion = {
 
 export type ChampionRotationPrediction = {
   duration: ChampionRotationDuration
-  champions: [Champion]
+  champions: Champion[]
+}
+
+export type SearchChampionsResult = {
+  matches: SearchChampionsMatch[]
+}
+
+export type SearchChampionsMatch = {
+  champion: Champion
+  availableIn: ChampionRotationType[]
 }
 
 export type ChampionRotationDuration = {
