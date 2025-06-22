@@ -1,10 +1,10 @@
 <template>
   <div
-    class="fixed z-30 max-w-[400px] md:max-w-[500px] lg:max-w-[600px] mx-auto inset-x-0 mt-5 md:mt-6 p-2 md:p-3 rounded-xl shadow-lg shadow-gray-700 bg-gray-100 dark:bg-gray-800"
+    class="fixed z-30 max-w-[400px] md:max-w-[500px] lg:max-w-[600px] mx-auto inset-x-0 mt-5 md:mt-6 p-2 md:p-3 rounded-xl shadow-md shadow-gray-500 dark:shadow-gray-700 bg-gray-100 dark:bg-gray-800"
   >
     <div v-if="searchState.type === 'initial'" class="pt-8 pb-7 flex flex-col items-center">
-      <PencilIcon class="size-8 mt-0.5 mb-2.5" />
-      <p class="text-center">Start typing to search...</p>
+      <PencilIcon class="size-8 mt-0.5 mb-2.5 text-gray-700 dark:text-gray-300" />
+      <p class="text-center text-gray-900 dark:text-gray-100">Start typing to search...</p>
     </div>
 
     <DataLoading
@@ -24,8 +24,10 @@
       v-else-if="searchState.type === 'data' && searchState.value.matches.length === 0"
       class="pt-8 pb-7 flex flex-col items-center"
     >
-      <ArchiveBoxIcon class="size-8 mt-0.5 mb-2.5" />
-      <p class="text-center">No champions match your search query.</p>
+      <ArchiveBoxIcon class="size-8 mt-0.5 mb-2.5 text-gray-700 dark:text-gray-300" />
+      <p class="text-center text-gray-900 dark:text-gray-100">
+        No champions match your search query.
+      </p>
     </div>
 
     <ChampionsSearchData

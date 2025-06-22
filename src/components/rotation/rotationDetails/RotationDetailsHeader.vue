@@ -2,12 +2,12 @@
   <AppPageHeader title="Rotation details">
     <BookmarkIconSolid
       v-if="isObserved"
-      class="size-6 md:size-7 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
+      class="size-6 md:size-7 p-1 rounded cursor-pointer ml-auto hover:bg-gray-200 hover:dark:bg-gray-800"
       @click="unobserveRotation(rotation.id)"
     />
     <BookmarkIconOutline
       v-else
-      class="size-6 md:size-7 p-1 rounded cursor-pointer ml-auto hover:bg-gray-100 hover:dark:bg-gray-800"
+      class="size-6 md:size-7 p-1 rounded cursor-pointer ml-auto hover:bg-gray-200 hover:dark:bg-gray-800"
       @click="observeRotation(rotation)"
     />
   </AppPageHeader>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-2 gap-1 flex flex-row items-center cursor-pointer rounded hover:bg-gray-100 hover:dark:bg-gray-800"
+    class="p-2 gap-1 flex flex-row items-center cursor-pointer rounded hover:bg-gray-200 hover:dark:bg-gray-800"
     :class="{ 'mt-2': index > 0 }"
     @click="openDetails(rotation)"
   >

@@ -1,7 +1,7 @@
 <template>
   <Listbox v-model="model">
     <ListboxButton
-      class="flex flex-row items-center p-0.5 -ml-1 pl-1 rounded hover:bg-gray-100 hover:dark:bg-gray-800"
+      class="flex flex-row items-center p-0.5 -ml-1 pl-1 rounded hover:bg-gray-200 hover:dark:bg-gray-800"
     >
       <span>{{ getTypeData(model).title }}</span>
       <IconExpandMore class="ml-0.5" />

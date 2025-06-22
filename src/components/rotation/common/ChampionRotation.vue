@@ -2,7 +2,7 @@
   <div
     :class="{
       'mb-2': rotation.champions.length > 0,
-      '-m-1 p-1 rounded cursor-pointer transition-colors hover:[&:not(:has(.champion-tile:hover))]:bg-gray-100 dark:hover:[&:not(:has(.champion-tile:hover))]:bg-gray-800':
+      '-m-1 p-1 rounded cursor-pointer transition-colors hover:[&:not(:has(.champion-tile:hover))]:bg-gray-200 dark:hover:[&:not(:has(.champion-tile:hover))]:bg-gray-800':
         rotation.detailsId,
     }"
     @click="openRotationDetails"
@@ -16,7 +16,7 @@
 
       <div
         v-if="rotation.expandable !== undefined"
-        class="ml-1 p-1 cursor-pointer rounded-full hover:bg-gray-100 hover:dark:bg-gray-800"
+        class="ml-1 p-1 cursor-pointer rounded-full hover:bg-gray-200 hover:dark:bg-gray-800"
         @click="toggleExpansion"
       >
         <IconUnfoldLess v-if="expanded" />

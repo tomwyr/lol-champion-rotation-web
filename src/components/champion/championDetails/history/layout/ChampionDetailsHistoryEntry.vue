@@ -2,7 +2,7 @@
   <div
     class="flex flex-row"
     :class="{
-      'cursor-pointer rounded hover:bg-gray-100 hover:dark:bg-gray-800': onClick,
+      'cursor-pointer rounded hover:bg-gray-200 hover:dark:bg-gray-800': onClick,
     }"
   >
     <ChampionDetailsHistoryIndicator :event :index :eventCount />

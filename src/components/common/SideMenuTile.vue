@@ -2,7 +2,7 @@
   <div
     class="flex flex-row items-center py-4"
     :class="{
-      'hover:bg-gray-100 hover:dark:bg-gray-800 rounded cursor-pointer': !!onClick,
+      'hover:bg-gray-200 hover:dark:bg-gray-800 rounded cursor-pointer': !!onClick,
     }"
   >
     <div class="size-5 mx-2 text-gray-700 dark:text-gray-300">

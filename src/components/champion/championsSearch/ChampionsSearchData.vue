@@ -2,7 +2,7 @@
   <div class="flex flex-col md:gap-1">
     <template v-for="match in matches" :key="match.champion.id">
       <div
-        class="flex flex-row items-center p-2 gap-4 rounded-lg cursor-pointer hover:bg-gray-100 hover:dark:bg-gray-900"
+        class="flex flex-row items-center p-2 gap-4 rounded-lg cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
         @click.stop="openChampionDetails(match.champion)"
       >
         <img
