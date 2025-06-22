@@ -10,9 +10,9 @@
 
     <input
       ref="searchInput"
-      class="grow bg-transparent placeholder-gray-400"
+      class="grow bg-transparent placeholder-gray-400 "
       :class="{
-        'cursor-pointer pointer-events-none': !active,
+        'cursor-pointer pointer-events-none [&::-webkit-search-cancel-button]:hidden': !active,
       }"
       type="search"
       v-model="query"

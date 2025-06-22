@@ -13,8 +13,9 @@
               'text-gray-400 dark:text-gray-400': !data.available,
             }"
             class="text-sm -mt-0.5"
-            >{{ data.available ? 'Available' : 'Unavailable' }}</span
           >
+            {{ data.available ? 'Available' : 'Unavailable' }}
+          </span>
         </div>
       </div>
     </template>
