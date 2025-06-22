@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed z-30 max-w-[400px] md:max-w-[500px] lg:max-w-[600px] mx-auto inset-x-0 mt-5 md:mt-6 p-4 rounded-xl shadow-lg shadow-gray-700 bg-gray-800"
+    class="fixed z-30 max-w-[400px] md:max-w-[500px] lg:max-w-[600px] mx-auto inset-x-0 mt-5 md:mt-6 p-4 rounded-xl shadow-lg shadow-gray-700 bg-gray-100 dark:bg-gray-800"
   >
     <div v-if="searchState.type === 'initial'" class="pt-8 pb-7 flex flex-col items-center">
       <PencilIcon class="size-8 mt-0.5 mb-2.5" />
