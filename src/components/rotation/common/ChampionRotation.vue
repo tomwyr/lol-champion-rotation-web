@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div v-if="!expanded" class="mb-4"></div>
+    <div v-if="!expanded" class="mb-2"></div>
 
     <div
       v-if="rotation.champions.length > 0"

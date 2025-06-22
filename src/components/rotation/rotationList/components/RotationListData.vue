@@ -1,14 +1,16 @@
 <template>
   <PageLayout>
     <template #header>
-      <RotationsHeader
-        v-model:rotation-type="rotationType"
-        v-model:search-query="searchQuery"
-        :rotationsOverview
-      />
+      <RotationListHeader v-model:search-query="searchQuery" :rotationsOverview />
     </template>
 
     <template #body>
+      <div
+        class="sticky top-[4.5rem] z-10 pb-1.5 mb-0.5 bg-white dark:bg-gray-900 transition-colors"
+      >
+        <RotationTypePicker v-model="rotationType" />
+      </div>
+
       <template v-if="rotationType === 'regular'">
         <FilteredChampionRotations :rotations="regularRotationsData" :filtered />
         <MoreDataLoader
@@ -41,7 +43,8 @@ import { computed, ref } from 'vue'
 import MoreDataLoader from '../../../common/MoreDataLoader.vue'
 import type { ChampionsRotationData } from '../../common/ChampionRotation.vue'
 import FilteredChampionRotations from './FilteredChampionRotations.vue'
-import RotationsHeader from './RotationListHeader.vue'
+import RotationListHeader from './RotationListHeader.vue'
+import RotationTypePicker from './RotationTypePicker.vue'
 
 const props = defineProps<{
   rotationPrediction?: ChampionRotationPrediction

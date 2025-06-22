@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row items-center gap-2">
+  <div class="flex flex-row w-full items-center gap-2">
     <ChevronLeftIcon class="size-5 stroke-[2px] cursor-pointer" @click="onBack" />
     <h1 class="text-xl">{{ title }}</h1>
     <slot />

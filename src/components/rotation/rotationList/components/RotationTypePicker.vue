@@ -12,7 +12,7 @@
       leave-from-class="opacity-100"
       leave-to-class="opacity-0"
     >
-      <ListboxOptions class="absolute py-1 mt-1 -ml-1 rounded-md bg-gray-100 dark:bg-gray-800">
+      <ListboxOptions class="absolute z-10 py-1 mt-1 -ml-1 rounded-md bg-gray-100 dark:bg-gray-800">
         <ListboxOption
           v-for="type in typesData"
           :key="type.value"

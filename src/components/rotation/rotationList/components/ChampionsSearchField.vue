@@ -1,23 +1,19 @@
 <template>
   <div
-    @click="expanded = !expanded"
-    class="p-1 hover:bg-gray-300 dark:hover:bg-gray-700 rounded relative"
+    class="flex flex-row max-w-80 h-8 md:h-9  w-full items-center mx-4 px-2 py-1 text-sm rounded-2xl text-gray-400 bg-gray-50 dark:bg-gray-800 border border-gray-300 focus:border-gray-500 dark:border-gray-700 dark:focus:border-gray-500 transition-colors"
   >
-    <IconSearch />
-    <IconFilter v-if="query && !expanded" />
+    <IconSearch class="size-4 mx-2" />
+    <input
+      class="grow bg-transparent placeholder-gray-400"
+      type="search"
+      v-model="query"
+      placeholder="Search champions..."
+    />
   </div>
-  <input
-    type="search"
-    v-show="expanded"
-    v-model="query"
-    class="w-64 ml-1 px-2 py-1 text-sm rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-300 focus:border-gray-500 dark:border-gray-700 dark:focus:border-gray-500"
-    placeholder="Champion name..."
-  />
 </template>
 
 <script setup lang="ts">
-import { IconFilter, IconSearch } from '@/icons/Icons'
+import IconSearch from '@/icons/IconSearch.vue'
 
 const query = defineModel('query', { default: '' })
-const expanded = defineModel('expanded', { default: false })
 </script>
