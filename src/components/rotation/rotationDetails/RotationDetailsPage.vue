@@ -13,7 +13,7 @@
         <RotationDetailsHeader :rotation="rotationDetailsState.value" />
       </template>
       <template #body>
-        <ChampionRotation :rotation="rotationItemDataFrom(rotationDetailsState.value)" />
+        <ChampionRotationGrid :rotation="rotationItemDataFrom(rotationDetailsState.value)" />
       </template>
     </PageLayout>
   </template>
@@ -29,7 +29,9 @@ import PageLayout from '@/components/common/PageLayout.vue'
 import { apiBaseUrl } from '@/Environment'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import ChampionRotation, { type ChampionsRotationData } from '../common/ChampionRotation.vue'
+import ChampionRotationGrid, {
+  type ChampionsRotationData,
+} from '../common/ChampionRotationGrid.vue'
 import RotationDetailsHeader from './RotationDetailsHeader.vue'
 
 const route = useRoute()

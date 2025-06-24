@@ -6,13 +6,16 @@
 
     <template #body>
       <div
-        class="sticky top-[4.5rem] z-10 pb-1.5 mb-0.5 bg-white dark:bg-gray-900 transition-colors"
+        class="sticky top-[4rem] md:top-[4.5rem] z-10 pb-1.5 mb-0.5 bg-white dark:bg-gray-900 transition-colors"
       >
         <RotationTypePicker v-model="rotationType" />
       </div>
 
       <template v-if="rotationType === 'regular'">
-        <FilteredChampionRotations :rotations="regularRotationsData" />
+        <template v-for="rotation in regularRotationsData" :key="rotation.key">
+          <ChampionRotationGrid :rotation />
+        </template>
+
         <MoreDataLoader
           v-if="hasNextRotation"
           :showButton="!isLoadingMore && nextRotations.length === 0"
@@ -23,7 +26,9 @@
       </template>
 
       <template v-if="rotationType === 'beginner'">
-        <FilteredChampionRotations :rotations="beginnerRotationsData" />
+        <template v-for="rotation in beginnerRotationsData" :key="rotation.key">
+          <ChampionRotationGrid :rotation />
+        </template>
       </template>
     </template>
   </PageLayout>
@@ -40,8 +45,8 @@ import {
 import PageLayout from '@/components/common/PageLayout.vue'
 import { computed, ref } from 'vue'
 import MoreDataLoader from '../../../common/MoreDataLoader.vue'
-import type { ChampionsRotationData } from '../../common/ChampionRotation.vue'
-import FilteredChampionRotations from './FilteredChampionRotations.vue'
+import type { ChampionsRotationData } from '../../common/ChampionRotationGrid.vue'
+import ChampionRotationGrid from '../../common/ChampionRotationGrid.vue'
 import RotationListHeader from './RotationListHeader.vue'
 import RotationTypePicker from './RotationTypePicker.vue'
 
