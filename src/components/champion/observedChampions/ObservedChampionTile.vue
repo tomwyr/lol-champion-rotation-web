@@ -15,6 +15,7 @@
 
 <script setup lang="ts">
 import type { ObservedChampion } from '@/common/Types'
+import RotationBadge from '@/components/rotation/common/RotationBadge.vue'
 import { ChevronRightIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
 
