@@ -15,7 +15,6 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-
 const isHome = computed(() => router.currentRoute.value.path === '/')
 
 function goHome() {

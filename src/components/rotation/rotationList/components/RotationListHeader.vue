@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row w-full items-center justify-between mb-1">
-    <AppLogo />
+    <AppLogo :loose="true" />
 
     <ChampionsSearch />
 

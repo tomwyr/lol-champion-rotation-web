@@ -5,9 +5,11 @@
     <ObservedRotationsTile />
 
     <div class="mt-auto">
-      <p class="h-px my-2 bg-gray-200 dark:bg-gray-700" />
+      <SideMenuDivider />
       <DarkModeToggle />
       <RotationPredictionToggle />
+      <SideMenuDivider />
+      <MobileShowcaseTile />
     </div>
 
     <RiotPolicyNote />
@@ -17,8 +19,10 @@
 <script setup lang="ts">
 import { closeSideMenu } from '../common/SideMenu'
 import SideMenu from '../common/SideMenu.vue'
+import SideMenuDivider from '../common/SideMenuDivider.vue'
 import AppPageHeader from './AppPageHeader.vue'
 import DarkModeToggle from './DarkModeToggle.vue'
+import MobileShowcaseTile from './MobileShowcaseTile.vue'
 import ObservedChampionsTile from './ObservedChampionsTile.vue'
 import ObservedRotationsTile from './ObservedRotationsTile.vue'
 import RiotPolicyNote from './RiotPolicyNote.vue'

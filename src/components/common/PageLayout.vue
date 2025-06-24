@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed z-50 inset-x-0 py-2 bg-inherit"
+    class="fixed z-50 inset-x-0 py-2 bg-white dark:bg-gray-900"
     :class="{
       'h-[4rem] md:h-[4.5rem]': headerSize === 'loose',
       'h-[4rem]': headerSize === 'tight',
