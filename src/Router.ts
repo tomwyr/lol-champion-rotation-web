@@ -13,6 +13,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/champions/observed', component: ObservedChampionsPage },
   { path: '/champions/:id', component: ChampionDetailsPage },
   { path: '/mobile', component: MobileShowcasePage },
+  { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
 const router = createRouter({
