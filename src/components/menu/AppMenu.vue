@@ -9,6 +9,7 @@
       <DarkModeToggle />
       <RotationPredictionToggle />
       <SideMenuDivider />
+      <PrivacyPolicyTile />
       <MobileShowcaseTile />
     </div>
 
@@ -23,6 +24,7 @@ import SideMenuDivider from '../common/SideMenuDivider.vue'
 import AppPageHeader from './AppPageHeader.vue'
 import DarkModeToggle from './DarkModeToggle.vue'
 import MobileShowcaseTile from './MobileShowcaseTile.vue'
+import PrivacyPolicyTile from './PrivacyPolicyTile.vue'
 import ObservedChampionsTile from './ObservedChampionsTile.vue'
 import ObservedRotationsTile from './ObservedRotationsTile.vue'
 import RiotPolicyNote from './RiotPolicyNote.vue'
