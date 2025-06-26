@@ -25,7 +25,7 @@ const query = defineModel('query', { default: '' })
 const active = ref(false)
 const searchState = ref<AsyncDataState<SearchChampionsResult>>({ type: 'initial' })
 
-const searchTask = createSwitchTask({ debounceMillis: 1000 })
+const searchTask = createSwitchTask({ debounceMillis: 300 })
 
 watchEffect(async () => {
   const searchQuery = query.value.trim()
@@ -38,7 +38,11 @@ watchEffect(async () => {
 
   try {
     const result = await searchChampions(searchQuery, {
-      onRun: () => (searchState.value = { type: 'loading' }),
+      onRun: () => {
+        if (searchState.value.type !== 'initial') {
+          searchState.value = { type: 'loading' }
+        }
+      },
     })
     if (!result) return
     searchState.value = { type: 'data', value: result }
