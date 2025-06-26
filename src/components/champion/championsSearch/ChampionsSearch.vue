@@ -39,7 +39,7 @@ watchEffect(async () => {
   try {
     const result = await searchChampions(searchQuery, {
       onRun: () => {
-        if (searchState.value.type !== 'initial') {
+        if (searchState.value.type !== 'data') {
           searchState.value = { type: 'loading' }
         }
       },
