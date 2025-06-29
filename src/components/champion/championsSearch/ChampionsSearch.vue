@@ -25,7 +25,7 @@ const query = defineModel('query', { default: '' })
 const active = ref(false)
 const searchState = ref<AsyncDataState<SearchChampionsResult>>({ type: 'initial' })
 
-const searchTask = createSwitchTask({ debounceMillis: 300 })
+const searchTask = createSwitchTask({ debounceMillis: 500 })
 
 watchEffect(async () => {
   const searchQuery = query.value.trim()
