@@ -12,7 +12,7 @@
       />
     </a>
     <a
-      href="https://play.google.com/store/apps/details?id=com.tomwyr.lolChampionRotation"
+      href="https://apps.apple.com/pl/app/lol-champion-rotation/id6739438416"
       target="_blank"
     >
       <img
