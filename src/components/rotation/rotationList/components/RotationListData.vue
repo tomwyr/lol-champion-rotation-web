@@ -12,7 +12,11 @@
       </div>
 
       <template v-if="rotationType === 'regular'">
-        <template v-for="rotation in regularRotationsData" :key="rotation.key">
+        <template v-for="(rotation, index) in regularRotationsData" :key="rotation.key">
+          <div
+            v-if="index > 0"
+            class="flex-shrink-0 min-w-max h-[1px] mb-3 bg-gray-200 dark:bg-gray-700"
+          ></div>
           <ChampionRotationGrid :rotation />
         </template>
 
@@ -35,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatRotationDuration } from '@/common/Formatters'
+import { formatRotationDetails, formatRotationDuration } from '@/common/Formatters'
 import {
   type ChampionRotation,
   type ChampionRotationPrediction,
@@ -69,7 +73,8 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
   if (rotationPrediction) {
     result.push({
       key: 'prediction',
-      header: formatRotationDuration(rotationPrediction.duration),
+      title: formatRotationDuration(rotationPrediction.duration, { format: 'short' }),
+      subtitle: formatRotationDetails(rotationPrediction.champions),
       champions: rotationPrediction.champions,
       expandable: true,
       badge: 'prediction',
@@ -78,7 +83,8 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
 
   result.push({
     key: `regular#${rotationsOverview.id}`,
-    header: formatRotationDuration(rotationsOverview.duration),
+    title: formatRotationDuration(rotationsOverview.duration, { format: 'short' }),
+    subtitle: formatRotationDetails(rotationsOverview.regularChampions),
     detailsId: rotationsOverview.id,
     champions: rotationsOverview.regularChampions,
     badge: 'current',
@@ -87,7 +93,8 @@ const regularRotationsData = computed<ChampionsRotationData[]>(() => {
   for (const rotation of nextRotations) {
     result.push({
       key: `regular#${rotationsOverview.id}`,
-      header: formatRotationDuration(rotation.duration),
+      title: formatRotationDuration(rotation.duration, { format: 'short' }),
+      subtitle: formatRotationDetails(rotation.champions),
       detailsId: rotation.id,
       champions: rotation.champions,
     })
@@ -102,7 +109,7 @@ const beginnerRotationsData = computed<ChampionsRotationData[]>(() => {
   return [
     {
       key: 'beginner',
-      header: 'New players up to level ' + rotationsOverview.beginnerMaxLevel + ' only',
+      title: 'New players up to level ' + rotationsOverview.beginnerMaxLevel + ' only',
       champions: rotationsOverview.beginnerChampions,
     },
   ]

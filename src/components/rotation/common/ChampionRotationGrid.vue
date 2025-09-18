@@ -1,16 +1,14 @@
 <template>
   <div
     :class="{
-      'mb-2': rotation.champions.length > 0,
+      'mb-2': expanded && rotation.champions.length > 0,
       '-m-1 p-1 rounded cursor-pointer transition-colors hover:[&:not(:has(.champion-tile:hover))]:bg-gray-200 dark:hover:[&:not(:has(.champion-tile:hover))]:bg-gray-800':
         rotation.detailsId,
     }"
     @click="openRotationDetails"
   >
     <div class="flex flex-row items-center">
-      <h2 class="text-gray-500 dark:text-gray-400">
-        {{ rotation.header }}
-      </h2>
+      <h2>{{ rotation.title }}</h2>
 
       <RotationBadge v-if="rotation.badge" :variant="rotation.badge" />
 
@@ -23,6 +21,10 @@
         <IconUnfoldMore v-else />
       </div>
     </div>
+
+    <h3 v-if="rotation.subtitle" class="font-light text-gray-500 dark:text-gray-400">
+      {{ rotation.subtitle }}
+    </h3>
 
     <div v-if="!expanded" class="mb-2"></div>
 
@@ -59,7 +61,8 @@ import { getRotationExpansion, saveRotationExpansion } from './RotationExpansion
 
 export type ChampionsRotationData = {
   key: string
-  header: string
+  title: string
+  subtitle?: string
   detailsId?: string
   champions: Champion[]
   expandable?: boolean

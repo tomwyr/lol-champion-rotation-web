@@ -5,7 +5,7 @@
     @click="openDetails(rotation)"
   >
     <span class="text-sm md:text-base">
-      {{ formatRotationDuration(rotation.duration) }}
+      {{ formatRotationDuration(rotation.duration, { format: 'short' }) }}
     </span>
     <template v-if="rotation.current">
       <RotationBadge variant="current" />

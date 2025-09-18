@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatRotationDuration } from '@/common/Formatters'
+import { formatRotationDetails, formatRotationDuration } from '@/common/Formatters'
 import type { ChampionRotationDetails } from '@/common/Types'
 import type { AsyncDataState } from '@/common/Utils'
 import DataError from '@/components/common/DataError.vue'
@@ -55,7 +55,8 @@ async function fetchRotationDetails() {
 function rotationItemDataFrom(details: ChampionRotationDetails): ChampionsRotationData {
   return {
     key: `details#${rotationId}`,
-    header: formatRotationDuration(details.duration),
+    title: formatRotationDuration(details.duration, { format: 'short' }),
+    subtitle: formatRotationDetails(details.champions),
     champions: details.champions,
     badge: details.current ? 'current' : undefined,
   }
