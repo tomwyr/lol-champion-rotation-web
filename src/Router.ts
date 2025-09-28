@@ -1,6 +1,7 @@
 import ChampionDetailsPage from '@/components/champion/championDetails/ChampionDetailsPage.vue'
 import ObservedChampionsPage from '@/components/champion/observedChampions/ObservedChampionsPage.vue'
-import MobileShowcasePage from '@/components/mobile/MobileShowcasePage.vue'
+import MobilePrivacyPolicyPage from '@/components/mobile/MobilePrivacyPolicyPage.vue'
+import MobileShowcasePage from '@/components/mobile/showcase/MobileShowcasePage.vue'
 import PrivacyPolicyPage from '@/components/privacy/PrivacyPolicyPage.vue'
 import ObservedRotationsPage from '@/components/rotation/observedRotations/ObservedRotationsPage.vue'
 import RotationDetailsPage from '@/components/rotation/rotationDetails/RotationDetailsPage.vue'
@@ -15,6 +16,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/champions/:id', component: ChampionDetailsPage },
   { path: '/privacy', component: PrivacyPolicyPage },
   { path: '/mobile', component: MobileShowcasePage },
+  { path: '/mobile/privacy', component: MobilePrivacyPolicyPage },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 

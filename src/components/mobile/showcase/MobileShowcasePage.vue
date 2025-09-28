@@ -34,7 +34,7 @@
 </template>
 
 <script setup lang="ts">
-import PageLayout from '../common/PageLayout.vue'
-import AppPageHeader from '../menu/AppPageHeader.vue'
+import PageLayout from '../../common/PageLayout.vue'
+import AppPageHeader from '../../menu/AppPageHeader.vue'
 import MobileShowcaseQrs from './MobileShowcaseQrs.vue'
 </script>
