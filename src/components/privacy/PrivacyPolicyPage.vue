@@ -15,10 +15,7 @@
         </span>
         <br />
         <br />
-        <span>
-          We do not use analytics, tracking tools, or third-party cookies. Your activity remains
-          private and is not monitored by us in any way.
-        </span>
+        <span> Your activity remains private and is not monitored by us in any way. </span>
         <br />
         <br />
         <span> If you have any questions about the policy, feel free to contact us at </span>
