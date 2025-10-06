@@ -1,6 +1,6 @@
 <template>
   <SideMenu>
-    <AppPageHeader title="Menu" class="pb-4" @back="closeSideMenu" />
+    <AppPageHeader title="Menu" class="pb-4" @close="closeSideMenu" />
     <ObservedChampionsTile />
     <ObservedRotationsTile />
 

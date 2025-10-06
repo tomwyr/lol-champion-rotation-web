@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-row w-full items-center gap-2">
-    <AppLogo />
+    <CloseButton v-if="onClose" @click="onClose" />
+    <AppLogo v-else />
     <h1 v-if="title" class="text-xl">{{ title }}</h1>
     <slot />
   </div>
@@ -8,6 +9,7 @@
 
 <script setup lang="ts">
 import AppLogo from '../common/AppLogo.vue'
+import CloseButton from '../common/CloseButton.vue'
 
-defineProps<{ title?: string }>()
+defineProps<{ title?: string; onClose?: () => void }>()
 </script>
