@@ -3,8 +3,25 @@
     <DataLoading />
   </template>
 
-  <template v-if="rotationDetailsState.type === 'error'">
+  <template v-if="rotationDetailsState.type === 'error' && !rotationDetailsState.reason">
     <DataError :onRetry="fetchRotationDetails" />
+  </template>
+
+  <template
+    v-if="rotationDetailsState.type === 'error' && rotationDetailsState.reason === 'notFound'"
+  >
+    <PageLayout>
+      <template #header>
+        <AppPageHeader title="Rotation details" />
+      </template>
+      <template #body>
+        <DataError
+          message="The champion rotation you're looking for doesn't exist. It may have been removed or the link is incorrect."
+          retryLabel="Back to home"
+          :onRetry="goHome"
+        />
+      </template>
+    </PageLayout>
   </template>
 
   <template v-if="rotationDetailsState.type === 'data'">
@@ -28,16 +45,22 @@ import DataLoading from '@/components/common/DataLoading.vue'
 import PageLayout from '@/components/common/PageLayout.vue'
 import { apiBaseUrl } from '@/Environment'
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import ChampionRotationGrid, {
   type ChampionsRotationData,
 } from '../common/ChampionRotationGrid.vue'
 import RotationDetailsHeader from './RotationDetailsHeader.vue'
+import AppPageHeader from '@/components/menu/AppPageHeader.vue'
 
 const route = useRoute()
 const rotationId = route.params.id as string
 
 const rotationDetailsState = ref<AsyncDataState<ChampionRotationDetails>>({ type: 'initial' })
+
+const router = useRouter()
+function goHome() {
+  router.push('/')
+}
 
 async function fetchRotationDetails() {
   rotationDetailsState.value = { type: 'loading' }
@@ -48,7 +71,11 @@ async function fetchRotationDetails() {
     const rotation = (await data.json()) as ChampionRotationDetails
     rotationDetailsState.value = { type: 'data', value: rotation }
   } else {
-    rotationDetailsState.value = { type: 'error' }
+    if (data.status == 404) {
+      rotationDetailsState.value = { type: 'error', reason: 'notFound' }
+    } else {
+      rotationDetailsState.value = { type: 'error' }
+    }
   }
 }
 
