@@ -7,6 +7,7 @@ import ObservedRotationsPage from '@/components/rotation/observedRotations/Obser
 import RotationDetailsPage from '@/components/rotation/rotationDetails/RotationDetailsPage.vue'
 import RotationListPage from '@/components/rotation/rotationList/RotationListPage.vue'
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
+import SupportPage from './components/support/SupportPage.vue'
 
 const routes: RouteRecordRaw[] = [
   { path: '/', component: RotationListPage },
@@ -17,6 +18,7 @@ const routes: RouteRecordRaw[] = [
   { path: '/privacy', component: PrivacyPolicyPage },
   { path: '/mobile', component: MobileShowcasePage },
   { path: '/mobile/privacy', component: MobilePrivacyPolicyPage },
+  { path: '/support', component: SupportPage },
   { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
