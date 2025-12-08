@@ -34,18 +34,7 @@
       class="pt-4 pb-2 gap-4 grid lg:grid-cols-5 md:grid-cols-4 grid-cols-3"
     >
       <template v-for="champion in rotation.champions" :key="champion.id">
-        <div
-          class="champion-tile relative cursor-pointer"
-          @click.stop="openChampionDetails(champion)"
-        >
-          <img class="rounded aspect-square" loading="lazy" :src="champion.imageUrl" />
-          <div class="absolute bottom-0 inset-x-0 text-center">
-            <div
-              v-text="champion.name"
-              class="inline-block px-2 py-0.5 mb-2 text-sm rounded-full shadow-sm shadow-black bg-opacity-80 text-gray-100 bg-gray-900"
-            />
-          </div>
-        </div>
+        <ChampionRotationTile :champion />
       </template>
     </div>
   </div>
@@ -56,6 +45,7 @@ import type { Champion } from '@/common/Types'
 import { IconUnfoldLess, IconUnfoldMore } from '@/icons/Icons'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import ChampionRotationTile from './ChampionRotationTile.vue'
 import RotationBadge, { type RotationBadgeVariant } from './RotationBadge.vue'
 import { getRotationExpansion, saveRotationExpansion } from './RotationExpansionsStorage'
 
@@ -74,10 +64,6 @@ const { rotation } = defineProps<{
 }>()
 
 const router = useRouter()
-
-function openChampionDetails(champion: Champion) {
-  router.push(`/champions/${champion.id}`)
-}
 
 function openRotationDetails() {
   if (rotation.detailsId) {

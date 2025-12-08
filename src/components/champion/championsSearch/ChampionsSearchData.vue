@@ -5,10 +5,9 @@
         class="flex flex-row items-center p-2 gap-4 rounded-lg cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
         @click.stop="openChampionDetails(match.champion)"
       >
-        <img
+        <ChampionImage
           class="rounded aspect-square size-16 md:size-20"
-          loading="lazy"
-          :src="match.champion.imageUrl"
+          :imageUrl="match.champion.imageUrl"
         />
 
         <div class="flex flex-col pb-2">
@@ -40,6 +39,7 @@
 import type { Champion, SearchChampionsMatch } from '@/common/Types'
 import { ChevronRightIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
+import ChampionImage from '../common/ChampionImage.vue'
 
 defineProps<{
   matches: SearchChampionsMatch[]

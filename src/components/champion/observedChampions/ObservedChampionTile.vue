@@ -4,7 +4,7 @@
     class="p-2 gap-6 flex flex-row items-center cursor-pointer rounded hover:bg-gray-200 hover:dark:bg-gray-800"
     @click="openDetails(champion)"
   >
-    <img class="rounded size-12 md:size-16" loading="lazy" :src="champion.imageUrl" />
+    <ChampionImage class="rounded size-12 md:size-16" :imageUrl="champion.imageUrl" />
     <span class="text-xl">{{ champion.name }}</span>
     <template v-if="champion.current">
       <RotationBadge variant="current" />
@@ -18,6 +18,7 @@ import type { ObservedChampion } from '@/common/Types'
 import RotationBadge from '@/components/rotation/common/RotationBadge.vue'
 import { ChevronRightIcon } from '@heroicons/vue/24/outline'
 import { useRouter } from 'vue-router'
+import ChampionImage from '../common/ChampionImage.vue'
 
 defineProps<{
   champion: ObservedChampion
