@@ -101,7 +101,7 @@ async function fetchNextRotation() {
   const data = await fetch(apiBaseUrl + '/rotations?nextRotationToken=' + token)
 
   if (data.ok) {
-    const rotation = (await data.json()) as ChampionRotation
+    const rotation = ((await data.json()) as ChampionRotation[])[0]
     nextRotationsState.value = { data: [...initialValue.data, rotation], loadingMore: false }
     restoreScrollAfterFrame()
   } else {
