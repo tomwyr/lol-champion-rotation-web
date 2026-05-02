@@ -1,17 +1,11 @@
 # syntax = docker/dockerfile:1
 
-# Adjust NODE_VERSION as desired
-ARG NODE_VERSION=20.15.0
+ARG NODE_VERSION=22.12.0
 FROM node:${NODE_VERSION}-slim as base
 
-LABEL fly_launch_runtime="Vite"
+LABEL fly_launch_runtime="Nuxt"
 
-# Vite app lives here
 WORKDIR /app
-
-# Set production environment
-ENV NODE_ENV="production"
-
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
@@ -38,17 +32,13 @@ RUN echo "API_BASE_URL=$API_BASE_URL" >> .env && \
 # Build application
 RUN npm run build
 
-# Remove development dependencies
-RUN npm prune --omit=dev
-
 
 # Final stage for app image
-FROM nginx
+FROM base
 
-# Copy built application
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
+COPY --from=build /app/.output /app/.output
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 80
-CMD [ "/usr/sbin/nginx", "-g", "daemon off;" ]
+ENV NODE_ENV="production"
+EXPOSE 3000
+CMD ["node", ".output/server/index.mjs"]
