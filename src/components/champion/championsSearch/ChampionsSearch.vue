@@ -2,7 +2,7 @@
   <div class="relative w-full mx-4">
     <ChampionsSearchField v-model:query="query" v-model:active="active" />
 
-    <ChampionsSearchState v-if="active" :has-input="query.length > 0" :searchState />
+    <ChampionsSearchState v-if="active" :search-state />
 
     <div
       v-if="active"
@@ -13,18 +13,15 @@
 </template>
 
 <script setup lang="ts">
-import { apiBaseUrl } from '@/Environment'
-import { type SearchChampionsResult } from '@/common/Types'
-import { createSwitchTask, type AsyncDataState } from '@/common/Utils'
+import type { SearchChampionsResult } from '~/domain/Types'
 import { ref, watchEffect } from 'vue'
 import ChampionsSearchField from './ChampionsSearchField.vue'
 import ChampionsSearchState from './ChampionsSearchState.vue'
 
-const query = defineModel('query', { default: '' })
+const query = searchQueryRef()
+const active = searchActiveRef()
 
-const active = ref(false)
 const searchState = ref<AsyncDataState<SearchChampionsResult>>({ type: 'initial' })
-
 const searchTask = createSwitchTask({ debounceMillis: 500 })
 
 watchEffect(async () => {
@@ -55,11 +52,11 @@ async function searchChampions(
   searchQuery: string,
   options: { onRun?: () => void } = {},
 ): Promise<SearchChampionsResult | undefined> {
-  const data = await searchTask.run(() => {
+  return searchTask.run(() => {
     options.onRun?.()
-    return fetch(apiBaseUrl + `/champions/search?name=${searchQuery}`)
+    return $fetch<SearchChampionsResult>(`/api/champions/search`, {
+      query: { name: searchQuery },
+    })
   })
-  if (!data) return
-  return (await data.json()) as SearchChampionsResult
 }
 </script>

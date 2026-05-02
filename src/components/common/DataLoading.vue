@@ -8,8 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import { IconSpinner } from '@/icons/Icons'
-
 const { fullScreen = true } = defineProps<{
   fullScreen?: boolean
 }>()

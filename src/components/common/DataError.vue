@@ -14,25 +14,30 @@
         <h1 class="max-w-[28rem] text-center pt-1 text-gray-900 dark:text-gray-100">
           {{ message ?? 'Failed to load data. Please try again.' }}
         </h1>
-        <button
-          v-if="onRetry"
-          @click="onRetry"
-          class="mt-4 py-1.5 px-3 rounded text-sm mx-auto bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100"
-        >
-          {{ retryLabel ?? 'Refresh' }}
-        </button>
+        <a v-if="showRetry" :href="retryDestination">
+          <button
+            class="mt-4 py-1.5 px-3 rounded text-sm mx-auto bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-100"
+          >
+            {{ retryLabel ?? 'Refresh' }}
+          </button>
+        </a>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { IconWarning } from '@/icons/Icons'
-
-const { fullScreen = true } = defineProps<{
+const {
+  message = undefined,
+  fullScreen = true,
+  showRetry = false,
+  retryLabel = undefined,
+  retryDestination = '',
+} = defineProps<{
   message?: string
   fullScreen?: boolean
+  showRetry?: boolean
   retryLabel?: string
-  onRetry?: () => void
+  retryDestination?: string
 }>()
 </script>

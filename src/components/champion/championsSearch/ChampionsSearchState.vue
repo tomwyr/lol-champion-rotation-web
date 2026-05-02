@@ -17,6 +17,7 @@
       v-else-if="searchState.type === 'error'"
       class="pt-6 pb-7"
       :full-screen="false"
+      :show-retry="false"
       message="We couldn't retrieve the search results. Please try again later."
     />
 
@@ -39,12 +40,8 @@
 </template>
 
 <script setup lang="ts">
-import type { SearchChampionsResult } from '@/common/Types'
-import type { AsyncDataState } from '@/common/Utils'
-import DataError from '@/components/common/DataError.vue'
-import DataLoading from '@/components/common/DataLoading.vue'
+import type { SearchChampionsResult } from '~/domain/Types'
 import { ArchiveBoxIcon, PencilIcon } from '@heroicons/vue/24/outline'
-import ChampionsSearchData from './ChampionsSearchData.vue'
 
 defineProps<{
   searchState: AsyncDataState<SearchChampionsResult>

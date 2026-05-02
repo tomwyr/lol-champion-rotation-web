@@ -1,53 +1,28 @@
 <template>
-  <div class="pb-6 text-center">
-    <button
-      v-if="showButton"
-      @click="onLoadMore"
-      class="flex flex-col items-center mx-auto p-2 rounded text-sm hover:bg-gray-200 hover:dark:bg-gray-800"
-    >
-      {{ buttonLabel }}
-      <ChevronDoubleDownIcon class="size-4" />
-    </button>
-
-    <IconSpinner class="mx-auto" v-if="!showButton" />
+  <div class="text-center">
+    <a :href="destination">
+      <button
+        class="flex flex-col items-center mx-auto p-2 rounded text-sm hover:bg-gray-200 hover:dark:bg-gray-800"
+      >
+        <template v-if="icon === 'up'">
+          <ChevronDoubleUpIcon class="size-4" />
+          {{ buttonLabel }}
+        </template>
+        <template v-else>
+          {{ buttonLabel }}
+          <ChevronDoubleDownIcon class="size-4" />
+        </template>
+      </button>
+    </a>
   </div>
 </template>
 
 <script setup lang="ts">
-import { IconSpinner } from '@/icons/Icons';
-import { ChevronDoubleDownIcon } from '@heroicons/vue/24/outline';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from '@heroicons/vue/24/outline'
 
-const props = defineProps<{
-  showButton: boolean
+defineProps<{
   buttonLabel: string
-  extentThreshold: number
-  onLoadMore: () => void
+  destination: string
+  icon?: 'up' | 'down'
 }>()
-
-const lastThresholedReached = ref(false)
-
-function onScroll() {
-  if (props.showButton) {
-    return
-  }
-
-  const scrollY = window.scrollY
-  const { scrollHeight, clientHeight } = document.documentElement
-  const extentAfter = scrollHeight - (scrollY + clientHeight)
-
-  const thresholdReached = extentAfter <= props.extentThreshold
-  if (thresholdReached && !lastThresholedReached.value) {
-    props.onLoadMore()
-  }
-  lastThresholedReached.value = thresholdReached
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', onScroll)
-})
-
-onUnmounted(() => {
-  window.addEventListener('scroll', onScroll)
-})
 </script>

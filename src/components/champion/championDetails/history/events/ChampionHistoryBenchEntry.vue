@@ -1,5 +1,5 @@
 <template>
-  <ChampionDetailsHistoryEntry :event :index :eventCount>
+  <ChampionDetailsHistoryEntry :event :index :event-count>
     <span class="text-gray-400">
       {{ event.rotationsMissed }}
       rotation{{ formatPluralSuffix(event.rotationsMissed) }} missed
@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-import { formatPluralSuffix } from '@/common/Formatters'
-import type { ChampionDetailsHistoryBench } from '@/common/Types'
+import { formatPluralSuffix } from '~/domain/Formatters'
+import type { ChampionDetailsHistoryBench } from '~/domain/Types'
 import ChampionDetailsHistoryEntry from '../layout/ChampionDetailsHistoryEntry.vue'
 
 defineProps<{

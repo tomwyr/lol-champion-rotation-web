@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row gap-4 mb-1">
-    <ChampionImage class="rounded size-24 md:size-36" :imageUrl="champion.imageUrl" />
+    <ChampionImage class="rounded size-24 md:size-36" :image-url="champion.imageUrl" />
     <div class="flex flex-col">
       <span class="text-xl md:text-3xl"> {{ champion.name }}</span>
       <span class="md:text-xl italic font-thin -mt-1"> {{ champion.title }}</span>
@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ChampionDetails } from '@/common/Types'
+import type { ChampionDetails } from '~/domain/Types'
 import { computed } from 'vue'
 import ChampionImage from '../common/ChampionImage.vue'
 

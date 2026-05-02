@@ -42,7 +42,6 @@
 
 <script setup lang="ts">
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
-import { sideMenuOpenRef } from './SideMenu'
 
 const open = sideMenuOpenRef()
 </script>

@@ -25,8 +25,8 @@
 </template>
 
 <script setup lang="ts">
-import { formatOrdinal, formatPluralSuffix as pluralSuffix } from '@/common/Formatters'
-import type { ChampionDetails } from '@/common/Types'
+import { formatOrdinal, formatPluralSuffix as pluralSuffix } from '~/domain/Formatters'
+import type { ChampionDetails } from '~/domain/Types'
 import {
   ArrowLongRightIcon,
   ArrowTrendingUpIcon,

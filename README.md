@@ -8,9 +8,10 @@ Available at [championrotation.lol](https://championrotation.lol/).
 
 The application uses a `.env` file to provide necessary configuration at runtime. The following variables must be defined:
 
-| Variable          | Description |
-|-------------------|-------------|
-| VITE_API_BASE_URL | Base URL of the backend API
+| Variable       | Description                                        |
+| -------------- | -------------------------------------------------- |
+| API_BASE_URL   | Base URL of the backend API                        |
+| API_ACCESS_KEY | Access key for authenticating with the backend API |
 
 ## Related Projects
 

@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ChampionDetailsHistoryEvent } from '@/common/Types'
+import type { ChampionDetailsHistoryEvent } from '~/domain/Types'
 import ChampionDetailsHistoryLink from './ChampionDetailsHistoryLink.vue'
 
 const { index, eventCount } = defineProps<{

@@ -1,5 +1,5 @@
 <template>
-  <SideMenuTile title="Get the App" @click="openOverview">
+  <SideMenuTile title="Get the App" destination="/mobile">
     <template #leading>
       <DevicePhoneMobileIcon />
     </template>
@@ -8,14 +8,4 @@
 
 <script setup lang="ts">
 import { DevicePhoneMobileIcon } from '@heroicons/vue/24/outline'
-import { useRouter } from 'vue-router'
-import { closeSideMenu } from '../common/SideMenu'
-import SideMenuTile from '../common/SideMenuTile.vue'
-
-const router = useRouter()
-
-function openOverview() {
-  closeSideMenu()
-  router.push('/mobile')
-}
 </script>

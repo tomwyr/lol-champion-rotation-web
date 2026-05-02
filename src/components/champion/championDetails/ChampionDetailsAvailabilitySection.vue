@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ChampionDetails, ChampionRotationType } from '@/common/Types'
+import type { ChampionDetails, ChampionRotationType } from '~/domain/Types'
 import { computed } from 'vue'
 
 const { champion } = defineProps<{

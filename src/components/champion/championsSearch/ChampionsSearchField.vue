@@ -10,12 +10,12 @@
 
     <input
       ref="searchInput"
-      class="grow bg-transparent placeholder-gray-400 "
+      v-model="query"
+      class="grow bg-transparent placeholder-gray-400"
       :class="{
         'cursor-pointer pointer-events-none [&::-webkit-search-cancel-button]:hidden': !active,
       }"
       type="search"
-      v-model="query"
       :readonly="!active"
       placeholder="Search champions..."
       @click="active = true"
@@ -25,12 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import { IconSearch } from '@/icons/Icons'
 import { ref, watch } from 'vue'
 
 const searchInput = ref<HTMLInputElement>()
 
-const query = defineModel('query', { default: '' })
+const query = defineModel<string>('query', { default: '' })
 const active = defineModel<boolean>('active', { required: true })
 
 watch(

@@ -1,19 +1,10 @@
-import pluginVue from 'eslint-plugin-vue'
-import vueTsEslintConfig from '@vue/eslint-config-typescript'
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+// @ts-check
+import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default [
-  {
-    name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+export default withNuxt({
+  rules: {
+    'vue/multi-word-component-names': 'off',
+    'vue/html-self-closing': 'off',
+    'vue/no-multiple-template-root': 'off',
   },
-
-  {
-    name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
-  },
-
-  ...pluginVue.configs['flat/essential'],
-  ...vueTsEslintConfig(),
-  skipFormatting,
-]
+})

@@ -17,7 +17,7 @@
       'pt-[4rem]': headerSize === 'tight',
     }"
   >
-    <slot name="body"></slot>
+    <slot name="body"/>
   </main>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <img loading="lazy" :src="imageUrl" @error="fallbackImageUrl" />
+  <img loading="lazy" :src="imageUrl" @error="fallbackImageUrl" >
 </template>
 
 <script setup lang="ts">

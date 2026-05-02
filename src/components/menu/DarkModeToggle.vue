@@ -11,10 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import DotSwitch from '@/components/common/DotSwitch.vue'
-import SideMenuTile from '@/components/common/SideMenuTile.vue'
 import { MoonIcon, SunIcon } from '@heroicons/vue/24/outline'
-import { darkModeEnabledRef } from './DarkMode'
 
-const enabled = darkModeEnabledRef()
+const isDark = useDarkMode()
+
+const enabled = computed({
+  get: () => isDark.value,
+  set: setDarkMode,
+})
 </script>
