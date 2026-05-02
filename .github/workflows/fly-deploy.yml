@@ -19,6 +19,9 @@ jobs:
         uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy to Fly.io
-        run: flyctl deploy --remote-only --depot=false --build-arg API_BASE_URL=${{ secrets.API_BASE_URL }}
+        run: |
+          flyctl deploy --remote-only --depot=false --no-cache \
+            --build-arg API_BASE_URL=${{ secrets.API_BASE_URL }} \
+            --build-arg API_ACCESS_KEY=${{ secrets.API_ACCESS_KEY }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

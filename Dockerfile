@@ -23,13 +23,17 @@ RUN apt-get update -qq && \
 # Install node modules
 COPY package-lock.json package.json ./
 RUN npm ci --include=dev
+# Fix missing platform-specific binaries not included in lockfile
+RUN npm install @oxc-parser/binding-linux-x64-gnu @oxc-transform/binding-linux-x64-gnu @oxc-minify/binding-linux-x64-gnu --no-save
 
 # Copy application code
 COPY . .
 
 # Set up environment variables
 ARG API_BASE_URL
-RUN echo "API_BASE_URL=$API_BASE_URL" >> .env
+ARG API_ACCESS_KEY
+RUN echo "API_BASE_URL=$API_BASE_URL" >> .env && \
+    echo "API_ACCESS_KEY=$API_ACCESS_KEY" >> .env
 
 # Build application
 RUN npm run build
