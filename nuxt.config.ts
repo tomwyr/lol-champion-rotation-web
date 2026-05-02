@@ -1,15 +1,18 @@
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-03-21',
   srcDir: 'src/',
   serverDir: 'src/server',
   components: [{ path: '~/components', pathPrefix: false }],
-  modules: ['@nuxtjs/tailwindcss', '@nuxt/eslint'],
+  modules: ['@nuxt/eslint'],
   css: ['~/assets/base.css', '~/assets/index.css'],
   runtimeConfig: {
     apiBaseUrl: process.env.API_BASE_URL,
     apiAccessKey: process.env.API_ACCESS_KEY,
   },
   vite: {
+    plugins: [tailwindcss()],
     optimizeDeps: {
       include: [
         '@heroicons/vue/24/solid',

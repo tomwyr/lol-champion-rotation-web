@@ -4,7 +4,7 @@
       <ChampionImage class="rounded aspect-square" :image-url="champion.imageUrl" />
       <div class="absolute bottom-0 inset-x-0 text-center">
         <div
-          class="inline-block px-2 py-0.5 mb-2 text-sm rounded-full shadow-sm shadow-black bg-opacity-80 text-gray-100 bg-gray-900"
+          class="inline-block px-2 py-0.5 mb-2 text-sm rounded-full shadow-sm shadow-black text-gray-100 bg-gray-900/80"
           v-text="champion.name"
         />
       </div>
