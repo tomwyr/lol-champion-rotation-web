@@ -57,3 +57,13 @@ export function createSwitchTask(options: { debounceMillis?: number } = {}) {
     },
   }
 }
+
+export function parsePageNumber(value: string | undefined): number | undefined {
+  if (!value) return
+  const num = Number(value)
+  if (isNaN(num)) return
+  const int = parseInt(String(num))
+  if (isNaN(int)) return
+  if (value !== String(int)) return
+  return int
+}

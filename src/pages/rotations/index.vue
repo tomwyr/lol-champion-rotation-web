@@ -1,5 +1,5 @@
 <template>
-  <RotationListPage active-rotation-type="regular" :rotation-token>
+  <RotationListPage v-if="pageNumber" active-rotation-type="regular" :page-number>
     <template #header>
       <RotationListHeader />
     </template>
@@ -12,10 +12,10 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 
-const route = useRoute()
-if (!route.query.nextRotationToken) {
+const pageValue = useRoute().query.page as string | undefined
+const pageNumber = parsePageNumber(pageValue)
+
+if (!pageNumber) {
   navigateTo('/')
 }
-
-const rotationToken = route.query.nextRotationToken as string
 </script>

@@ -29,8 +29,8 @@
         />
 
         <MoreDataLoader
-          v-if="nextRotationToken"
-          :destination="`/rotations?nextRotationToken=${nextRotationToken}`"
+          v-if="nextPageNumber"
+          :destination="`/rotations?page=${nextPageNumber}`"
           class="pb-6"
           button-label="Previous Rotations"
           icon="down"
@@ -56,13 +56,13 @@ const {
   regularRotations = [],
   beginnerRotations = [],
   showBackToCurrent,
-  nextRotationToken = undefined,
+  nextPageNumber = undefined,
 } = defineProps<{
   activeRotationType: ChampionRotationType
   regularRotations?: ChampionsRotationData[]
   beginnerRotations?: ChampionsRotationData[]
   showBackToCurrent: boolean
-  nextRotationToken?: string
+  nextPageNumber?: number
 }>()
 
 const showRotationPicker = computed(() => {

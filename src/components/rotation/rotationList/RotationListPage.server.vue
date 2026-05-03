@@ -12,7 +12,7 @@
       <RotationListData
         :active-rotation-type
         :regular-rotations
-        :next-rotation-token
+        :next-page-number="nextPageNumber"
         :show-back-to-current="true"
       >
         <template #header>
@@ -31,19 +31,21 @@ import { formatRotationDetails, formatRotationDuration } from '~/domain/Formatte
 import type { ChampionRotationType } from '~/domain/Types'
 import { getNextRotations } from '~/server/utils/services/RotationService'
 
-const { activeRotationType, rotationToken } = defineProps<{
+const { activeRotationType, pageNumber } = defineProps<{
   activeRotationType: ChampionRotationType
-  rotationToken: string
+  pageNumber: number
 }>()
 
-const { data, error } = await useAsyncData(`rotations-data-${rotationToken}`, () =>
-  getNextRotations(rotationToken),
+const { data, error } = await useAsyncData(`rotations-data-${pageNumber}`, () =>
+  getNextRotations(pageNumber),
 )
+
+const nextPageNumber = computed(() => (data.value?.hasNext ? pageNumber + 1 : undefined))
 
 const regularRotations = computed(() => {
   const result: ChampionsRotationData[] = []
 
-  for (const rotation of data.value ?? []) {
+  for (const rotation of data.value?.entries ?? []) {
     result.push({
       key: `regular#${rotation.id}`,
       title: formatRotationDuration(rotation.duration, { format: 'short' }),
@@ -54,10 +56,5 @@ const regularRotations = computed(() => {
   }
 
   return result
-})
-
-const nextRotationToken = computed(() => {
-  const rotations = data.value ?? []
-  return rotations[rotations.length - 1]?.nextRotationToken
 })
 </script>

@@ -1,5 +1,5 @@
 import type {
-  ChampionRotation,
+  ChampionRotationsPage,
   ChampionRotationDetails,
   ChampionRotationsOverview,
 } from '~/domain/Types'
@@ -13,11 +13,12 @@ export function getRotationsOverview() {
   return apiFetch<ChampionRotationsOverview>(`rotations/overview`)
 }
 
-export function getNextRotations(nextRotationToken: string) {
-  return apiFetch<ChampionRotation[]>(`rotations`, {
+export function getNextRotations(pageNumber: number) {
+  return apiFetch<ChampionRotationsPage>(`rotations/paged`, {
     query: {
-      nextRotationToken: nextRotationToken,
+      page: pageNumber,
       count: 5,
+      historical: true,
     },
   })
 }

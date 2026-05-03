@@ -13,7 +13,7 @@
         :active-rotation-type
         :regular-rotations
         :beginner-rotations
-        :next-rotation-token
+        :next-page-number="1"
         :show-back-to-current="false"
       >
         <template #header>
@@ -71,6 +71,4 @@ const beginnerRotations = computed<ChampionsRotationData[]>(() => {
 
   return result
 })
-
-const nextRotationToken = computed(() => data.value?.nextRotationToken)
 </script>

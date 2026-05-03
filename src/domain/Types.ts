@@ -56,15 +56,18 @@ export type ChampionRotationsOverview = {
   beginnerMaxLevel: number
   beginnerChampions: Champion[]
   regularChampions: Champion[]
-  nextRotationToken?: string
 }
 
 export type ChampionRotation = {
   id: string
   patchVersion?: string
-  nextRotationToken?: string
   duration: ChampionRotationDuration
   champions: Champion[]
+}
+
+export type ChampionRotationsPage = {
+  entries: ChampionRotation[]
+  hasNext: boolean
 }
 
 export type ChampionRotationSummary = {
