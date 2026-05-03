@@ -6,7 +6,7 @@
   >
     <a class="flex flex-row" :href="destination">
       <ChampionDetailsHistoryIndicator :event :index :event-count />
-      <div class="flex flex-grow items-center min-h-8 my-1.5 ml-2">
+      <div class="flex grow items-center min-h-8 my-1.5 ml-2">
         <slot />
       </div>
     </a>

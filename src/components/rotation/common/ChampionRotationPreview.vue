@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-grow pr-4 md:pr-6" dir="rtl">
+  <div class="flex grow pr-4 md:pr-6" dir="rtl">
     <template v-for="imageUrl in championImageUrls.reversed()" :key="imageUrl">
       <img
         class="rounded-full"

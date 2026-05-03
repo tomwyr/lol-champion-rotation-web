@@ -6,15 +6,15 @@
     <template #body>
       <img
         src="/assets/mobile.webp"
-        class="mx-auto blur-[0.4px] md:blur-[0.5px] lg:blur-[0.6px] mt-[1rem] md:mt-[2rem] lg:mt-[3rem] w-[20rem] md:w-[25rem] lg:w-[30rem]"
+        class="mx-auto blur-[0.4px] md:blur-[0.5px] lg:blur-[0.6px] mt-4 md:mt-8 lg:mt-12 w-[20rem] md:w-100 lg:w-120"
       />
 
       <div
-        class="fixed inset-0 bg-gradient-to-b from-transparent from-[10rem] to-30% md:to-35% lg:to-45% to-gray-300 dark:to-gray-950"
+        class="fixed inset-0 bg-linear-to-b from-transparent from-[10rem] to-30% md:to-35% lg:to-45% to-gray-300 dark:to-gray-950"
       />
 
       <div
-        class="absolute drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.3)] mt-44 md:mt-52 lg:mt-56 px-8 md:px-12 lg:px-24 max-w-[480px] md:max-w-[600px] lg:max-w-[768px]"
+        class="absolute drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.3)] mt-44 md:mt-52 lg:mt-56 px-8 md:px-12 lg:px-24 max-w-120 md:max-w-150 lg:max-w-3xl"
       >
         <p class="text-center leading-6 md:leading-8 lg:leading-10 text-lg md:text-xl lg:text-2xl">
           LoL Champion Rotation<br />

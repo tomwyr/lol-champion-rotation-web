@@ -11,7 +11,7 @@
     >
       <div class="flex flex-col justify-center items-center">
         <IconWarning />
-        <h1 class="max-w-[28rem] text-center pt-1 text-gray-900 dark:text-gray-100">
+        <h1 class="max-w-md text-center pt-1 text-gray-900 dark:text-gray-100">
           {{ message ?? 'Failed to load data. Please try again.' }}
         </h1>
         <a v-if="showRetry" :href="retryDestination">

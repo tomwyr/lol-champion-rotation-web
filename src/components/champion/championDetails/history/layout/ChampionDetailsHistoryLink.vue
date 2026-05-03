@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex-grow w-0.5 bg-gray-400 dark:bg-gray-300"
+    class="grow w-0.5 bg-gray-400 dark:bg-gray-300"
     :class="[link === edge || link === 'both' ? 'visible' : 'invisible']"
   />
 </template>

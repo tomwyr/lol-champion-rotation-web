@@ -7,7 +7,7 @@
     <template #body>
       <div
         v-if="showRotationPicker"
-        class="sticky top-[4rem] md:top-[4.5rem] z-10 pb-1.5 mb-0.5 -mx-1 px-1 bg-white dark:bg-gray-900 transition-colors"
+        class="sticky top-16 md:top-18 z-10 pb-1.5 mb-0.5 -mx-1 px-1 bg-white dark:bg-gray-900 transition-colors"
       >
         <slot name="rotation-type-picker" />
       </div>
@@ -16,7 +16,7 @@
         <template v-for="(rotation, index) in regularRotations" :key="rotation.key">
           <div
             v-if="index > 0"
-            class="flex-shrink-0 min-w-max h-[1px] mb-3 bg-gray-200 dark:bg-gray-700"
+            class="shrink-0 min-w-max h-px mb-3 bg-gray-200 dark:bg-gray-700"
           />
           <ChampionRotationGrid :rotation />
         </template>
