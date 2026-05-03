@@ -14,15 +14,13 @@
 
       <template v-if="activeRotationType === 'regular'">
         <template v-for="(rotation, index) in regularRotations" :key="rotation.key">
-          <div
-            v-if="index > 0"
-            class="shrink-0 min-w-max h-px mb-3 bg-gray-200 dark:bg-gray-700"
-          />
+          <div v-if="index > 0" class="shrink-0 min-w-max h-px mb-3 bg-gray-200 dark:bg-gray-700" />
           <ChampionRotationGrid :rotation />
         </template>
 
         <MoreDataLoader
           v-if="showBackToCurrent"
+          :class="{ 'pb-6': !nextPageNumber }"
           destination="/"
           button-label="Back to Current"
           icon="up"
