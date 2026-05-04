@@ -5,9 +5,14 @@ export function formatRotationDuration(
   duration: ChampionRotationDuration,
   options: { format: 'long' | 'short' },
 ) {
-  const formatStr = options.format === 'long' ? 'MMMM dd' : 'MMM dd'
-  const start = format(duration.start, formatStr)
-  const end = format(duration.end, formatStr)
+  const singleYear = new Date(duration.start).getFullYear() === new Date(duration.end).getFullYear()
+  const baseFormat = options.format === 'long' ? 'MMMM dd' : 'MMM dd'
+  const startFormat = singleYear ? baseFormat : `${baseFormat} ''yy`
+  const endFormat = `${baseFormat} ''yy`
+
+  const start = format(duration.start, startFormat)
+  const end = format(duration.end, endFormat)
+
   return start + ' to ' + end
 }
 
@@ -16,7 +21,7 @@ export function formatRotationDetails(champions: Champion[]) {
   return [`${count} champion${formatPluralSuffix(count)}`].join(' · ')
 }
 
-export function formatChampionReleaseDate(date: Date) {
+export function formatChampionReleaseDate(date: string) {
   return format(date, "MMM dd ''yy")
 }
 

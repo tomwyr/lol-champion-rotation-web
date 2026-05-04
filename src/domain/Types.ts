@@ -16,7 +16,7 @@ export type ChampionDetails = {
 
 export type ChampionDetailsAvailability = {
   rotationType: ChampionRotationType
-  lastAvailable?: Date
+  lastAvailable?: string
   current: boolean
 }
 
@@ -46,7 +46,7 @@ export type ChampionDetailsHistoryBench = {
 
 export type ChampionDetailsHistoryRelease = {
   type: 'release'
-  releasedAt: Date
+  releasedAt: string
 }
 
 export type ChampionRotationsOverview = {
@@ -93,8 +93,8 @@ export type SearchChampionsMatch = {
 }
 
 export type ChampionRotationDuration = {
-  start: Date
-  end: Date
+  start: string
+  end: string
 }
 
 export type ChampionRotationType = 'regular' | 'beginner'
