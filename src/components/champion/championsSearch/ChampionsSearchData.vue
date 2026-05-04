@@ -6,7 +6,7 @@
           class="flex flex-row items-center p-2 gap-4 rounded-lg cursor-pointer hover:bg-gray-300 hover:dark:bg-gray-700"
         >
           <ChampionImage
-            class="rounded aspect-square size-16 md:size-20"
+            class="aspect-square size-16 md:size-20"
             :image-url="match.champion.imageUrl"
           />
 
