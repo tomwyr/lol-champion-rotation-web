@@ -40,21 +40,25 @@ const props = defineProps<{
 
 const className = 'size-5 mx-2.5 text-gray-500 dark:text-gray-300'
 
-const { occurrences, popularity, currentStreak } = props.champion.overview
+const overview = props.champion.overview
 const nbsp = '\u00A0'
+const placeholder = ['', 'N/A']
 
-const [occurrencesPrefix, occurrencesSuffix] = [
-  occurrences.toString(),
-  nbsp + 'time' + pluralSuffix(occurrences),
-]
+const occurrences = overview?.occurrences
+const [occurrencesPrefix, occurrencesSuffix] = (() => {
+  if (!occurrences) return placeholder
+  return [occurrences.toString(), nbsp + 'time' + pluralSuffix(occurrences)]
+})()
 
+const popularity = overview?.popularity
 const [popularityPrefix, popularitySuffix] = (() => {
-  if (!popularity) return ['', 'N/A']
+  if (!popularity) return placeholder
   return [formatOrdinal(popularity), nbsp + 'most popular']
 })()
 
+const currentStreak = overview?.currentStreak
 const [currentStreakHighlight, currentStreakDescription] = (() => {
-  if (!currentStreak) return ['', 'N/A']
+  if (!currentStreak) return placeholder
   if (currentStreak === 0) return ['', 'Not featured yet']
 
   const count = Math.abs(currentStreak).toString()

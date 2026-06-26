@@ -10,7 +10,7 @@ export type ChampionDetails = {
   title: string
   imageUrl: string
   availability: ChampionDetailsAvailability[]
-  overview: ChampionDetailsOverview
+  overview?: ChampionDetailsOverview
   history: ChampionDetailsHistoryEvent[]
 }
 
@@ -22,8 +22,8 @@ export type ChampionDetailsAvailability = {
 
 export type ChampionDetailsOverview = {
   occurrences: number
-  popularity?: number
-  currentStreak?: number
+  popularity: number
+  currentStreak: number
 }
 
 export type ChampionDetailsHistoryEvent =
