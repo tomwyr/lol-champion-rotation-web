@@ -5,7 +5,7 @@
     <div class="flex flex-row items-center my-1">
       <HashtagIcon :class="className" />
       <span class="font-bold ml-2">{{ occurrencesPrefix }}</span>
-      <span>{{ occurrencesSuffix }} in rotation</span>
+      <span>{{ occurrencesSuffix }}</span>
     </div>
 
     <div class="flex flex-row items-center my-1">
@@ -47,7 +47,7 @@ const placeholder = ['', 'N/A']
 const occurrences = overview?.occurrences
 const [occurrencesPrefix, occurrencesSuffix] = (() => {
   if (!occurrences) return placeholder
-  return [occurrences.toString(), nbsp + 'time' + pluralSuffix(occurrences)]
+  return [occurrences.toString(), nbsp + 'time' + pluralSuffix(occurrences) + ' in rotation']
 })()
 
 const popularity = overview?.popularity
