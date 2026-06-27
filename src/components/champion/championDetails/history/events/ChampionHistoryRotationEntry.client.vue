@@ -1,7 +1,8 @@
 <template>
   <ChampionDetailsHistoryEntry :event :index :event-count :destination="`/rotations/${event.id}`">
-    <span>{{ formatRotationDuration(event.duration, { format: 'short' }) }}</span>
-    <RotationBadge v-if="event.current" variant="current" />
+    <span :class="{ 'text-green-500 dark:text-green-300': event.current }">{{
+      formatRotationDuration(event.duration, { format: 'short' })
+    }}</span>
     <ChampionRotationPreview :champion-image-urls="event.championImageUrls" :compact="true" />
   </ChampionDetailsHistoryEntry>
 </template>

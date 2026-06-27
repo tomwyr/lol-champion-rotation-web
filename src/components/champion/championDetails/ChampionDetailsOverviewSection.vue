@@ -1,6 +1,13 @@
 <template>
   <div class="flex flex-col mt-3">
-    <span class="md:text-xl mb-1 font-thin">Overview</span>
+    <div class="flex flex-row items-center gap-1.5 mb-1">
+      <span class="md:text-xl font-thin">Overview</span>
+      <InfoTooltip
+        aria-label="Overview info"
+        text="Last year's performance."
+        tooltip-id="overview-info-tooltip"
+      />
+    </div>
 
     <div class="flex flex-row items-center my-1">
       <HashtagIcon :class="className" />

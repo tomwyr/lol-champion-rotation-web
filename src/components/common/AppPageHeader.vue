@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row w-full items-center gap-2">
+  <div class="h-14 flex flex-row w-full items-center gap-2">
     <CloseButton v-if="onClose" @click="onClose" />
     <AppLogo v-else />
     <h1 v-if="title" class="text-xl">{{ title }}</h1>

@@ -4,8 +4,12 @@
       <ChampionDetailsHistoryLink :link edge="top" />
       <div
         class="size-7 mx-1.5 flex justify-center rounded-full border-2 border-gray-400 dark:border-gray-300"
+        :class="{ 'border-green-500 dark:border-green-300': event.current }"
       >
-        <div class="size-3 self-center rounded-full bg-gray-400 dark:bg-gray-300" />
+        <div
+          class="size-3 self-center rounded-full bg-gray-400 dark:bg-gray-300"
+          :class="{ 'bg-green-500 dark:bg-green-300': event.current }"
+        />
       </div>
       <ChampionDetailsHistoryLink :link edge="bottom" />
     </template>

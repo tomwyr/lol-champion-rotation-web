@@ -1,5 +1,5 @@
 <template>
-  <div class="relative w-full mx-4">
+  <div class="relative min-w-0 flex-1 mx-4">
     <ChampionsSearchField v-model:query="query" v-model:active="active" />
 
     <ChampionsSearchState v-if="active" :search-state />

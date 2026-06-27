@@ -1,6 +1,6 @@
 <template>
   <Bars3Icon
-    class="size-6 md:size-7 p-1 rounded cursor-pointer hover:bg-gray-200 hover:dark:bg-gray-800"
+    class="size-6 md:size-7 shrink-0 p-1 rounded cursor-pointer hover:bg-gray-200 hover:dark:bg-gray-800"
     @click="openSideMenu"
   />
 </template>
