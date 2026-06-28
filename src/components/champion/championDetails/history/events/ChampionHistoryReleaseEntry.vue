@@ -1,5 +1,5 @@
 <template>
-  <ChampionDetailsHistoryEntry :event :index :event-count>
+  <ChampionDetailsHistoryEntry :event :index :event-count :shorten-top-link :shorten-bottom-link>
     <span>Released on {{ formatChampionReleaseDate(event.releasedAt) }}</span>
   </ChampionDetailsHistoryEntry>
 </template>
@@ -13,5 +13,7 @@ defineProps<{
   event: ChampionDetailsHistoryRelease
   index: number
   eventCount: number
+  shortenTopLink?: boolean
+  shortenBottomLink?: boolean
 }>()
 </script>

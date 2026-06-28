@@ -1,5 +1,5 @@
 <template>
-  <ChampionDetailsHistoryEntry :event :index :event-count>
+  <ChampionDetailsHistoryEntry :event :index :event-count :shorten-top-link :shorten-bottom-link>
     <span class="text-gray-400">
       {{ event.rotationsMissed }}
       rotation{{ formatPluralSuffix(event.rotationsMissed) }} missed
@@ -16,5 +16,7 @@ defineProps<{
   event: ChampionDetailsHistoryBench
   index: number
   eventCount: number
+  shortenTopLink?: boolean
+  shortenBottomLink?: boolean
 }>()
 </script>
