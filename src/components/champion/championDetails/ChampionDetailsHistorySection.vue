@@ -23,6 +23,10 @@
         />
       </template>
 
+      <template v-if="event.type === 'yearChanged'">
+        <ChampionHistoryYearChangedEntry :event :index :event-count />
+      </template>
+
       <template v-if="event.type === 'gap'">
         <ChampionHistoryGapEntry :event :index :event-count />
       </template>
@@ -46,6 +50,7 @@ import ChampionHistoryBenchEntry from './history/events/ChampionHistoryBenchEntr
 import ChampionHistoryGapEntry from './history/events/ChampionHistoryGapEntry.vue'
 import ChampionHistoryReleaseEntry from './history/events/ChampionHistoryReleaseEntry.vue'
 import ChampionHistoryRotationEntry from './history/events/ChampionHistoryRotationEntry.client.vue'
+import ChampionHistoryYearChangedEntry from './history/events/ChampionHistoryYearChangedEntry.vue'
 
 const props = defineProps<{
   champion: ChampionDetails

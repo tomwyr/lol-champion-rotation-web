@@ -29,6 +29,7 @@ export type ChampionDetailsOverview = {
 export type ChampionDetailsHistoryEvent =
   | ChampionDetailsHistoryRotation
   | ChampionDetailsHistoryBench
+  | ChampionDetailsHistoryYearChanged
   | ChampionDetailsHistoryGap
   | ChampionDetailsHistoryRelease
 
@@ -43,6 +44,11 @@ export type ChampionDetailsHistoryRotation = {
 export type ChampionDetailsHistoryBench = {
   type: 'bench'
   rotationsMissed: number
+}
+
+export type ChampionDetailsHistoryYearChanged = {
+  type: 'yearChanged'
+  year: number
 }
 
 export type ChampionDetailsHistoryGap = {

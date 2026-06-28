@@ -4,6 +4,11 @@
       <ChampionDetailsHistoryGapIndicator :link />
     </template>
 
+    <template v-if="event.type === 'yearChanged'">
+      <ChampionDetailsHistoryLink :link edge="top" />
+      <ChampionDetailsHistoryLink :link edge="bottom" />
+    </template>
+
     <template v-if="event.type === 'rotation' && event.current">
       <ChampionDetailsHistoryGapEdgeDot v-if="shortenTopLink" edge="top" />
       <ChampionDetailsHistoryLink :link edge="top" :shortened="shortenTopLink" />
@@ -40,7 +45,7 @@
       <ChampionDetailsHistoryGapEdgeDot v-if="shortenBottomLink" edge="bottom" />
     </template>
 
-    <template v-else-if="event.type !== 'gap'">
+    <template v-else-if="event.type !== 'gap' && event.type !== 'yearChanged'">
       <ChampionDetailsHistoryGapEdgeDot v-if="shortenTopLink" edge="top" />
       <ChampionDetailsHistoryLink :link edge="top" :shortened="shortenTopLink" />
       <div class="size-2 mx-4 rounded-full bg-gray-400 dark:bg-gray-300" />
