@@ -8,7 +8,7 @@
     :destination="`/rotations/${event.id}`"
   >
     <span :class="{ 'text-green-500 dark:text-green-300': event.current }">{{
-      formatRotationDuration(event.duration, { format: 'short' })
+      formatRotationDuration(event.duration, { format: 'short', withYear: false })
     }}</span>
     <ChampionRotationPreview :champion-image-urls="event.championImageUrls" :compact="true" />
   </ChampionDetailsHistoryEntry>

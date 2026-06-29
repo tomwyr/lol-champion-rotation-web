@@ -3,12 +3,13 @@ import type { Champion, ChampionRotationDuration } from './Types'
 
 export function formatRotationDuration(
   duration: ChampionRotationDuration,
-  options: { format: 'long' | 'short' },
+  options: { format: 'long' | 'short'; withYear?: boolean },
 ) {
   const singleYear = new Date(duration.start).getFullYear() === new Date(duration.end).getFullYear()
+  const withYear = options.withYear ?? true
   const baseFormat = options.format === 'long' ? 'MMMM dd' : 'MMM dd'
-  const startFormat = singleYear ? baseFormat : `${baseFormat} ''yy`
-  const endFormat = `${baseFormat} ''yy`
+  const startFormat = withYear && !singleYear ? `${baseFormat} ''yy` : baseFormat
+  const endFormat = withYear ? `${baseFormat} ''yy` : baseFormat
 
   const start = format(duration.start, startFormat)
   const end = format(duration.end, endFormat)
